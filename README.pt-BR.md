@@ -6,7 +6,15 @@
 Aprendizado por reforço tabular em Dart puro, com Q-Learning e SARSA.
 O núcleo não depende de Flutter, bibliotecas nativas ou serviços externos.
 
-Versão inicial: **0.1.0**.
+Versão inicial: **0.1.0**. Código atual: **0.2.0-dev.1**.
+
+
+## Próxima versão em desenvolvimento
+
+`0.2.0-dev.1` adiciona avaliação de políticas, métricas e Cliff Walking.
+Veja o [guia de avaliação](doc/evaluation.pt-BR.md) e execute
+`dart run example/evaluation.dart`. A primeira versão `0.1.0` está preservada na
+referência de release; a versão em desenvolvimento ainda não foi publicada.
 
 
 ## Guias e exemplos executáveis

@@ -9,7 +9,9 @@
 | `lib/src/algorithms/` | Bootstrap de Q-Learning e SARSA | Contratos, valores e SDK |
 | `lib/src/agents/` | Validação, epsilon-greedy e atualização TD | Contratos, valores, domínio; algoritmos apenas para defaults |
 | `lib/src/training/` | Ciclo do episódio e reutilização da próxima ação | Contrato de ambiente, agente e domínio |
-| `lib/src/environments/` | GridWorld de referência | Contrato de ambiente e domínio |
+| `lib/src/policies/` | Seleção de ações; desempate greedy compartilhado | Contrato de política, tabela Q e SDK |
+| `lib/src/evaluation/` | Episódios de avaliação e métricas com RNG próprio | Contratos de ambiente/política e domínio |
+| `lib/src/environments/` | GridWorld e Cliff Walking | Contrato de ambiente e domínio |
 | `test/` | Testes comportamentais e de integração | Entrada pública |
 | `example/*.dart` | Exemplos executáveis | Entrada pública |
 | `example/flutter_lab/` | Interface e agendamento | Pacote público e dependências Flutter próprias |

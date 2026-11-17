@@ -10,6 +10,14 @@ Q-Learning and SARSA, with no runtime dependencies or Flutter imports in the cor
 [Architecture](doc/architecture.md) · [Roadmap](doc/roadmap.md) · [Contributing](CONTRIBUTING.md)
 
 
+## Next version in development
+
+`0.2.0-dev.1` adds policy evaluation, metrics and Cliff Walking.
+See the [evaluation guide](doc/evaluation.md) and run
+`dart run example/evaluation.dart`. The initial `0.1.0` is preserved in its release
+reference; the development version has not been published.
+
+
 ## Guides and runnable examples
 
 | Topic | Dart example | Guide |
@@ -22,7 +30,7 @@ Q-Learning and SARSA, with no runtime dependencies or Flutter imports in the cor
 
 ## Status
 
-Initial release, version 0.1.0.
+Initial release line: 0.1.0. Current source: 0.2.0-dev.1.
 Requires Dart 3.3 or newer. Intended for finite, discrete state/action spaces.
 
 ## Quick start

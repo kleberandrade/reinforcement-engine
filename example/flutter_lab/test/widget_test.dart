@@ -16,6 +16,9 @@ void main() {
       await tester.pump(const Duration(milliseconds: 16));
     }
     expect(find.text('Episódios: 500'), findsOneWidget);
+    await tester.tap(find.text('Avaliar ×50'));
+    await tester.pump();
+    expect(find.textContaining('100% de sucesso, 8.0 passos'), findsOneWidget);
     await tester.tap(find.text('Executar'));
     for (var i = 0; i < 12; i++) {
       await tester.pump(const Duration(milliseconds: 220));

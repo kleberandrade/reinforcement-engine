@@ -13,3 +13,9 @@ export 'src/agents/tabular_agent.dart';
 export 'src/values/q_table.dart';
 export 'src/training/train_episode.dart';
 export 'src/environments/grid_world.dart';
+
+export 'src/contracts/action_policy.dart';
+export 'src/domain/evaluation_result.dart';
+export 'src/policies/greedy_policy.dart';
+export 'src/evaluation/evaluate_policy.dart';
+export 'src/environments/cliff_walking.dart';

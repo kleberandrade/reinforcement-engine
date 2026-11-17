@@ -1,6 +1,6 @@
 name: reinforcement_engine
 description: Pure Dart tabular reinforcement learning with Q-Learning, SARSA, reproducible exploration, JSON Q-tables and custom environments.
-version: 0.1.0
+version: 0.2.0-dev.1
 repository: https://github.com/kleberandrade/reinforcement-engine
 issue_tracker: https://github.com/kleberandrade/reinforcement-engine/issues
 homepage: https://github.com/kleberandrade/reinforcement-engine

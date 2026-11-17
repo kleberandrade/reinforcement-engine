@@ -18,6 +18,9 @@ jobs:
       - run: dart run example/reinforcement_engine_example.dart
       - run: dart run example/custom_extensions.dart
       - run: dart run example/persistence.dart
+      - run: dart run example/evaluation.dart
+      - run: dart compile js example/evaluation.dart -o /tmp/evaluation.js
+      - run: node /tmp/evaluation.js
       - run: dart compile js example/custom_extensions.dart -o /tmp/extensions.js
       - run: dart compile js example/persistence.dart -o /tmp/persistence.js
       - run: node /tmp/extensions.js

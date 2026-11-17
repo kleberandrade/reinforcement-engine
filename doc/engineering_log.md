@@ -60,3 +60,37 @@ avoid modifying the read-only SDK. Suppressed analytics per invocation. Ran the
 core test runner directly against the existing package configuration to avoid
 writes to the read-only package cache. These environment adaptations do not
 change package code or dependencies.
+
+## 2026-11-16 — public repository, first release and 0.2 development
+
+Created github.com/kleberandrade/reinforcement-engine and pushed the reviewed 0.1.0
+source. The first hosted run passed both Dart jobs and caught Material-import
+deprecations on newer Flutter. Reused neural_engine's narrowly scoped compatibility
+annotations. The second hosted run passed in full: Dart 3.3 and stable, examples,
+JavaScript execution, Flutter analysis/widget tests/web build, publication dry-run.
+Created GitHub release v0.1.0 at 50a8cf7. A detached release worktree preserves
+those exact files separately from 0.2 development.
+
+An actual local `dart pub publish --force` attempt for 0.1.0 failed while accessing
+pub.dev due to the environment's network restriction. Native Terminal access was
+also denied. No successful pub.dev upload or publisher transfer is claimed.
+The first upload must complete before the package admin transfer is available.
+
+For 0.2.0-dev.1, added explicit ActionPolicy/GreedyPolicy, read-only evaluatePolicy,
+immutable aggregate reports, caller-defined success and an independent evaluation
+RNG. Extracted greedy selection into one shared implementation to retain the
+agent's seeded behavior. Added the deterministic CliffWalking task with penalized
+nonterminal falls, a Q-Learning/SARSA comparison and Flutter evaluation controls.
+English/Portuguese guides distinguish these additions from the 0.1.0 release.
+
+Validation of the development increment:
+
+- 29 public-API tests passed, including independent RNG preservation, immutable
+  reports, terminal/truncation semantics, illegal policy actions and cliff behavior.
+- Core and Flutter analysis with fatal infos passed; formatting and doc links clean.
+- Evaluation example passed on Dart VM and compiled JavaScript in Node: both
+  policies reached the cliff goal on all 100 episodes (13 and 17 moves respectively).
+- Flutter web release build and Wasm compatibility dry-run passed.
+- Updated widget evaluation test is included for hosted CI; local widget execution
+  remains unavailable because loopback sockets are denied.
+- Expected SARSA, Double Q-Learning and configurable exploration remain roadmap items.

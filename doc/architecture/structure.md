@@ -9,7 +9,9 @@
 | `lib/src/algorithms/` | Q-Learning and SARSA bootstrap rules | Contracts, values and SDK |
 | `lib/src/agents/` | Validation, epsilon-greedy selection and TD update | Contracts, values, domain; built-ins only for constructor defaults |
 | `lib/src/training/` | Bounded episode lifecycle and next-action reuse | Environment contract, agent and domain |
-| `lib/src/environments/` | Deterministic reference GridWorld | Environment contract and domain |
+| `lib/src/policies/` | Read-only action selection; shared greedy tie handling | Policy contract, Q-values and SDK |
+| `lib/src/evaluation/` | Fresh evaluation episodes, independent RNG and aggregate report | Environment/policy contracts and domain only |
+| `lib/src/environments/` | Deterministic GridWorld and Cliff Walking | Environment contract and domain |
 | `test/` | Public-contract behavior and integration | Public package entry point |
 | `example/*.dart` | Runnable consumer scenarios | Public package entry point |
 | `example/flutter_lab/` | Rendering, scheduling and interaction | Public package; owns Flutter dependencies |

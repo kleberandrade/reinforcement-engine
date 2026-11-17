@@ -105,6 +105,24 @@ class _MazePageState extends State<MazePage> {
     });
   }
 
+  void evaluate() {
+    final report = evaluatePolicy<int, GridAction>(
+      environmentFactory: GridWorld.new,
+      policy: GreedyPolicy(agent.table),
+      isSuccess: (state, episode) =>
+          episode.terminated && state == environment.goal,
+      episodes: 50,
+      maxSteps: 100,
+      seed: 7,
+    );
+    setState(() {
+      status =
+          'Avaliação: ${(report.successRate * 100).toStringAsFixed(0)}% de sucesso, '
+          '${report.meanSteps.toStringAsFixed(1)} passos em média. '
+          'Tabela e exploração preservadas.';
+    });
+  }
+
   @override
   void dispose() {
     timer?.cancel();
@@ -159,6 +177,10 @@ class _MazePageState extends State<MazePage> {
                           OutlinedButton(
                               onPressed: busy || episodes == 0 ? null : play,
                               child: const Text('Executar')),
+                          OutlinedButton(
+                              onPressed:
+                                  busy || episodes == 0 ? null : evaluate,
+                              child: const Text('Avaliar ×50')),
                           TextButton(
                               onPressed: () => setState(resetAgent),
                               child: const Text('Reiniciar')),

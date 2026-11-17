@@ -11,6 +11,7 @@ with no Flutter, IO, HTTP or runtime package dependencies.
 | [Class diagrams / Diagramas](architecture/class_diagrams.md) | Implemented interfaces and collaborators |
 | [Algorithms](algorithms.md) / [Algoritmos](algorithms.pt-BR.md) | Updates, termination, truncation and exploration |
 | [Extending](extending.md) / [Extensibilidade](extending.pt-BR.md) | Custom environments and TD strategies |
+| [Evaluation](evaluation.md) / [Avaliação](evaluation.pt-BR.md) | Fixed policies, episode metrics and Cliff Walking (0.2 development) |
 | [Persistence](persistence.md) / [Persistência](persistence.pt-BR.md) | Versioned table format and limits |
 | [Integration](integration.md) / [Integração](integration.pt-BR.md) | Flutter execution and engine family boundaries |
 

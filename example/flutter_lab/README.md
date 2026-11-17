@@ -23,3 +23,7 @@ flutter build web
 
 Web scaffolding is included. To run on another platform, generate that platform
 with `flutter create --platforms=android,ios,macos .` on a configured machine.
+
+In 0.2 development, **Avaliar ×50** runs 50 greedy GridWorld episodes with a
+separate evaluation RNG and fresh environments. It reports success rate and
+average steps without changing the learned table or agent exploration.

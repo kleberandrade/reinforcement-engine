@@ -5,6 +5,7 @@ import '../domain/learning_algorithm.dart';
 import '../algorithms/q_learning.dart';
 import '../algorithms/sarsa.dart';
 import '../values/q_table.dart';
+import '../policies/greedy_policy.dart';
 
 /// Epsilon-greedy tabular learner. Supply the same seed and call order to
 /// reproduce a run within the same Dart runtime and environment.
@@ -53,6 +54,7 @@ class TabularAgent<S, A> {
   final double minEpsilon;
   final QTable<S, A> table;
   final Random _random;
+  late final _greedyPolicy = GreedyPolicy<S, A>(table);
   double _epsilon;
 
   /// Current exploration probability.
@@ -72,17 +74,7 @@ class TabularAgent<S, A> {
     if (explore && _epsilon > 0 && _random.nextDouble() < _epsilon) {
       return actions[_random.nextInt(actions.length)];
     }
-    var best = double.negativeInfinity;
-    final candidates = <A>[];
-    for (final action in actions) {
-      final value = table.value(state, action);
-      if (value > best) {
-        best = value;
-        candidates.clear();
-      }
-      if (value == best) candidates.add(action);
-    }
-    return candidates[_random.nextInt(candidates.length)];
+    return _greedyPolicy.selectAction(state, actions, _random);
   }
 
   /// Terminal transitions never bootstrap. For SARSA, pass the actual next

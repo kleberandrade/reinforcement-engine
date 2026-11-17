@@ -1,3 +1,13 @@
+## Unreleased
+
+- Add read-only policy evaluation with independent RNG, caller-defined success,
+  immutable episode summaries and aggregate reward/step/termination metrics.
+- Add the `ActionPolicy` contract and `GreedyPolicy`, shared by evaluation and
+  the agent's exploitation path while preserving seeded behavior.
+- Add deterministic Cliff Walking with nonterminal cliff resets and a runnable
+  Q-Learning/SARSA comparison.
+- Add Flutter evaluation controls and bilingual guides for the next 0.2 release.
+
 ## 0.1.0
 
 - Align source organization with the engine family: contracts, domain values,
