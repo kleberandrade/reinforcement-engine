@@ -1,6 +1,6 @@
 # Reinforcement Engine Lab
 
-Interactive 5×5 maze with Q-Learning and SARSA, using the parent Dart package.
+Interactive 5×5 maze with Q-Learning, SARSA, Expected SARSA and Double Q-Learning, using the parent Dart package.
 
 ```sh
 flutter pub get

@@ -28,3 +28,10 @@ Expected SARSA for an epsilon-greedy behavior policy.
 ```sh
 dart run example/custom_extensions.dart
 ```
+
+## New contracts in 0.2
+
+`LearningAgent` supports multi-estimator agents without inheriting from
+`TabularAgent`. `ActionValues` exposes read-only estimates for policies and
+evaluation. `ExplorationPolicy` exposes selection and probabilities for the same
+policy. See [control](control.md) for obligations and examples.

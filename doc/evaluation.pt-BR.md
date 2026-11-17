@@ -1,6 +1,6 @@
 # Avaliação de políticas e Cliff Walking
 
-Disponível no desenvolvimento `0.2.0-dev.1`; não faz parte da primeira versão `0.1.0`.
+Disponível no desenvolvimento `0.2.0-dev.2`; não faz parte da primeira versão `0.1.0`.
 
 Treinar modifica a tabela e a exploração. Avaliar mede uma política fixa usando
 `ActionPolicy<S, A>`. `GreedyPolicy` consulta os valores Q e desempata com o RNG

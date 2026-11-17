@@ -1,4 +1,4 @@
-import '../agents/tabular_agent.dart';
+import '../contracts/learning_agent.dart';
 import '../contracts/environment.dart';
 import '../domain/episode_result.dart';
 
@@ -6,7 +6,7 @@ import '../domain/episode_result.dart';
 /// long-running training. This runner is synchronous.
 EpisodeResult trainEpisode<S, A>(
     {required Environment<S, A> environment,
-    required TabularAgent<S, A> agent,
+    required LearningAgent<S, A> agent,
     int maxSteps = 1000}) {
   if (maxSteps <= 0) throw ArgumentError.value(maxSteps, 'maxSteps');
   var state = environment.reset();
@@ -17,7 +17,7 @@ EpisodeResult trainEpisode<S, A>(
     final nextActions =
         result.terminated ? <A>[] : environment.actions(result.state);
     // SARSA must reuse this sampled action at the next transition.
-    final nextAction = !result.terminated && agent.updateRule.requiresNextAction
+    final nextAction = !result.terminated && agent.requiresNextAction
         ? agent.selectAction(result.state, nextActions)
         : null;
     agent.update(
@@ -40,7 +40,7 @@ EpisodeResult trainEpisode<S, A>(
           truncated: truncated);
     }
     state = result.state;
-    action = agent.updateRule.requiresNextAction
+    action = agent.requiresNextAction
         ? nextAction as A
         : agent.selectAction(state, nextActions);
   }

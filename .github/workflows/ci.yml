@@ -19,6 +19,9 @@ jobs:
       - run: dart run example/custom_extensions.dart
       - run: dart run example/persistence.dart
       - run: dart run example/evaluation.dart
+      - run: dart run example/exploration.dart
+      - run: dart compile js example/exploration.dart -o /tmp/exploration.js
+      - run: node /tmp/exploration.js
       - run: dart compile js example/evaluation.dart -o /tmp/evaluation.js
       - run: node /tmp/evaluation.js
       - run: dart compile js example/custom_extensions.dart -o /tmp/extensions.js

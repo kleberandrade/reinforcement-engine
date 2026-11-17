@@ -19,3 +19,12 @@ export 'src/domain/evaluation_result.dart';
 export 'src/policies/greedy_policy.dart';
 export 'src/evaluation/evaluate_policy.dart';
 export 'src/environments/cliff_walking.dart';
+
+export 'src/contracts/action_values.dart';
+export 'src/contracts/learning_agent.dart';
+export 'src/contracts/exploration_policy.dart';
+export 'src/values/sum_action_values.dart';
+export 'src/policies/epsilon_greedy.dart';
+export 'src/policies/softmax_exploration.dart';
+export 'src/algorithms/expected_sarsa.dart';
+export 'src/agents/double_q_agent.dart';

@@ -17,3 +17,11 @@ IO, armazenamento e criptografia pertencem à aplicação.
 ```sh
 dart run example/persistence.dart
 ```
+
+## Double Q-Learning (0.2)
+
+Serialize `agent.tableA` e `agent.tableB` individualmente com os codecs da aplicação.
+Restaure as duas tabelas com `QTable.fromJson` e forneça `tableA` e `tableB` ao
+construtor de `DoubleQAgent`. Não salve apenas a soma: isso perde os estimadores
+independentes necessários para continuar Double Q-Learning. `agent.values` é uma
+visão de leitura, não um formato serializado. Não há checkpoint de RNG/epsilon.

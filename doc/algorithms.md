@@ -1,11 +1,12 @@
 # Tabular control algorithms
 
-Both strategies update `Q(s,a) += alpha * (reward + gamma * bootstrap - Q(s,a))`.
+The single-table strategies update `Q(s,a) += alpha * (reward + gamma * bootstrap - Q(s,a))`.
 
 | Rule | Bootstrap for a nonterminal transition | Next action |
 | --- | --- | --- |
 | `QLearning<S, A>` | Maximum over legal next action values | Sampled after the update |
 | `Sarsa<S, A>` | Value of the sampled next behavior action | Sampled before the update and reused |
+| `ExpectedSarsa<S, A>` | Expected value under the behavior policy | No bootstrap sampling |
 
 Unseen pairs are zero. For Q-Learning, illegal actions never participate and
 negative maxima remain negative. Terminal transitions set bootstrap to zero.
@@ -25,3 +26,5 @@ There is no cross-runtime bitwise guarantee or general convergence guarantee.
 Run `dart run example/reinforcement_engine_example.dart` to train Q-Learning
 on the default maze. Its goal is eight moves away. This is an educational
 finite-state example, not a benchmark for real applications.
+
+See [control and exploration](control.md) for Expected SARSA, Double Q-Learning and softmax.

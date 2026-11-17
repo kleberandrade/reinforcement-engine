@@ -69,3 +69,36 @@ dependency. Its RNG and fresh environments isolate evaluation from training stat
 
 `evaluatePolicy` combina contratos de ambiente e política sem depender do agente.
 Seu RNG e ambientes novos isolam a avaliação do estado de treinamento.
+
+## Control and exploration / Controle e exploração (0.2)
+
+```mermaid
+classDiagram
+  class LearningAgent {
+    <<interface>>
+    values
+    requiresNextAction
+    selectAction()
+    update()
+  }
+  class TabularAgent
+  class DoubleQAgent
+  class AgentBehavior
+  class ExplorationPolicy {
+    <<interface>>
+    selectAction()
+    probabilities()
+  }
+  LearningAgent <|.. TabularAgent
+  LearningAgent <|.. DoubleQAgent
+  TabularAgent --> AgentBehavior
+  DoubleQAgent --> AgentBehavior
+  AgentBehavior --> ExplorationPolicy
+```
+
+ExpectedSarsa implements the existing TdUpdateRule contract. Its probability
+provider is bound to the agent's live behavior schedule by the enum constructor.
+DoubleQAgent exposes SumActionValues and updates only one independent QTable per step.
+
+ExpectedSarsa implementa TdUpdateRule com probabilidades vinculadas ao comportamento
+atual. DoubleQAgent expõe SumActionValues e atualiza apenas uma tabela por passo.

@@ -4,12 +4,12 @@
 | --- | --- | --- |
 | `lib/reinforcement_engine.dart` | Deliberate public exports | No runtime logic |
 | `lib/src/domain/` | Transition, episode summary and enums | Dart SDK only |
-| `lib/src/values/` | Sparse Q-values and JSON table format | Dart SDK only |
-| `lib/src/contracts/` | Environment and TD bootstrap interfaces | Domain and values |
-| `lib/src/algorithms/` | Q-Learning and SARSA bootstrap rules | Contracts, values and SDK |
-| `lib/src/agents/` | Validation, epsilon-greedy selection and TD update | Contracts, values, domain; built-ins only for constructor defaults |
-| `lib/src/training/` | Bounded episode lifecycle and next-action reuse | Environment contract, agent and domain |
-| `lib/src/policies/` | Read-only action selection; shared greedy tie handling | Policy contract, Q-values and SDK |
+| `lib/src/values/` | Sparse Q-values, sum view and JSON table format | SDK and ActionValues contract |
+| `lib/src/contracts/` | Environment, learner, exploration and value-reading interfaces | SDK/domain; legacy TD contract also references QTable |
+| `lib/src/algorithms/` | Q-Learning, SARSA and Expected SARSA bootstraps | Contracts, values and SDK |
+| `lib/src/agents/` | Single/double control, shared behavior/RNG/schedule and validation | Contracts, values, domain; built-ins only for constructor defaults |
+| `lib/src/training/` | Bounded episode lifecycle and next-action reuse | Environment/LearningAgent contracts and domain |
+| `lib/src/policies/` | Greedy reading, epsilon-greedy/softmax behavior, probability validation | Policy contract, Q-values and SDK |
 | `lib/src/evaluation/` | Fresh evaluation episodes, independent RNG and aggregate report | Environment/policy contracts and domain only |
 | `lib/src/environments/` | Deterministic GridWorld and Cliff Walking | Environment contract and domain |
 | `test/` | Public-contract behavior and integration | Public package entry point |

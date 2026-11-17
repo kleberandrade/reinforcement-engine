@@ -28,3 +28,10 @@ de contrato; não implementa Expected SARSA para uma política epsilon-greedy.
 ```sh
 dart run example/custom_extensions.dart
 ```
+
+## Novos contratos em 0.2
+
+`LearningAgent` permite criar agentes com múltiplos estimadores, sem herdar de
+`TabularAgent`. `ActionValues` fornece leitura dos estimadores para políticas e
+avaliação. `ExplorationPolicy` expõe seleção e probabilidades da mesma política.
+Veja [controle](control.pt-BR.md) para suas obrigações e exemplos.

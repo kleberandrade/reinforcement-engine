@@ -1,5 +1,17 @@
 ## Unreleased
 
+## 0.2.0-dev.2
+
+- Add Expected SARSA with behavior probabilities bound to the current policy
+  and exploration schedule, including greedy ties and distribution validation.
+- Add DoubleQAgent with two independent estimators and cross-table bootstraps.
+- Add LearningAgent, ActionValues and ExplorationPolicy contracts, epsilon-greedy
+  and stable fixed-temperature softmax policies, preserving the default seeded API.
+- Add four-algorithm Flutter controls, algorithm/policy tests, bilingual control
+  guides and runnable exploration/comparison examples.
+- Add `expectedSarsa` to LearningAlgorithm; exhaustive consumer switches may
+  require a new branch. Existing TdUpdateRule implementations remain compatible.
+
 ## 0.2.0-dev.1
 
 - Add read-only policy evaluation with independent RNG, caller-defined success,

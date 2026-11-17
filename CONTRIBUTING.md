@@ -23,6 +23,7 @@ dart run example/reinforcement_engine_example.dart
 dart run example/custom_extensions.dart
 dart run example/persistence.dart
 dart run example/evaluation.dart
+dart run example/exploration.dart
 dart compile js example/custom_extensions.dart -o /tmp/reinforcement_extensions.js
 ```
 

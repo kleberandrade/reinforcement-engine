@@ -1,18 +1,23 @@
-import 'dart:math';
-
 import '../contracts/td_update_rule.dart';
 import '../domain/learning_algorithm.dart';
 import '../algorithms/q_learning.dart';
 import '../algorithms/sarsa.dart';
 import '../values/q_table.dart';
-import '../policies/greedy_policy.dart';
+import '../contracts/learning_agent.dart';
+import '../contracts/exploration_policy.dart';
+import '../policies/epsilon_greedy.dart';
+import '../algorithms/expected_sarsa.dart';
+import 'agent_behavior.dart';
+import 'agent_validation.dart';
 
-/// Epsilon-greedy tabular learner. Supply the same seed and call order to
+/// Tabular learner with composable update and exploration strategies.
+/// Supply the same seed and call order to
 /// reproduce a run within the same Dart runtime and environment.
-class TabularAgent<S, A> {
+class TabularAgent<S, A> implements LearningAgent<S, A> {
   TabularAgent(
       {this.algorithm = LearningAlgorithm.qLearning,
       TdUpdateRule<S, A>? updateRule,
+      ExplorationPolicy<S, A>? explorationPolicy,
       this.learningRate = 0.1,
       this.discountFactor = 0.99,
       double epsilon = 1,
@@ -20,26 +25,34 @@ class TabularAgent<S, A> {
       this.minEpsilon = 0.01,
       int? seed,
       QTable<S, A>? table})
-      : updateRule = updateRule ??
-            (algorithm == LearningAlgorithm.sarsa
-                ? Sarsa<S, A>()
-                : QLearning<S, A>()),
-        _epsilon = epsilon,
-        _random = Random(seed),
+      : explorationPolicy = explorationPolicy ?? EpsilonGreedy<S, A>(),
         table = table ?? QTable<S, A>() {
-    _unit(learningRate, 'learningRate', allowZero: false);
-    _unit(discountFactor, 'discountFactor');
-    _unit(epsilon, 'epsilon');
-    _unit(epsilonDecay, 'epsilonDecay', allowZero: false);
-    _unit(minEpsilon, 'minEpsilon');
-    if (minEpsilon > epsilon) throw ArgumentError('minEpsilon exceeds epsilon');
+    validateUnit(learningRate, 'learningRate', allowZero: false);
+    validateUnit(discountFactor, 'discountFactor');
+    _behavior = AgentBehavior(
+        values: this.table,
+        policy: this.explorationPolicy,
+        epsilon: epsilon,
+        epsilonDecay: epsilonDecay,
+        minEpsilon: minEpsilon,
+        seed: seed);
+    _updateRule = updateRule ??
+        switch (algorithm) {
+          LearningAlgorithm.qLearning => QLearning<S, A>(),
+          LearningAlgorithm.sarsa => Sarsa<S, A>(),
+          LearningAlgorithm.expectedSarsa =>
+            ExpectedSarsa<S, A>(probabilities: _behavior.probabilities),
+        };
   }
 
   /// Convenience selector used when no explicit update rule is supplied.
   final LearningAlgorithm algorithm;
 
   /// Effective strategy. An explicit rule takes precedence over [algorithm].
-  final TdUpdateRule<S, A> updateRule;
+  TdUpdateRule<S, A> get updateRule => _updateRule;
+  late final TdUpdateRule<S, A> _updateRule;
+
+  final ExplorationPolicy<S, A> explorationPolicy;
 
   /// Step size in (0, 1].
   final double learningRate;
@@ -53,32 +66,26 @@ class TabularAgent<S, A> {
   /// Lower exploration bound in [0, epsilon].
   final double minEpsilon;
   final QTable<S, A> table;
-  final Random _random;
-  late final _greedyPolicy = GreedyPolicy<S, A>(table);
-  double _epsilon;
+  late final AgentBehavior<S, A> _behavior;
 
-  /// Current exploration probability.
-  double get epsilon => _epsilon;
-  static void _unit(double value, String name, {bool allowZero = true}) {
-    if (!value.isFinite ||
-        value > 1 ||
-        value < 0 ||
-        (!allowZero && value == 0)) {
-      throw ArgumentError.value(value, name, 'Expected a probability in range');
-    }
-  }
+  @override
+  QTable<S, A> get values => table;
 
-  /// Randomizes ties to avoid bias toward the first available action.
-  A selectAction(S state, List<A> actions, {bool explore = true}) {
-    if (actions.isEmpty) throw ArgumentError('No available actions');
-    if (explore && _epsilon > 0 && _random.nextDouble() < _epsilon) {
-      return actions[_random.nextInt(actions.length)];
-    }
-    return _greedyPolicy.selectAction(state, actions, _random);
-  }
+  @override
+  bool get requiresNextAction => updateRule.requiresNextAction;
+
+  /// Current exploration schedule value. Softmax uses its own temperature.
+  @override
+  double get epsilon => _behavior.epsilon;
+
+  /// Selects with the configured behavior policy, or greedy when not exploring.
+  @override
+  A selectAction(S state, List<A> actions, {bool explore = true}) =>
+      _behavior.selectAction(state, actions, explore: explore);
 
   /// Terminal transitions never bootstrap. For SARSA, pass the actual next
   /// behavior action; for Q-learning, pass all legal next actions.
+  @override
   double update(
       {required S state,
       required A action,
@@ -113,6 +120,6 @@ class TabularAgent<S, A> {
   }
 
   /// Applies one episode of multiplicative decay with the configured floor.
-  void decayExploration() =>
-      _epsilon = max(minEpsilon, _epsilon * epsilonDecay);
+  @override
+  void decayExploration() => _behavior.decayExploration();
 }

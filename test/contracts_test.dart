@@ -55,7 +55,10 @@ void main() {
   });
 
   test('strategies agree with convenience API during seeded training', () {
-    for (final algorithm in LearningAlgorithm.values) {
+    for (final algorithm in [
+      LearningAlgorithm.qLearning,
+      LearningAlgorithm.sarsa
+    ]) {
       final a = TabularAgent<int, GridAction>(algorithm: algorithm, seed: 42);
       final b = TabularAgent<int, GridAction>(
           seed: 42,

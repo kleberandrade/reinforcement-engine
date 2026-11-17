@@ -6,6 +6,16 @@ import 'package:reinforcement_engine/reinforcement_engine.dart';
 
 void main() => runApp(const LearningLab());
 
+enum LabAlgorithm {
+  qLearning('Q-Learning'),
+  sarsa('SARSA'),
+  expectedSarsa('Expected SARSA'),
+  doubleQ('Double Q-Learning');
+
+  const LabAlgorithm(this.label);
+  final String label;
+}
+
 class LearningLab extends StatelessWidget {
   const LearningLab({super.key});
   @override
@@ -28,8 +38,8 @@ class MazePage extends StatefulWidget {
 
 class _MazePageState extends State<MazePage> {
   final environment = GridWorld();
-  LearningAlgorithm algorithm = LearningAlgorithm.qLearning;
-  late TabularAgent<int, GridAction> agent;
+  LabAlgorithm algorithm = LabAlgorithm.qLearning;
+  late LearningAgent<int, GridAction> agent;
   Timer? timer;
   int episodes = 0, position = 0, moves = 0;
   double lastReward = 0;
@@ -45,8 +55,18 @@ class _MazePageState extends State<MazePage> {
   void resetAgent() {
     timer?.cancel();
     timer = null;
-    agent = TabularAgent<int, GridAction>(
-        algorithm: algorithm, seed: 42, learningRate: 0.2);
+    agent = switch (algorithm) {
+      LabAlgorithm.doubleQ =>
+        DoubleQAgent<int, GridAction>(seed: 42, learningRate: 0.2),
+      _ => TabularAgent<int, GridAction>(
+          algorithm: switch (algorithm) {
+            LabAlgorithm.qLearning => LearningAlgorithm.qLearning,
+            LabAlgorithm.sarsa => LearningAlgorithm.sarsa,
+            _ => LearningAlgorithm.expectedSarsa,
+          },
+          seed: 42,
+          learningRate: 0.2),
+    };
     episodes = 0;
     position = environment.reset();
     moves = 0;
@@ -108,7 +128,7 @@ class _MazePageState extends State<MazePage> {
   void evaluate() {
     final report = evaluatePolicy<int, GridAction>(
       environmentFactory: GridWorld.new,
-      policy: GreedyPolicy(agent.table),
+      policy: GreedyPolicy(agent.values),
       isSuccess: (state, episode) =>
           episode.terminated && state == environment.goal,
       episodes: 50,
@@ -151,7 +171,7 @@ class _MazePageState extends State<MazePage> {
                         runSpacing: 12,
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
-                          DropdownButton<LearningAlgorithm>(
+                          DropdownButton<LabAlgorithm>(
                               value: algorithm,
                               onChanged: busy
                                   ? null
@@ -163,13 +183,9 @@ class _MazePageState extends State<MazePage> {
                                         });
                                       }
                                     },
-                              items: LearningAlgorithm.values
+                              items: LabAlgorithm.values
                                   .map((v) => DropdownMenuItem(
-                                      value: v,
-                                      child: Text(
-                                          v == LearningAlgorithm.qLearning
-                                              ? 'Q-Learning'
-                                              : 'SARSA')))
+                                      value: v, child: Text(v.label)))
                                   .toList()),
                           FilledButton(
                               onPressed: busy ? null : train,

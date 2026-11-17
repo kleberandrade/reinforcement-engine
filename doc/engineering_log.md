@@ -105,3 +105,39 @@ Flutter job, but the publication dry-run rejected the missing 0.2.0-dev.1 change
 heading. Added that heading while keeping Unreleased for future changes. No runtime
 code changed; the fix is validated by the publication check on the next hosted run.
 The initial 0.1.0 release worktree and tag remain unchanged.
+
+## 2026-11-16 — verified publisher and complete 0.2 control algorithms
+
+Confirmed the user's first pub.dev upload: reinforcement_engine 0.1.0 is public.
+Transferred the package to kleberandrade.dev and verified the public package header
+and sidebar show the verified publisher. The package analysis reports 160 points.
+
+Implemented Expected SARSA with probabilities bound to the live exploration policy
+and current epsilon. Added independent-estimator DoubleQAgent, read-only ActionValues,
+LearningAgent and ExplorationPolicy contracts. The runner now accepts LearningAgent;
+it has no concrete agent checks. Shared AgentBehavior owns per-agent random state,
+exploration and decay, preserving the v0.1 default RNG call order. Softmax exploration
+uses stable exponentiation and a fixed positive temperature; it intentionally ignores
+epsilon. Double Q uses a live summed value view, updates only one estimator at a time,
+and rejects aliased table inputs. The published TdUpdateRule contract is unchanged.
+
+Expanded the Flutter lab to four algorithms, with new Expected SARSA/Double Q widget
+scenarios. Added bilingual control/extension/persistence guidance, source maps and
+class diagrams, primary algorithm references, exploration examples and updated CI.
+Source is now 0.2.0-dev.2; no second pub.dev version or stable 0.2 release is claimed.
+
+Validation on installed Dart 3.11.5 / Flutter 3.41.9:
+
+- 46 core behavioral tests passed. Tests include exact Expected SARSA weights,
+  live epsilon decay, custom softmax distributions, invalid probabilities,
+  both cross-estimator branches, negative/illegal next values, independent JSON
+  restoration, default RNG compatibility and Double Q seeded replay.
+- Both new agents learn the eight-step GridWorld policy in 500 episodes.
+- Core and Flutter analysis with fatal infos passed; formatting and doc links clean.
+- Cliff comparison and exploration examples passed on VM and compiled JavaScript.
+  With the documented settings, all four policies succeed; greedy paths were
+  13, 17, 15 and 17 steps for Q-Learning, SARSA, Expected SARSA and Double Q.
+- Existing custom-extension and JSON examples still pass.
+- Flutter web release build passed, including the Wasm compatibility dry-run.
+- New widget scenarios require hosted execution because local loopback sockets
+  remain restricted. Hosted checks are verified separately after pushing.

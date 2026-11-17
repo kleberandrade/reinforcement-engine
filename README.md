@@ -4,7 +4,7 @@
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Pure Dart tabular reinforcement learning for Flutter apps, games and simulations.
-Q-Learning and SARSA, with no runtime dependencies or Flutter imports in the core.
+Q-Learning, SARSA, Expected SARSA and Double Q-Learning, with no runtime dependencies or Flutter imports in the core.
 
 [Português](README.pt-BR.md) · [Flutter lab](example/flutter_lab/README.md) ·
 [Architecture](doc/architecture.md) · [Roadmap](doc/roadmap.md) · [Contributing](CONTRIBUTING.md)
@@ -12,7 +12,7 @@ Q-Learning and SARSA, with no runtime dependencies or Flutter imports in the cor
 
 ## Next version in development
 
-`0.2.0-dev.1` adds policy evaluation, metrics and Cliff Walking.
+`0.2.0-dev.2` adds policy evaluation, metrics and Cliff Walking.
 See the [evaluation guide](doc/evaluation.md) and run
 `dart run example/evaluation.dart`. The initial `0.1.0` is preserved in its release
 reference; the development version has not been published.
@@ -30,7 +30,7 @@ reference; the development version has not been published.
 
 ## Status
 
-Initial release line: 0.1.0. Current source: 0.2.0-dev.1.
+Initial release line: 0.1.0. Current source: 0.2.0-dev.2.
 Requires Dart 3.3 or newer. Intended for finite, discrete state/action spaces.
 
 ## Quick start
@@ -191,3 +191,11 @@ final agent = TabularAgent<int, GridAction>(
 Implement `TdUpdateRule<S, A>` for custom strategies. An explicit `updateRule`
 takes precedence over `algorithm`. Contracts, domain, algorithms, agent, values
 and training follow the [source responsibility map](doc/architecture/structure.md).
+
+## Control and exploration in 0.2
+
+Expected SARSA, Double Q-Learning and epsilon-greedy/softmax exploration are
+implemented in development. See the [control guide](doc/control.md).
+The Flutter lab supports all four algorithms. Version `0.1.0` is published on
+[pub.dev](https://pub.dev/packages/reinforcement_engine) under verified publisher
+[kleberandrade.dev](https://pub.dev/publishers/kleberandrade.dev).

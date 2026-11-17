@@ -1,8 +1,11 @@
+import '../contracts/action_values.dart';
+
 /// Sparse action values. States and actions must have stable equality/hashCode.
-class QTable<S, A> {
+class QTable<S, A> implements ActionValues<S, A> {
   final Map<S, Map<A, double>> _rows = {};
 
   /// Returns zero for unseen pairs without allocating a row.
+  @override
   double value(S state, A action) => _rows[state]?[action] ?? 0;
   void set(S state, A action, double value) {
     if (!value.isFinite) throw ArgumentError.value(value, 'value');

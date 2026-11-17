@@ -3,15 +3,15 @@
 [![Dart CI](https://github.com/kleberandrade/reinforcement-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kleberandrade/reinforcement-engine/actions/workflows/ci.yml)
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Aprendizado por reforço tabular em Dart puro, com Q-Learning e SARSA.
+Aprendizado por reforço tabular em Dart puro, com Q-Learning, SARSA, Expected SARSA e Double Q-Learning.
 O núcleo não depende de Flutter, bibliotecas nativas ou serviços externos.
 
-Versão inicial: **0.1.0**. Código atual: **0.2.0-dev.1**.
+Versão inicial: **0.1.0**. Código atual: **0.2.0-dev.2**.
 
 
 ## Próxima versão em desenvolvimento
 
-`0.2.0-dev.1` adiciona avaliação de políticas, métricas e Cliff Walking.
+`0.2.0-dev.2` adiciona avaliação de políticas, métricas e Cliff Walking.
 Veja o [guia de avaliação](doc/evaluation.pt-BR.md) e execute
 `dart run example/evaluation.dart`. A primeira versão `0.1.0` está preservada na
 referência de release; a versão em desenvolvimento ainda não foi publicada.
@@ -95,3 +95,11 @@ final agent = TabularAgent<int, GridAction>(
 Implemente `TdUpdateRule<S, A>` para estratégias próprias. Uma `updateRule`
 explícita tem prioridade sobre `algorithm`. Contratos, domínio, algoritmos,
 agente, valores e treinamento seguem a [estrutura por responsabilidade](doc/architecture/structure.pt-BR.md).
+
+## Controle e exploração em 0.2
+
+Expected SARSA, Double Q-Learning e políticas epsilon-greedy/softmax estão
+implementados na versão em desenvolvimento. Veja o [guia de controle](doc/control.pt-BR.md).
+O laboratório Flutter permite selecionar os quatro algoritmos. A `0.1.0` já foi
+publicada no [pub.dev](https://pub.dev/packages/reinforcement_engine) pelo publisher
+verificado [kleberandrade.dev](https://pub.dev/publishers/kleberandrade.dev).

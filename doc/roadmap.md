@@ -13,15 +13,16 @@
 - [x] Create public GitHub repository.
 - [x] Complete first-release hosted CI on Dart 3.3/stable and Flutter stable.
 - [x] Validate first-release publication with hosted dry-run.
-- [ ] Upload 0.1.0 to pub.dev (local command environment has no network).
-- [ ] Transfer to verified publisher kleberandrade.dev.
+- [x] Publish 0.1.0 to pub.dev.
+- [x] Transfer to verified publisher kleberandrade.dev (160 pub points).
 
 ## 0.2.0 — in development (not published)
 
-- [ ] Expected SARSA and Double Q-Learning.
+- [x] Expected SARSA and Double Q-Learning.
 - [x] Evaluation runner with aggregate success/reward/step metrics.
 - [x] Cliff Walking environment and algorithm comparisons.
-- [ ] Exploration strategy composition.
+- [x] Exploration strategy composition: epsilon-greedy and fixed-temperature softmax.
+- [ ] Review and publish the stable 0.2 release.
 
 ## Later candidates
 

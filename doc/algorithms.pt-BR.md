@@ -1,11 +1,12 @@
 # Algoritmos de controle tabular
 
-As duas estratégias aplicam `Q(s,a) += alpha * (recompensa + gamma * bootstrap - Q(s,a))`.
+As estratégias de uma tabela aplicam `Q(s,a) += alpha * (recompensa + gamma * bootstrap - Q(s,a))`.
 
 | Estratégia | Bootstrap não terminal | Próxima ação |
 | --- | --- | --- |
 | `QLearning<S, A>` | Máximo dos valores das próximas ações legais | Amostrada após a atualização |
 | `Sarsa<S, A>` | Valor da próxima ação de comportamento amostrada | Amostrada antes da atualização e reutilizada |
+| `ExpectedSarsa<S, A>` | Média ponderada pela política de comportamento | Não amostra no bootstrap |
 
 Pares ainda não visitados valem zero. Q-Learning ignora ações ilegais e preserva
 máximos negativos. Transições terminais usam bootstrap zero. Truncamentos encerram
@@ -25,3 +26,5 @@ semente. Não há garantia de igualdade entre runtimes nem de convergência gera
 
 Execute `dart run example/reinforcement_engine_example.dart` para treinar Q-Learning no labirinto padrão. O caminho mínimo possui oito movimentos.
 Esse exemplo é didático; não é um benchmark para aplicações reais.
+
+Veja [controle e exploração](control.pt-BR.md) para Expected SARSA, Double Q-Learning e softmax.
