@@ -1,0 +1,18 @@
+# Architecture / Arquitetura
+
+The stable consumer entry point is `package:reinforcement_engine/reinforcement_engine.dart`.
+Internal source paths are not a compatibility contract. The core is pure Dart,
+with no Flutter, IO, HTTP or runtime package dependencies.
+
+| Document | Contents / Conteúdo |
+| --- | --- |
+| [Overview](architecture/overview.md) / [Visão geral](architecture/overview.pt-BR.md) | Boundaries, ownership, design decisions |
+| [Source structure](architecture/structure.md) / [Estrutura](architecture/structure.pt-BR.md) | Folder map and dependency rules |
+| [Class diagrams / Diagramas](architecture/class_diagrams.md) | Implemented interfaces and collaborators |
+| [Algorithms](algorithms.md) / [Algoritmos](algorithms.pt-BR.md) | Updates, termination, truncation and exploration |
+| [Extending](extending.md) / [Extensibilidade](extending.pt-BR.md) | Custom environments and TD strategies |
+| [Persistence](persistence.md) / [Persistência](persistence.pt-BR.md) | Versioned table format and limits |
+| [Integration](integration.md) / [Integração](integration.pt-BR.md) | Flutter execution and engine family boundaries |
+
+These documents describe implemented code. Future work is explicitly listed
+in the [roadmap](roadmap.md).

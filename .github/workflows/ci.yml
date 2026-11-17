@@ -1,0 +1,39 @@
+name: Dart
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        sdk: ['3.3.0', stable]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+      - run: dart pub get
+      - run: dart format --output=none --set-exit-if-changed lib test example
+      - run: dart analyze --fatal-infos
+      - run: dart test
+      - run: dart run example/reinforcement_engine_example.dart
+      - run: dart run example/custom_extensions.dart
+      - run: dart run example/persistence.dart
+      - run: dart compile js example/custom_extensions.dart -o /tmp/extensions.js
+      - run: dart compile js example/persistence.dart -o /tmp/persistence.js
+      - run: node /tmp/extensions.js
+      - run: node /tmp/persistence.js
+  flutter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+        working-directory: example/flutter_lab
+      - run: flutter analyze --fatal-infos
+        working-directory: example/flutter_lab
+      - run: flutter test
+        working-directory: example/flutter_lab
+      - run: flutter build web
+        working-directory: example/flutter_lab
