@@ -58,6 +58,8 @@ The brand and flag drawings are original code-native assets in this MIT-licensed
 repository; no third-party logo or flag image is copied. The PNG app icons are
 rendered from the same native mark with `flutter test tool/render_brand.dart`.
 
+![Learn served by the published application at mobile width.](../../doc/images/lab/published-learn-mobile.jpg)
+
 ## Guided scenarios
 
 1. **Learn the route.** Keep Q-Learning, seed 42 and initial epsilon 1. Press
@@ -119,9 +121,9 @@ seed does not mean the same actions because the algorithms consume random draws
 differently. Training returns include exploration; use **Avaliar ×50** separately
 to measure a fixed greedy policy. The chart does not change values, RNG or epsilon.
 
-![Real browser capture: Q-Learning and SARSA returns from episode 1 to 500, with 25-episode moving means.](../../doc/images/lab/joint-training-curves.jpg)
+![Real browser capture: Q-Learning and SARSA returns from episode 1 to 500, with 25-episode moving means.](../../doc/images/lab/bilingual-curves-en.jpg)
 
-![Real mobile browser capture of the two curves, legend and episode inspector.](../../doc/images/lab/joint-training-mobile.jpg)
+![Real mobile browser capture of compact navigation, circular language flags and experiment settings.](../../doc/images/lab/bilingual-navbar-mobile.jpg)
 
 Reward is −1 per nonterminal step and +10 upon reaching the flag. The shortest
 route has eight moves and return **+3**, not +10. Collisions cost a step. Training
@@ -139,7 +141,7 @@ histories, while reset clears them. Parameter inputs and navigation are disabled
 during active/paused work. Reset remains available. Native labeled buttons and
 sliders support keyboard interaction, and panels expose separate semantic groups.
 
-![Real desktop browser capture of the joint-training dashboard.](../../doc/images/lab/joint-training-desktop.jpg)
+![Real desktop browser capture of the joint-training dashboard.](../../doc/images/lab/bilingual-navbar-desktop.jpg)
 
 ## Training versus observation
 

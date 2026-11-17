@@ -209,3 +209,26 @@ The native Flutter localization dependency adds the SDK-pinned intl 0.20.3 in th
 application lockfile. No override or core dependency was added. This is automated
 and visual evidence, not a screen-reader certification. SVG/PNG assets are local;
 no runtime branding download is required. Core sources and shared SDKs are intact.
+
+Final hosted verification: **901703a88ebb96093a674fb1d54eb57ae44f0894** passed
+Dart 3.3.0, Dart stable, Flutter and Pages in
+[Actions run 44180910191](https://github.com/kleberandrade/reinforcement-engine/actions/runs/44180910191).
+The [public lab](https://kleberandrade.github.io/reinforcement-engine/) was opened
+in a fresh Chrome tab, not inferred from HTTP status. Its live navbar, circular
+Brazil/UK buttons, fully translated English Learn content and 390px mobile menu/
+examples view were inspected. Focused keyboard activation opened Examples. The
+DOM language changed to `en` and back to `pt-BR`. Default viewport was restored.
+A real public mobile capture is published-learn-mobile.jpg; the fresh current
+curve capture is bilingual-curves-en.jpg. Active guide images now use final UI.
+
+The public HTML/base path, bootstrap, application JS, original SVG, manifest,
+192px PNG icon and bundled CanvasKit returned 200. The JS includes the actual
+circular-language and five-exercise interface; SHA-256:
+`7f71e4b548d868aba0bd6cac9aa0306e3e065e2096101265ca33c15ad50d15d9`.
+The PNG header/dimensions were verified. About description/homepage now describes
+the bilingual learning lab and all eight existing topics remain. The full staged
+source/config diff was reviewed and targeted credential-pattern checks returned
+no findings; this is not a comprehensive security audit.
+
+A final evidence/image documentation commit skips duplicate CI. It does not
+change application sources or the deployed artifact. No pub.dev release was made.

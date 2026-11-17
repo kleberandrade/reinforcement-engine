@@ -414,3 +414,11 @@ passed across 87 files and all updated local documentation links resolve.
 - Heavy checks ran sequentially within this project, per resource coordination.
   Public-source credential-pattern review found no credential material; final
   staged diff review and hosted publication are recorded below after verification.
+
+Hosted gate: 901703a88ebb96093a674fb1d54eb57ae44f0894 passed both Dart SDKs,
+Flutter and Pages in Actions 44180910191. Verified the real public Chrome app at
+desktop and 390px, EN/PT-BR navbar/flags/Learn/examples and DOM language, plus all
+required HTTP assets and original icon dimensions. About/homepage and eight
+retained topics were verified. Staged source/config credential-pattern checks
+were clean. Added final UI captures to the active guide and recorded the JS hash;
+final evidence-only docs commit skips rebuilding unchanged application sources.
