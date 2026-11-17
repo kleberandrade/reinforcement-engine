@@ -14,8 +14,10 @@ SARSA(λ), **Watkins Q(λ)** and **multi-armed bandits** (epsilon-greedy and UCB
 **[Open the live laboratory](https://kleberandrade.github.io/reinforcement-engine/)**
 
 Interactive gridworld: policy arrows, full reward history with moving averages,
-Q-Learning/SARSA comparison, seeded epsilon exploration,
+one-click Q-Learning/SARSA training, a responsive dashboard and seeded epsilon exploration,
 pause/resume and independent greedy evaluation. [Scenario guide](example/flutter_lab/README.md).
+
+![Responsive lab dashboard with one-click Q-Learning and SARSA training and learned policy grid.](doc/images/lab/joint-training-desktop.jpg)
 
 Source version: **0.5.0**. The badge links to the independently published pub.dev
 version; a source commit does not imply publication. New 0.5 examples can be run

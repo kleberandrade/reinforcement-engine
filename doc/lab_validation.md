@@ -122,3 +122,42 @@ JavaScript includes the new full-history comparison interface. Its SHA-256 was
 `4f0c30e1e678bebbfd6ca2146586ba64ab200ef430dc07727c7ac2b6c683a577`.
 A final documentation-only commit records this result without rebuilding the
 unchanged application.
+
+## Paired training and responsive dashboard revision
+
+**Treinar juntos** creates fresh Q-Learning and SARSA agents from one
+LabParameters configuration: selected seed/epsilon, alpha .2, gamma .99, epsilon
+multiplier .995, floor .01 and 200-step limit. Each owns an independent RNG and
+GridWorld. One UI timer interleaves ten complete pairs per tick, up to 500 pairs;
+this is bounded main-thread work, not parallel CPU workers. Both histories pause,
+resume or cancel together. Repeating starts from zero; reset clears both.
+
+A numerical test compares 40 paired episodes with independently trained baselines
+for each algorithm at seed 7/epsilon .6 and checks equal exploration schedules,
+learning rate and discount factor. The peer reward snapshot cannot be mutated.
+UI tests cover repeatable 500/500 runs, pause/cancel/reset and primary-only +500
+continuation while keeping the peer history fixed. Existing observation isolation,
+six-algorithm learning and populated 200%-text chart cases remain in the suite.
+
+Chrome inspection verified paired 500/500 runs, pause at 30/30, resume/cancel at
+70/70, reset to zero and another fresh completed run. The default desktop and
+390×844 viewports were inspected. New screenshots show the responsive dashboard
+and paired curves: joint-training-desktop.jpg, joint-training-curves.jpg and
+joint-training-mobile.jpg. Completed-state captures are real app screenshots.
+
+Automated checks now include text contrast, labeled controls and Android target
+sizes before and during joint training. The selected parameter values retain
+readable text while disabled. Separate semantic groups keep progress and buttons
+individually exposed. These checks do not replace a manual screen-reader audit
+or establish WCAG certification. Mobile panels scroll; the chart retains every
+recorded episode. Grid/playback/evaluation show Q-Learning after a joint run;
+SARSA's history and exploration are separately identified.
+
+Final local results for this revision: **21 Flutter tests passed**, including
+contrast before/during training, synchronized pair lifecycle and individual
+continuation. Fatal-info Flutter analysis, Web release build (repository base
+path, bundled render resources) and Wasm compatibility dry run passed. Required
+format checks passed across 87 Dart files. The 92 core tests, ten VM examples,
+external consumer, JS execution and SVG consistency checks also passed; core
+sources and dependency manifests were not changed. Hosted result follows after
+verification of the deployed revision.

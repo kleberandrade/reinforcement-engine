@@ -339,3 +339,38 @@ Hosted comparison revision: Actions 44171550439 passed both Dart SDK jobs,
 Flutter and Pages for f49024d. Verified HTTP 200 for the public site, bootstrap
 and application JS, including the new comparison text; saved the artifact hash
 in lab_validation.md. Final evidence-only commit skips duplicate CI.
+
+## 2026-11-17 — One-click paired training and dashboard refresh
+
+- Started from clean main at 758da56, preserving release checkouts and other
+  engine projects. Added a failing paired-run test before implementation.
+- Added LabParameters as one shared configuration and PairedTraining as a lab-only
+  adapter. Each algorithm owns its seeded agent and GridWorld. One timer trains
+  ten complete pairs per tick; the UI owns pause/resume/cancel/reset scheduling.
+- Added Treinar juntos: fresh 500 episodes per learner. Individual +500 continues
+  the primary Q-Learning learner and keeps SARSA as a fixed reference. The grid
+  and greedy observation controls clearly identify their primary learner.
+- Reorganized the screen into responsive configuration, observation and comparison
+  panels. Added progress, shared-settings badges, visible per-agent episode/epsilon
+  status, clearer policy cells, modern spacing/colors/buttons and navigation.
+- Inspected real Chrome: joint runs reached 500/500; paused at 30/30, resumed and
+  cancelled at 70/70, then reset both and repeated the run. Captured desktop and
+  390px layouts and full-history curves. Existing historical captures are retained.
+- Separated semantic groups after inspecting merged browser accessibility output.
+  Added contrast checks before/during training; selected disabled dropdown values
+  inherited low-contrast text, so their actual item text now retains an explicit
+  readable color. Disabled hints did not control selected values and were removed.
+- Paired numerical tests match independent Q-Learning/SARSA runs for seed 7 and
+  epsilon .6. Interaction coverage includes synchronization, repeatability,
+  cancellation/reset and individual continuation after paired training.
+- Ran the 92 core tests, required examples, JS compile/execution, independent
+  consumer, SVG consistency and formatting checks. Core sources are unchanged.
+  Installed crapper/dryer/mutator were invoked: Dart remains unsupported, so no
+  empty scan is counted as a quality or mutation pass.
+- Updated English and Portuguese READMEs, scenario/control guide, Unreleased and
+  fresh actual dashboard/curve captures. No dependency, shared SDK, release
+  checkout or package-publication change was required.
+
+Final local gate: 21 Flutter tests passed with the added contrast and continuation
+assertions; Flutter analysis and Web release build passed. Required format check
+passed across 87 files and all updated local documentation links resolve.

@@ -48,11 +48,17 @@ serving at a domain root. Web render resources are bundled with the build.
 
 ## Compare Q-Learning and SARSA
 
-1. Keep seed 42 and initial epsilon 1. Train Q-Learning for 500 episodes.
-2. Switch to SARSA and train 500 episodes. The chart preserves Q-Learning's
-   latest run as an immutable reference. Both share the same episode axis and
-   fixed return scale **−200 to +3**. A shorter run ends at its last observation;
-   it is not padded, extrapolated or stretched across the longer run.
+1. Choose seed 42 (or 7/123) and the initial epsilon, then press **Treinar juntos**.
+   This starts a fresh comparison: **500 Q-Learning episodes and 500 SARSA
+   episodes**, each using its own newly seeded agent and GridWorld. No algorithm
+   switching is needed. Repeating the button restarts both runs from episode 1.
+2. Both agents share one immutable `LabParameters` configuration: selected seed
+   and epsilon, alpha .2, gamma .99, epsilon decay .995, epsilon floor .01 and a
+   200-step episode cap. Their RNGs are independent. Ten complete episode pairs
+   run per timer tick; pause/resume/cancel applies to both histories together.
+   Both share the same episode axis and fixed return scale **−200 to +3**.
+   A shorter saved/manual run ends at its last observation; it is not padded,
+   extrapolated or stretched across the longer run.
 3. Compare the violet solid Q-Learning curve with the green dashed SARSA curve.
    Strong lines show trailing means; faint lines show raw per-episode returns.
    Turn off **Retornos por episódio** to focus on the smoothed curves.
@@ -62,7 +68,12 @@ serving at a domain root. Web render resources are bundled with the build.
 5. Use the episode slider (keyboard or touch) to read both algorithms' exact
    raw return and moving mean. A missing episode is identified explicitly.
 
-Switching algorithms restarts the active learner while retaining the latest
+The grid, **Executar** and **Avaliar ×50** show the Q-Learning agent after a joint
+run. The SARSA curve and its episode/epsilon status are shown alongside it.
+**Treinar +500** remains an individual action: after a paired run it extends
+Q-Learning only, retaining SARSA's last curve as a fixed reference.
+
+Manual comparison remains available. Switching algorithms restarts the active learner while retaining the latest
 Q-Learning/SARSA curves for these settings. Changing seed/initial epsilon or
 pressing **Reiniciar** clears both active and reference histories. Train the same
 number of episodes for an easier visual comparison. Other algorithms still show
@@ -73,15 +84,27 @@ seed does not mean the same actions because the algorithms consume random draws
 differently. Training returns include exploration; use **Avaliar ×50** separately
 to measure a fixed greedy policy. The chart does not change values, RNG or epsilon.
 
-![Real browser capture: Q-Learning and SARSA returns from episode 1 to 500, with 25-episode moving means.](../../doc/images/lab/reward-comparison.jpg)
+![Real browser capture: Q-Learning and SARSA returns from episode 1 to 500, with 25-episode moving means.](../../doc/images/lab/joint-training-curves.jpg)
 
-![Real mobile browser capture of the two curves, legend and episode inspector.](../../doc/images/lab/reward-comparison-mobile.jpg)
+![Real mobile browser capture of the two curves, legend and episode inspector.](../../doc/images/lab/joint-training-mobile.jpg)
 
 Reward is −1 per nonterminal step and +10 upon reaching the flag. The shortest
 route has eight moves and return **+3**, not +10. Collisions cost a step. Training
 caps each episode at 200 steps; playback and evaluation cap at 100. A cap is not
-success. Ten episodes run per timer tick, leaving Flutter opportunities to render;
+success. Ten individual episodes or ten episode pairs run per timer tick, leaving Flutter opportunities to render;
 this is bounded main-thread work, not an isolate or background worker.
+
+## Layout and controls
+
+The responsive dashboard separates configuration, policy observation and reward
+comparison. Desktop places settings beside the grid; smaller screens stack the
+panels and scroll. A shared-settings badge identifies the comparison configuration.
+Progress is per episode pair during joint training; cancel preserves both partial
+histories, while reset clears them. Parameter inputs and navigation are disabled
+during active/paused work. Reset remains available. Native labeled buttons and
+sliders support keyboard interaction, and panels expose separate semantic groups.
+
+![Real desktop browser capture of the joint-training dashboard.](../../doc/images/lab/joint-training-desktop.jpg)
 
 ## Training versus observation
 
@@ -121,7 +144,8 @@ Native Material controls support keyboard focus and activation. Grid cells expos
 role/state/policy labels, status is a live region and chart summaries have text.
 Symbols identify walls, robot and goal in addition to color. Content scrolls on
 narrow displays. Widget tests cover 360×800 with 200% text, labeled targets,
-Android target sizes, cancellation/reset, observation independence and all six
+Android target sizes, text contrast before/during training, synchronized paired
+lifecycle, cancellation/reset, observation independence and all six
 algorithms. Browser captures and hosted validation are recorded in
 [the validation report](../../doc/lab_validation.md). These checks are not a
 comprehensive assistive-technology audit or a claim of WCAG certification.
@@ -131,9 +155,14 @@ comprehensive assistive-technology audit or a claim of WCAG certification.
 Treine, avalie e execute separadamente. Mudar algoritmo, seed ou epsilon inicial
 reinicia o aprendizado. **Pausar/Continuar** preserva a execução atual;
 **Cancelar** preserva os valores aprendidos; **Reiniciar** zera o experimento.
-Setas mostram empates da política gulosa. O gráfico mantém todos os episódios,
-com média móvel de 10, 25, 50 ou 100 episódios. Treine Q-Learning, troque para
-SARSA e treine novamente: a curva anterior fica sobreposta na mesma escala.
+**Treinar juntos** inicia Q-Learning e SARSA com a mesma seed e os mesmos
+parâmetros, 500 episódios para cada agente, com ambientes e RNGs independentes.
+Repetir inicia uma comparação do zero. Pausa/retomada/cancelamento afeta ambos;
+Reiniciar limpa ambos. O grid exibe Q-Learning; Treinar +500 estende só o agente
+individual. O painel de configuração fica ao lado do grid no desktop e acima
+no celular. Setas mostram empates da política gulosa. O gráfico mantém todos os episódios,
+com média móvel de 10, 25, 50 ou 100 episódios. As duas curvas do treino conjunto ficam sobrepostas na mesma escala; a comparação
+manual por troca de algoritmo também continua disponível.
 Use o seletor de episódio para consultar retornos e médias; mudar seed/epsilon
 ou Reiniciar limpa ambas as curvas.
 Avaliar e executar usam ambiente e RNG próprios, sem alterar o treino seguinte.

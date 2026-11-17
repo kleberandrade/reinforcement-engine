@@ -1,5 +1,12 @@
 ## Unreleased
 
+- Add one-click paired Q-Learning/SARSA training with shared parameters and
+  separate seeded agents/environments, synchronized pause/resume/cancel and reset.
+- Refresh the lab with responsive settings/policy panels, shared-setting badges,
+  pair progress, clearer grid/metrics and separate accessibility groups.
+- Treino conjunto em um clique, parâmetros compartilhados, controle dos dois
+  agentes e interface responsiva com configuração, política e curvas separadas.
+
 - Plot the entire Flutter training history from episode 1, with configurable
   trailing means, optional raw returns and an accessible episode inspector.
 - Preserve Q-Learning/SARSA reference runs across algorithm changes, sharing
