@@ -3,3 +3,6 @@
 build/
 coverage/
 pubspec.lock
+
+# Pin the executable Flutter application; library consumers resolve their own graph.
+!example/flutter_lab/pubspec.lock
