@@ -114,3 +114,11 @@ controls and populated accessibility layout case. Fatal-info Flutter analysis,
 release Web build and Wasm compatibility dry run passed. The 92 core tests,
 required VM examples, independent contracts consumer, SVG check and JavaScript
 compile/execution passed again. No dependencies were added for chart rendering.
+
+Hosted revision verification: source `f49024d` passed Dart 3.3.0, Dart stable,
+Flutter and Pages in [Actions run 44171550439](https://github.com/kleberandrade/reinforcement-engine/actions/runs/44171550439).
+The site, bootstrap and application JavaScript returned HTTP 200; the published
+JavaScript includes the new full-history comparison interface. Its SHA-256 was
+`4f0c30e1e678bebbfd6ca2146586ba64ab200ef430dc07727c7ac2b6c683a577`.
+A final documentation-only commit records this result without rebuilding the
+unchanged application.

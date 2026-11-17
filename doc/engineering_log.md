@@ -334,3 +334,8 @@ because the application sources and deployed artifact are unchanged.
 - Inspected real 500-episode Q-Learning and SARSA runs in Chrome desktop/390px,
   changed the moving window and saved new captures. Updated English/Portuguese
   guidance and Unreleased notes. Hosted validation is recorded after deployment.
+
+Hosted comparison revision: Actions 44171550439 passed both Dart SDK jobs,
+Flutter and Pages for f49024d. Verified HTTP 200 for the public site, bootstrap
+and application JS, including the new comparison text; saved the artifact hash
+in lab_validation.md. Final evidence-only commit skips duplicate CI.
