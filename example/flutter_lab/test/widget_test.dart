@@ -76,6 +76,45 @@ void main() {
     expect(find.text('Episódios: 0'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
+  testWidgets('compares Q-Learning and SARSA and clears incompatible runs',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1000, 2200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(const LearningLab());
+    Future<void> train() async {
+      await tester.tap(find.text('Treinar +500'));
+      for (var i = 0; i < 55; i++) {
+        await tester.pump(const Duration(milliseconds: 16));
+      }
+    }
+
+    await train();
+    final first = List<double>.of(
+        tester.widget<RewardHistory>(find.byType(RewardHistory)).rewards);
+    await tester.tap(find.byType(DropdownButton<LabAlgorithm>));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('SARSA').last);
+    await tester.pumpAndSettle();
+    await train();
+    var chart = tester.widget<RewardHistory>(find.byType(RewardHistory));
+    expect(chart.algorithm, 'SARSA');
+    expect(chart.rewards, hasLength(500));
+    expect(chart.comparison, first);
+    expect(chart.comparisonAlgorithm, 'Q-Learning');
+    await tester.tap(find.byType(DropdownButton<int>).first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Seed 7').last);
+    await tester.pumpAndSettle();
+    chart = tester.widget<RewardHistory>(find.byType(RewardHistory));
+    expect(chart.rewards, isEmpty);
+    expect(chart.comparison, isEmpty);
+    await train();
+    await tester.tap(find.text('Reiniciar'));
+    await tester.pump();
+    chart = tester.widget<RewardHistory>(find.byType(RewardHistory));
+    expect(chart.rewards, isEmpty);
+    expect(chart.comparison, isEmpty);
+  });
   testWidgets('fits narrow screens with large text', (tester) async {
     await tester.binding.setSurfaceSize(const Size(360, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));

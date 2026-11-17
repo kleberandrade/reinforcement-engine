@@ -3,6 +3,8 @@ import 'dart:math';
 import 'continuing_page.dart';
 import 'checkpoint_page.dart';
 import 'bandits_page.dart';
+import 'reward_history.dart';
+export 'reward_history.dart' show RewardHistory;
 // Keep compatibility with Flutter versions before the material_ui split.
 // ignore: deprecated_member_use
 import 'package:flutter/material.dart';
@@ -53,6 +55,7 @@ class _MazePageState extends State<MazePage> {
   int seed = 42;
   double initialEpsilon = 1;
   final rewards = <double>[];
+  final comparisonRuns = <LabAlgorithm, List<double>>{};
   GridWorld? playback;
   Random playbackRandom = Random(7);
   int episodes = 0, position = 0, moves = 0;
@@ -66,7 +69,8 @@ class _MazePageState extends State<MazePage> {
     resetAgent();
   }
 
-  void resetAgent() {
+  void resetAgent({bool preserveComparison = false}) {
+    if (!preserveComparison) comparisonRuns.clear();
     timer?.cancel();
     timer = null;
     paused = false;
@@ -259,8 +263,18 @@ class _MazePageState extends State<MazePage> {
                                       : (value) {
                                           if (value != null) {
                                             setState(() {
+                                              if (rewards.isNotEmpty &&
+                                                  (algorithm ==
+                                                          LabAlgorithm
+                                                              .qLearning ||
+                                                      algorithm ==
+                                                          LabAlgorithm.sarsa)) {
+                                                comparisonRuns[algorithm] =
+                                                    List.unmodifiable(rewards);
+                                              }
                                               algorithm = value;
-                                              resetAgent();
+                                              resetAgent(
+                                                  preserveComparison: true);
                                             });
                                           }
                                         },
@@ -362,6 +376,10 @@ class _MazePageState extends State<MazePage> {
                       Text(
                           'Última recompensa: ${lastReward.toStringAsFixed(0)}'),
                     ]),
+                    const SizedBox(height: 16),
+                    Semantics(
+                        liveRegion: true,
+                        child: Text(status, textAlign: TextAlign.center)),
                     const SizedBox(height: 24),
                     Center(
                         child: ConstrainedBox(
@@ -443,11 +461,19 @@ class _MazePageState extends State<MazePage> {
                         'Setas: ações de maior valor Q; empates mostram várias direções.',
                         textAlign: TextAlign.center),
                     const SizedBox(height: 16),
-                    RewardHistory(rewards: rewards),
+                    RewardHistory(
+                        rewards: List.unmodifiable(rewards),
+                        algorithm: algorithm.label,
+                        comparison: comparisonRuns[switch (algorithm) {
+                              LabAlgorithm.qLearning => LabAlgorithm.sarsa,
+                              LabAlgorithm.sarsa => LabAlgorithm.qLearning,
+                              _ => algorithm,
+                            }] ??
+                            const [],
+                        comparisonAlgorithm: algorithm == LabAlgorithm.sarsa
+                            ? 'Q-Learning'
+                            : 'SARSA'),
                     const SizedBox(height: 16),
-                    Semantics(
-                        liveRegion: true,
-                        child: Text(status, textAlign: TextAlign.center)),
                     const SizedBox(height: 16),
                     Text(
                         'Recompensa: −1 por passo, +10 ao alcançar a bandeira. '
@@ -455,52 +481,4 @@ class _MazePageState extends State<MazePage> {
                         'O treino usa seed $seed e até 200 passos por episódio. ',
                         textAlign: TextAlign.center),
                   ])))));
-}
-
-class RewardHistory extends StatelessWidget {
-  const RewardHistory({super.key, required this.rewards});
-  final List<double> rewards;
-
-  @override
-  Widget build(BuildContext context) {
-    final recent = rewards.skip(max(0, rewards.length - 50)).toList();
-    final mean =
-        recent.isEmpty ? 0.0 : recent.reduce((a, b) => a + b) / recent.length;
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('Recompensas por episódio',
-          style: Theme.of(context).textTheme.titleMedium),
-      Text(
-          '${rewards.length} episódios registrados · média dos últimos ${recent.length}: ${mean.toStringAsFixed(1)}'),
-      const Text(
-          'Últimos 50: altura indica retorno de −200 a +3; maior é melhor.'),
-      const SizedBox(height: 8),
-      Semantics(
-          label:
-              'Histórico de recompensas. Última: ${rewards.isEmpty ? "nenhuma" : rewards.last.toStringAsFixed(1)}. Média recente ${mean.toStringAsFixed(1)}.',
-          child: ExcludeSemantics(
-              child: SizedBox(
-                  height: 64,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      for (var i = 0; i < recent.length; i++)
-                        Expanded(
-                            child: Tooltip(
-                                message:
-                                    'Episódio ${rewards.length - recent.length + i + 1}: ${recent[i]}',
-                                child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 1),
-                                    child: Container(
-                                        height: 4 +
-                                            60 *
-                                                ((recent[i] + 200) / 203)
-                                                    .clamp(0, 1),
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary))))
-                    ],
-                  )))),
-    ]);
-  }
 }
