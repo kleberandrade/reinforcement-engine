@@ -71,5 +71,16 @@ release was made and no service was purchased.
 
 Pages was absent before this revision. It was enabled with Actions as the build
 source. The new job depends on both Dart matrix jobs and the Flutter job and only
-publishes main outside pull requests. Final hosted result is recorded below
-when verified; configuration alone is not publication evidence.
+publishes main outside pull requests. Deployment of source revision `dbbeb66` succeeded in
+[Actions run 44168240494](https://github.com/kleberandrade/reinforcement-engine/actions/runs/44168240494).
+Both Dart jobs (3.3.0 and stable), Flutter and Pages completed successfully.
+
+[The published laboratory](https://kleberandrade.github.io/reinforcement-engine/)
+returned HTTP 200, as did `flutter_bootstrap.js`, `main.dart.js` and bundled
+`canvaskit/canvaskit.js`. Served HTML has `lang="pt-BR"` and the correct repository
+base path. GitHub About now links to the lab; all eight existing topics were
+retained. The existing pub badge resolves to published version 0.5.0 and the CI
+badge endpoint returns 200. These checks do not imply a new package release.
+
+A final documentation-only commit records these results and links with CI
+explicitly skipped; it does not alter the deployed application sources.

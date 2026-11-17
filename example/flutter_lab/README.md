@@ -3,6 +3,8 @@
 A responsive Flutter application over the **pure Dart** reinforcement_engine core.
 The interface is in Portuguese; this guide describes the controls in English.
 
+**[Open the live laboratory](https://kleberandrade.github.io/reinforcement-engine/)**
+
 ## Run and reproduce
 
 Validated with **Flutter 3.50.0 / Dart 3.14.0**. CI pins Flutter 3.50.0 and the

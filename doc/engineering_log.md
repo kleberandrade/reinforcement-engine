@@ -304,3 +304,10 @@ Validation before final source commit:
   limits and Portuguese control notes. Synchronized both READMEs and Unreleased.
 - Enabled Actions-based Pages and added publication gated on core and Flutter
   checks, with repository base-href. Hosted verification is recorded separately.
+
+Publication verification: Actions run 44168240494 passed Dart 3.3/stable, Flutter
+and Pages for dbbeb66. Site, bootstrap, application JS and bundled CanvasKit all
+returned 200 with the correct base path. Updated About description/homepage and
+retained eight topics; verified pub 0.5.0 and CI badge endpoints. Added visible
+links to both READMEs. The final docs-only evidence commit skips duplicate CI
+because the application sources and deployed artifact are unchanged.

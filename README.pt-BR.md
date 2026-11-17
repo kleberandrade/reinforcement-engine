@@ -11,6 +11,8 @@ R-learning, SARSA(λ), **Watkins Q(λ)** e **bandits** com epsilon-greedy e UCB1
 [English](README.md) · [Guia de aprendizado](doc/learning_guide.pt-BR.md) ·
 [Laboratório Flutter](example/flutter_lab/README.md) · [Arquitetura](doc/architecture.md)
 
+**[Abrir laboratório online](https://kleberandrade.github.io/reinforcement-engine/)**
+
 Gridworld interativo: setas da política, retornos por episódio, seeds e exploração
 epsilon, pausa/retomada e avaliação independente. [Cenários](example/flutter_lab/README.md).
 

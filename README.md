@@ -11,6 +11,8 @@ SARSA(λ), **Watkins Q(λ)** and **multi-armed bandits** (epsilon-greedy and UCB
 [Português](README.pt-BR.md) · [Learning guide](doc/learning_guide.md) ·
 [Flutter lab](example/flutter_lab/README.md) · [Architecture](doc/architecture.md)
 
+**[Open the live laboratory](https://kleberandrade.github.io/reinforcement-engine/)**
+
 Interactive gridworld: policy arrows, episode rewards, seeded epsilon exploration,
 pause/resume and independent greedy evaluation. [Scenario guide](example/flutter_lab/README.md).
 
