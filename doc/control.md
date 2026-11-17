@@ -1,6 +1,6 @@
 # Tabular control and exploration strategies
 
-Implemented in `0.2.0-dev.2`, not yet published. Version `0.1.0` retains its
+Implemented in `0.2.0`. Version `0.1.0` retains its
 Q-Learning/SARSA API; existing constructors and TD extension contracts remain available.
 
 ## Choosing an agent

@@ -1,6 +1,6 @@
 # Policy evaluation and Cliff Walking
 
-Available in development `0.2.0-dev.2`; not part of the initial `0.1.0` release.
+Available in `0.2.0`; not part of the initial `0.1.0` release.
 
 Training modifies the table and exploration. Evaluation measures a fixed policy
 through `ActionPolicy<S, A>`. `GreedyPolicy` reads Q-values and randomizes ties

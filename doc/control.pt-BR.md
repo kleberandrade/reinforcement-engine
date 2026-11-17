@@ -1,6 +1,6 @@
 # Controle tabular e estratégias de exploração
 
-Implementado em `0.2.0-dev.2`, ainda não publicado. A versão `0.1.0` permanece
+Implementado em `0.2.0`. A versão `0.1.0` permanece
 com Q-Learning e SARSA; as APIs antigas continuam disponíveis.
 
 ## Escolha do agente

@@ -10,12 +10,11 @@ Q-Learning, SARSA, Expected SARSA and Double Q-Learning, with no runtime depende
 [Architecture](doc/architecture.md) · [Roadmap](doc/roadmap.md) · [Contributing](CONTRIBUTING.md)
 
 
-## Next version in development
+## Version 0.2.0
 
-`0.2.0-dev.2` adds policy evaluation, metrics and Cliff Walking.
+`0.2.0` adds policy evaluation, metrics and Cliff Walking.
 See the [evaluation guide](doc/evaluation.md) and run
-`dart run example/evaluation.dart`. The initial `0.1.0` is preserved in its release
-reference; the development version has not been published.
+`dart run example/evaluation.dart`. See the [migration guide](doc/migration.md) before updating from 0.1.
 
 
 ## Guides and runnable examples
@@ -30,7 +29,7 @@ reference; the development version has not been published.
 
 ## Status
 
-Initial release line: 0.1.0. Current source: 0.2.0-dev.2.
+Initial release line: 0.1.0. Current source: 0.2.0.
 Requires Dart 3.3 or newer. Intended for finite, discrete state/action spaces.
 
 ## Quick start
@@ -195,7 +194,7 @@ and training follow the [source responsibility map](doc/architecture/structure.m
 ## Control and exploration in 0.2
 
 Expected SARSA, Double Q-Learning and epsilon-greedy/softmax exploration are
-implemented in development. See the [control guide](doc/control.md).
+implemented in 0.2.0. See the [control guide](doc/control.md).
 The Flutter lab supports all four algorithms. Version `0.1.0` is published on
 [pub.dev](https://pub.dev/packages/reinforcement_engine) under verified publisher
 [kleberandrade.dev](https://pub.dev/publishers/kleberandrade.dev).

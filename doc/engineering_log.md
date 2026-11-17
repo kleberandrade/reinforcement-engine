@@ -141,3 +141,12 @@ Validation on installed Dart 3.11.5 / Flutter 3.41.9:
 - Flutter web release build passed, including the Wasm compatibility dry-run.
 - New widget scenarios require hosted execution because local loopback sockets
   remain restricted. Hosted checks are verified separately after pushing.
+
+## 2026-11-16 — stable 0.2.0 preparation
+
+Consolidated the unpublished prerelease notes into 0.2.0, updated version and
+bilingual guides, and added migration notes covering the new enum case, common
+agent/value contracts and two-table persistence. Runtime code is unchanged from
+c86f969, whose complete hosted CI passed. A dedicated release worktree preserves
+0.2.0 while 0.3 development proceeds. Publishing success is verified separately;
+no upload is inferred from a tag or metadata change.

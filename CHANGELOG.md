@@ -1,6 +1,6 @@
 ## Unreleased
 
-## 0.2.0-dev.2
+## 0.2.0
 
 - Add Expected SARSA with behavior probabilities bound to the current policy
   and exploration schedule, including greedy ties and distribution validation.
@@ -11,8 +11,6 @@
   guides and runnable exploration/comparison examples.
 - Add `expectedSarsa` to LearningAlgorithm; exhaustive consumer switches may
   require a new branch. Existing TdUpdateRule implementations remain compatible.
-
-## 0.2.0-dev.1
 
 - Add read-only policy evaluation with independent RNG, caller-defined success,
   immutable episode summaries and aggregate reward/step/termination metrics.

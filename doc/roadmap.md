@@ -16,13 +16,14 @@
 - [x] Publish 0.1.0 to pub.dev.
 - [x] Transfer to verified publisher kleberandrade.dev (160 pub points).
 
-## 0.2.0 — in development (not published)
+## 0.2.0 — release prepared
 
 - [x] Expected SARSA and Double Q-Learning.
 - [x] Evaluation runner with aggregate success/reward/step metrics.
 - [x] Cliff Walking environment and algorithm comparisons.
 - [x] Exploration strategy composition: epsilon-greedy and fixed-temperature softmax.
-- [ ] Review and publish the stable 0.2 release.
+- [x] Review and prepare the stable 0.2 release.
+- [ ] Confirm the 0.2.0 upload on pub.dev.
 
 ## Later candidates
 
