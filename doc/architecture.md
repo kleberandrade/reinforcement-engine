@@ -21,3 +21,6 @@ with no Flutter, IO, HTTP or runtime package dependencies.
 
 These documents describe implemented code. Future work is explicitly listed
 in the [roadmap](roadmap.md).
+
+[Learning checkpoints](checkpoints.md) / [Checkpoints](checkpoints.pt-BR.md) describe
+the 0.4 outer persistence adapter, typed key codecs and new-RNG boundary contract.

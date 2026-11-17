@@ -25,3 +25,7 @@ Restaure as duas tabelas com `QTable.fromJson` e forneça `tableA` e `tableB` ao
 construtor de `DoubleQAgent`. Não salve apenas a soma: isso perde os estimadores
 independentes necessários para continuar Double Q-Learning. `agent.values` é uma
 visão de leitura, não um formato serializado. Não há checkpoint de RNG/epsilon.
+
+Para salvar o estado de agentes nativos além dos valores, use
+[TrainingCheckpoint](checkpoints.pt-BR.md) (0.4), entre episódios/janelas, com uma
+nova sequência aleatória na retomada. O JSON existente de QTable não muda.

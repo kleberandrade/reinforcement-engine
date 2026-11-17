@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'continuing_page.dart';
+import 'checkpoint_page.dart';
 // Keep compatibility with Flutter versions before the material_ui split.
 // ignore: deprecated_member_use
 import 'package:flutter/material.dart';
@@ -217,6 +218,14 @@ class _MazePageState extends State<MazePage> {
                                           builder: (_) =>
                                               const ContinuingPage())),
                               child: const Text('Tarefa contínua')),
+                          OutlinedButton(
+                              onPressed: busy
+                                  ? null
+                                  : () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                          builder: (_) =>
+                                              const CheckpointPage())),
+                              child: const Text('Salvar e retomar')),
                           TextButton(
                               onPressed: () => setState(resetAgent),
                               child: const Text('Reiniciar')),

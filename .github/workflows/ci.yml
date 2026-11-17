@@ -24,6 +24,9 @@ jobs:
         working-directory: validation/contracts_03
       - run: dart run example/reinforcement_engine_example.dart
       - run: dart run example/custom_extensions.dart
+      - run: dart run example/checkpoint.dart
+      - run: dart compile js example/checkpoint.dart -o /tmp/checkpoint.js
+      - run: node /tmp/checkpoint.js
       - run: dart run example/persistence.dart
       - run: dart run example/evaluation.dart
       - run: dart run example/exploration.dart

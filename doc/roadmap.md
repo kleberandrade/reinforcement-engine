@@ -34,13 +34,22 @@
 - [x] Flutter continuing-task demo and SARSA(lambda) maze control.
 - [x] Compare learning across 420 task/parameter/seed combinations.
 - [x] Review API, migration, guides and independent contract consumers.
-- [ ] Confirm stable 0.3.0 publication and GitHub release.
+- [x] Confirm stable 0.3.0 publication and GitHub release.
+
+## 0.4.0 — learning checkpoints
+
+- [x] Versioned immutable snapshots with typed state/action codecs.
+- [x] Restore configuration, exploration, independent estimators and average reward.
+- [x] Reject custom strategies and active traces; document new RNG stream.
+- [x] Flutter JSON transfer, resume and before/after evaluation.
+- [x] Bilingual guides and numerical round-trip/error tests.
+- [ ] Confirm full hosted CI, GitHub release and pub.dev publication.
 
 ## Later candidates
 
 - Replacing/true-online traces and Watkins Q(lambda).
 - Bandit algorithms under distinct interfaces.
 - DQN with optional neural_engine integration in a separate package.
-- Explicit checkpoint contract, including a serializable RNG if exact resume is needed.
+- Trajectory-exact checkpoints with serializable RNG and environment state.
 
 Continuous-control policy-gradient algorithms require separate design and benchmarks.

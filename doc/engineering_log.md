@@ -216,3 +216,31 @@ Local validation:
 - Full experiment has 420 unique rows, all ten seeds per task and no numeric errors.
 - Previous hosted run 44002809344 passed core, JS and Flutter checks for this exact
   numerical implementation; final stable metadata/consumer CI runs after pushing.
+
+## 2026-11-16 — 0.4 boundary checkpoints
+
+Added an immutable version-1 TrainingCheckpoint outer adapter for built-in
+TabularAgent, DoubleQAgent, RLearningAgent and SarsaLambdaAgent. Snapshots retain
+configuration, live epsilon/schedule, exploration strategy, independent estimators
+and rho. They create fresh agents/tables with a NEW RNG stream. Kept existing RNG
+implementation/call order and numerical update paths unchanged. Exact trajectory
+resume needs serializable agent/environment RNGs and is explicitly out of scope.
+
+Reject custom TD callbacks/policies instead of replacing their behavior. Reject
+active eligibility traces and decoded key collisions; callers own true episode
+boundaries, pending actions and environment identity. Concrete policy inspection
+is isolated to the format adapter, never placed in the learning/runner paths.
+
+Added a bounded Flutter JSON transfer/resume page with application-owned counters
+and environment envelope, independent before/after evaluation and invalid-input
+preservation. Updated bilingual guides, architecture, diagrams, migration and
+release metadata. Extended the independent public consumer and VM/JS CI example.
+
+Local validation:
+- 70 behavioral tests passed, including 10 checkpoint scenarios.
+- Root, Flutter and independent-consumer analysis passed with fatal infos.
+- All eight CLI examples ran; checkpoint compiled JavaScript ran successfully.
+- Flutter release web build and Wasm compatibility dry run passed.
+- Widget execution blocked by local loopback socket permissions; hosted CI runs it.
+- Publish dry run built/inspected a 122 KB archive, then failed DNS accessing
+  pub.dev. Hosted validation and actual upload are tracked separately.

@@ -29,7 +29,18 @@ void main() {
   if (!average.averageReward.isFinite) {
     throw StateError('Public R-learning failed');
   }
-  print('Independent 0.3 contract consumer passed');
+  final checkpoint = TrainingCheckpoint.rLearning(average,
+      encodeState: (state) => state, encodeAction: (action) => action);
+  final resumed = TrainingCheckpoint.fromJson(checkpoint.toJson())
+      .restoreRLearning<int, int>(
+          decodeState: (key) => key as int,
+          decodeAction: (key) => key as int,
+          seed: 99);
+  if (resumed.averageReward != average.averageReward ||
+      resumed.table.value(0, 0) != average.table.value(0, 0)) {
+    throw StateError('Public checkpoint consumer failed');
+  }
+  print('Independent contracts and 0.4 checkpoint consumer passed');
 }
 
 final class ConsumerEnvironment implements Environment<int, int> {

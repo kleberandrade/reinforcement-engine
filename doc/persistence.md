@@ -25,3 +25,7 @@ Restore each through `QTable.fromJson` and pass `tableA` and `tableB` to the
 `DoubleQAgent` constructor. Saving only the sum loses the independent estimators
 required to continue Double Q-Learning. `agent.values` is a read-only view, not a
 serialized format. No RNG/epsilon checkpoint is provided.
+
+For built-in learner state beyond table values, use
+[TrainingCheckpoint](checkpoints.md) (0.4), at episode/window boundaries with a
+new random stream on restore. Existing QTable JSON remains unchanged.

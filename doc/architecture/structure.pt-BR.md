@@ -23,3 +23,11 @@ operam pelo contrato, sem verificar tipos concretos de estratégia.
 
 Widgets, experimentos e armazenamento ficam fora de `lib/`. Consumidores importam
 somente a biblioteca pública. Os nomes públicos anteriores continuam exportados.
+
+## Persistência de aprendizado (0.4)
+
+`lib/src/persistence/` contém o adaptador de formato dos checkpoints nativos,
+validação e restauração em agentes novos. Depende de agentes, políticas, valores,
+domínio e SDK. Agentes e runners não importam essa camada. A inspeção de tipos
+nativos fica restrita ao adaptador de serialização; treino e seleção continuam
+por contratos. Estratégias personalizadas exigem um adaptador da aplicação.

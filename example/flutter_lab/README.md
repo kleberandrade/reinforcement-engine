@@ -32,3 +32,11 @@ The 0.3 development lab adds **SARSA(λ)** to the maze selector and **Tarefa con
 for an independent maintenance-task screen. R-learning trains 100-step blocks
 between timer ticks, preserving state/rho; evaluation uses a fresh environment.
 The trace agent uses trainEpisodic so eligibility cannot cross episode boundaries.
+
+## Learning checkpoints / Checkpoints
+
+Open **Salvar e retomar**. Train +100, export the JSON, create a new agent, import
+and train again. The page compares greedy evaluations before/after resumed
+training. A new RNG stream starts on import; environment identity and counters
+are demo-owned. See [English](../../doc/checkpoints.md) /
+[Português](../../doc/checkpoints.pt-BR.md) for the boundary contract.

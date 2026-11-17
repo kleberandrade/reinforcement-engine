@@ -22,6 +22,7 @@ dart test
 dart run example/reinforcement_engine_example.dart
 dart run example/custom_extensions.dart
 dart run example/persistence.dart
+dart run example/checkpoint.dart
 dart run example/evaluation.dart
 dart run example/exploration.dart
 dart run example/continuing.dart

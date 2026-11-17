@@ -10,9 +10,16 @@ Q-Learning, SARSA, Expected SARSA and Double Q-Learning, with no runtime depende
 [Architecture](doc/architecture.md) · [Roadmap](doc/roadmap.md) · [Contributing](CONTRIBUTING.md)
 
 
+## Version 0.4.0
+
+Learning checkpoints preserve built-in agent state and resume with a new RNG stream.
+See the [checkpoint guide](doc/checkpoints.md), run `dart run example/checkpoint.dart`
+and open **Salvar e retomar** in the Flutter lab.
+
+
 ## Version 0.3.0
 
-Current source `0.3.0` adds [R-learning and continuing tasks](doc/continuing.md)
+Version `0.3.0` added [R-learning and continuing tasks](doc/continuing.md)
 and [SARSA(lambda) with accumulating traces](doc/traces.md). The `v0.2.0` reference
 preserves the previous stable delivery. See the [stability review](doc/benchmarks/stability.md) and [API review](doc/release_0.3.0.md).
 
@@ -36,7 +43,7 @@ See the [evaluation guide](doc/evaluation.md) and run
 
 ## Status
 
-Initial release line: 0.1.0. Current source: 0.3.0.
+Initial release line: 0.1.0. Current source: 0.4.0.
 Requires Dart 3.3 or newer. Intended for finite, discrete state/action spaces.
 
 ## Quick start

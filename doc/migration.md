@@ -25,3 +25,11 @@ acquire automatic trace cleanup; manual loops need beginEpisode/endEpisode.
 Persisting QTable saves neither RNG, traces nor rho. For R-learning, save rho
 separately and restore with initialAverageReward. See the
 [continuing](continuing.md) and [trace](traces.md) guides.
+
+## 0.3 to 0.4
+
+Existing constructors, learning updates, RNG call order and QTable JSON remain
+compatible. `TrainingCheckpoint` is additive; see [checkpoints](checkpoints.md).
+Capture at episode/window boundaries. Restore starts a new RNG stream, not an
+exact continuation. Custom strategies need an application adapter. The public
+`TabularAgent.usesBuiltInUpdateRule` identifies the enum-managed strategy path.

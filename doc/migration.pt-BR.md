@@ -25,3 +25,11 @@ rastros automaticamente; loops manuais precisam beginEpisode/endEpisode.
 Persistir QTable não salva RNG, rastros ou rho. Para R-Learning, salve rho
 separadamente e restaure com initialAverageReward. Veja os guias de
 [tarefas contínuas](continuing.pt-BR.md) e [rastros](traces.pt-BR.md).
+
+## 0.3 para 0.4
+
+Construtores, atualizações, ordem de chamadas aleatórias e JSON de QTable mantêm
+compatibilidade. `TrainingCheckpoint` é aditivo; veja [checkpoints](checkpoints.pt-BR.md).
+Capture entre episódios/janelas. A retomada inicia outra sequência aleatória.
+Estratégias personalizadas exigem adaptador da aplicação. O novo indicador público
+`TabularAgent.usesBuiltInUpdateRule` identifica regras gerenciadas pelo enum.

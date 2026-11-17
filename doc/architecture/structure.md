@@ -12,6 +12,7 @@
 | `lib/src/policies/` | Greedy reading, epsilon-greedy/softmax behavior, probability validation | Policy contract, Q-values and SDK |
 | `lib/src/evaluation/` | Fresh evaluation episodes, independent RNG and aggregate report | Environment/policy contracts and domain only |
 | `lib/src/environments/` | Deterministic GridWorld, Cliff Walking and MaintenanceTask | Environment contract and domain |
+| `lib/src/persistence/` | Built-in checkpoint format adapter, validation and fresh-agent restoration | Agents, policies, values, domain and SDK; never imported by training |
 | `test/` | Public-contract behavior and integration | Public package entry point |
 | `example/*.dart` | Runnable consumer scenarios | Public package entry point |
 | `example/flutter_lab/` | Rendering, scheduling and interaction | Public package; owns Flutter dependencies |
@@ -24,3 +25,7 @@ dispatch through the selected contract; they never check concrete strategy types
 Keep experiments, widgets and file storage outside `lib/`. Consumers use the
 public library, never `src/` imports. Existing public names remain exported after
 this structural refactor.
+
+Checkpoint persistence is an outer adapter. It inspects supported built-in policy
+types only at serialization; learning/runner dispatch remains contract-driven.
+Custom TD callbacks and custom exploration require an application-owned adapter.

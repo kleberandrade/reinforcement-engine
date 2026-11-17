@@ -40,3 +40,5 @@ export 'src/training/train_episodic.dart';
 export 'src/domain/machine_state.dart';
 export 'src/domain/machine_action.dart';
 export 'src/environments/maintenance_task.dart';
+
+export 'src/persistence/training_checkpoint.dart';

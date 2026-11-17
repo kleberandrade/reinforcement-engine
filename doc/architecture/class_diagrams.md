@@ -135,3 +135,27 @@ projected table update before committing average-reward arithmetic.
 O runner contínuo preserva estado entre janelas. O episódico envolve o loop
 existente com limpeza garantida. RLearningAgent valida uma projeção da tabela
 antes de confirmar a atualização de recompensa média.
+
+## Checkpoint adapter / Adaptador de checkpoint (0.4)
+
+```mermaid
+classDiagram
+  class TrainingCheckpoint {
+    toJson()
+    fromJson()
+    restoreTabular()
+    restoreDoubleQ()
+    restoreRLearning()
+    restoreSarsaLambda()
+  }
+  class QTable
+  class ExplorationPolicy
+  TrainingCheckpoint ..> QTable : copies values
+  TrainingCheckpoint ..> ExplorationPolicy : built-in format
+```
+
+The outer persistence adapter captures supported agents and creates fresh learners.
+It owns no environment or storage. Restore begins a new random stream.
+
+O adaptador externo captura agentes suportados e cria novos agentes. Não controla
+ambiente nem armazenamento. A restauração inicia outra sequência aleatória.

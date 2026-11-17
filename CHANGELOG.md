@@ -1,5 +1,16 @@
 ## Unreleased
 
+## 0.4.0
+
+- Add immutable versioned TrainingCheckpoint snapshots for built-in tabular,
+  Double Q, R-learning and boundary-only SARSA(lambda) agents.
+- Preserve configuration, current epsilon, both Double Q estimators and average
+  reward; restore with an explicitly new random stream and typed key codecs.
+- Reject unsupported custom strategies, active eligibility traces, malformed
+  formats and decoded key collisions without mutating an existing learner.
+- Add JSON transfer/resume and before/after evaluation to the Flutter lab,
+  bilingual checkpoint guides, VM/JavaScript example and behavioral tests.
+
 ## 0.3.0
 
 - Validate learning stability across 420 task/parameter/seed combinations; publish

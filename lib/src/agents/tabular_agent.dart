@@ -26,7 +26,8 @@ class TabularAgent<S, A> implements LearningAgent<S, A> {
       int? seed,
       QTable<S, A>? table})
       : explorationPolicy = explorationPolicy ?? EpsilonGreedy<S, A>(),
-        table = table ?? QTable<S, A>() {
+        table = table ?? QTable<S, A>(),
+        usesBuiltInUpdateRule = updateRule == null {
     validateUnit(learningRate, 'learningRate', allowZero: false);
     validateUnit(discountFactor, 'discountFactor');
     _behavior = AgentBehavior(
@@ -47,6 +48,10 @@ class TabularAgent<S, A> implements LearningAgent<S, A> {
 
   /// Convenience selector used when no explicit update rule is supplied.
   final LearningAlgorithm algorithm;
+
+  /// Whether the enum constructor owns the complete update strategy.
+  /// Custom rules require an application-owned persistence adapter.
+  final bool usesBuiltInUpdateRule;
 
   /// Effective strategy. An explicit rule takes precedence over [algorithm].
   TdUpdateRule<S, A> get updateRule => _updateRule;
