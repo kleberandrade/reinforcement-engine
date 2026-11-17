@@ -49,11 +49,11 @@ class _RewardHistoryState extends State<RewardHistory> {
     final labelWidth = axisFontSize * 3.5;
     final chartHeight = max(220.0, axisFontSize * 8);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('Evolução das recompensas', style: theme.textTheme.titleLarge),
+      Text('Curvas de aprendizado', style: theme.textTheme.titleLarge),
       Text(
           '${widget.rewards.length} episódios registrados · histórico completo'),
       const Text(
-          'Treine Q-Learning e depois selecione SARSA (ou vice-versa) para comparar. '
+          'Use Treinar juntos para comparar Q-Learning e SARSA com a mesma configuração. '
           'Seed, epsilon e Reiniciar limpam as curvas.'),
       const SizedBox(height: 12),
       Wrap(

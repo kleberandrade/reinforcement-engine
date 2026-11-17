@@ -115,6 +115,58 @@ void main() {
     expect(chart.rewards, isEmpty);
     expect(chart.comparison, isEmpty);
   });
+  testWidgets(
+      'trains both agents with one action and pauses cancels and resets both',
+      (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1280, 2200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(const LearningLab());
+    await tester.tap(find.text('Treinar juntos'));
+    await tester.pump(const Duration(milliseconds: 16));
+    var chart = tester.widget<RewardHistory>(find.byType(RewardHistory));
+    expect(chart.rewards, hasLength(10));
+    expect(chart.comparison, hasLength(10));
+    await tester.tap(find.text('Pausar'));
+    await tester.pump(const Duration(seconds: 2));
+    expect(tester.widget<RewardHistory>(find.byType(RewardHistory)).comparison,
+        hasLength(10));
+    await tester.tap(find.text('Continuar'));
+    await tester.pump(const Duration(milliseconds: 16));
+    await tester.tap(find.text('Cancelar'));
+    await tester.pump(const Duration(seconds: 2));
+    chart = tester.widget<RewardHistory>(find.byType(RewardHistory));
+    expect(chart.rewards, hasLength(20));
+    expect(chart.comparison, hasLength(20));
+    await tester.tap(find.text('Treinar juntos'));
+    for (var i = 0; i < 55; i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    chart = tester.widget<RewardHistory>(find.byType(RewardHistory));
+    expect(chart.rewards, hasLength(500));
+    expect(chart.comparison, hasLength(500));
+    final first = List<double>.of(chart.rewards);
+    final second = List<double>.of(chart.comparison);
+    await tester.tap(find.text('Treinar juntos'));
+    for (var i = 0; i < 55; i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    chart = tester.widget<RewardHistory>(find.byType(RewardHistory));
+    expect(chart.rewards, first);
+    expect(chart.comparison, second);
+    await tester.tap(find.text('Treinar +500'));
+    for (var i = 0; i < 55; i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    chart = tester.widget<RewardHistory>(find.byType(RewardHistory));
+    expect(chart.rewards, hasLength(1000));
+    expect(chart.comparison, second);
+    await tester.tap(find.text('Reiniciar'));
+    await tester.pump(const Duration(seconds: 2));
+    chart = tester.widget<RewardHistory>(find.byType(RewardHistory));
+    expect(chart.rewards, isEmpty);
+    expect(chart.comparison, isEmpty);
+    expect(tester.takeException(), isNull);
+  });
   testWidgets('fits narrow screens with large text', (tester) async {
     await tester.binding.setSurfaceSize(const Size(360, 800));
     addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -163,8 +215,16 @@ void main() {
     addTearDown(() => tester.binding.setSurfaceSize(null));
     await tester.pumpWidget(const LearningLab());
     await tester.pumpAndSettle();
+    await expectLater(tester, meetsGuideline(textContrastGuideline));
     await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
     await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+    await tester.tap(find.text('Treinar juntos'));
+    await tester.pump(const Duration(milliseconds: 16));
+    await expectLater(tester, meetsGuideline(textContrastGuideline));
+    await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+    await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+    await tester.tap(find.text('Reiniciar'));
+    await tester.pump();
     semantics.dispose();
   });
   for (final name in [
