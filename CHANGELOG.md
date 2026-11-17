@@ -1,5 +1,12 @@
 ## Unreleased
 
+- Plot the entire Flutter training history from episode 1, with configurable
+  trailing means, optional raw returns and an accessible episode inspector.
+- Preserve Q-Learning/SARSA reference runs across algorithm changes, sharing
+  axes and settings; clear comparisons on seed/epsilon changes and reset.
+- Gráfico completo desde o episódio 1, média móvel ajustável e comparação
+  Q-Learning/SARSA na mesma escala, com consulta dos valores por episódio.
+
 - Complete the Flutter gridworld lab with policy arrows, per-episode returns,
   seed/epsilon controls, pause/resume/cancel and independent playback RNG.
 - Add responsive/accessibility and observation-isolation regression tests;

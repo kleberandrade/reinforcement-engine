@@ -311,3 +311,26 @@ returned 200 with the correct base path. Updated About description/homepage and
 retained eight topics; verified pub 0.5.0 and CI badge endpoints. Added visible
 links to both READMEs. The final docs-only evidence commit skips duplicate CI
 because the application sources and deployed artifact are unchanged.
+
+## 2026-11-17 — Full reward history and Q-Learning/SARSA comparison
+
+- Replaced the last-50 bars after reproducing their loss of the initial learning
+  trajectory. Wrote mean/episode-inspection tests before adding the new chart.
+- Extracted a pure trailing-mean helper inside the lab, with partial starting
+  windows and no future data. Added whole-history raw paths, adjustable smoothing
+  (10/25/50/100), shared −200/+3 scale, legends and a keyboard/touch episode slider.
+- Preserved immutable Q-Learning/SARSA run snapshots when switching algorithms.
+  Seed/epsilon changes and explicit reset clear both runs; other algorithms keep
+  their own full-history plot. Reference paths stop at their actual last sample.
+- Moved status ahead of the grid so training/evaluation feedback stays visible
+  when the chart is tall. Kept training, evaluation and playback RNG ownership.
+- Tested numeric windows, window selection, episode 1 after 100 records, unequal
+  histories, saved-run isolation and seed/reset invalidation. The populated
+  200%-text test found axis-label wrapping; scaled axis label space to fix it.
+- Validation: 19 Flutter tests, fatal-info Flutter analysis and release Web build
+  passed. All 92 core tests, required examples, JS consumer, independent consumer,
+  SVG consistency and formatting checks passed. Installed crapper/dryer/mutator
+  still report no Dart support; their empty scans are not counted as passes.
+- Inspected real 500-episode Q-Learning and SARSA runs in Chrome desktop/390px,
+  changed the moving window and saved new captures. Updated English/Portuguese
+  guidance and Unreleased notes. Hosted validation is recorded after deployment.

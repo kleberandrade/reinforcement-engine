@@ -39,14 +39,43 @@ serving at a domain root. Web render resources are bundled with the build.
 4. **Inspect learning.** Each open cell shows all actions tied for maximum Q.
    Unseen values are zero, so several arrows can appear. Playback breaks greedy
    ties randomly. The robot hides its cell's arrow visually; its accessible label
-   retains the policy. Bars show the last 50 episode returns; the mean and latest
-   return are also text. Hover a bar for its episode number and exact reward.
+   retains the policy. The reward chart shows every episode from episode 1,
+   with a trailing moving average. See the comparison workflow below.
 5. **Control execution.** **Pausar** preserves the current training batch or
    playback position. **Continuar** resumes it. **Cancelar** stops scheduling while
    preserving learned values and recorded rewards. **Reiniciar** cancels active
    work and creates a new seeded agent with the selected settings.
 
-![Real browser capture: learned policy arrows, highlighted eight-step route and recent episode returns.](../../doc/images/lab/learned-route.jpg)
+## Compare Q-Learning and SARSA
+
+1. Keep seed 42 and initial epsilon 1. Train Q-Learning for 500 episodes.
+2. Switch to SARSA and train 500 episodes. The chart preserves Q-Learning's
+   latest run as an immutable reference. Both share the same episode axis and
+   fixed return scale **−200 to +3**. A shorter run ends at its last observation;
+   it is not padded, extrapolated or stretched across the longer run.
+3. Compare the violet solid Q-Learning curve with the green dashed SARSA curve.
+   Strong lines show trailing means; faint lines show raw per-episode returns.
+   Turn off **Retornos por episódio** to focus on the smoothed curves.
+4. Choose **Média móvel: 10/25/50/100** (default 25). At episode t, the mean uses
+   episodes max(1, t−N+1) through t. Initial windows use fewer observations,
+   without zero padding or future values. Every episode is retained and plotted.
+5. Use the episode slider (keyboard or touch) to read both algorithms' exact
+   raw return and moving mean. A missing episode is identified explicitly.
+
+Switching algorithms restarts the active learner while retaining the latest
+Q-Learning/SARSA curves for these settings. Changing seed/initial epsilon or
+pressing **Reiniciar** clears both active and reference histories. Train the same
+number of episodes for an easier visual comparison. Other algorithms still show
+full-history curves but do not overlay the Q-Learning/SARSA reference.
+
+This is one training run per algorithm, not a statistical benchmark. The same
+seed does not mean the same actions because the algorithms consume random draws
+differently. Training returns include exploration; use **Avaliar ×50** separately
+to measure a fixed greedy policy. The chart does not change values, RNG or epsilon.
+
+![Real browser capture: Q-Learning and SARSA returns from episode 1 to 500, with 25-episode moving means.](../../doc/images/lab/reward-comparison.jpg)
+
+![Real mobile browser capture of the two curves, legend and episode inspector.](../../doc/images/lab/reward-comparison-mobile.jpg)
 
 Reward is −1 per nonterminal step and +10 upon reaching the flag. The shortest
 route has eight moves and return **+3**, not +10. Collisions cost a step. Training
@@ -102,7 +131,11 @@ comprehensive assistive-technology audit or a claim of WCAG certification.
 Treine, avalie e execute separadamente. Mudar algoritmo, seed ou epsilon inicial
 reinicia o aprendizado. **Pausar/Continuar** preserva a execução atual;
 **Cancelar** preserva os valores aprendidos; **Reiniciar** zera o experimento.
-Setas mostram empates da política gulosa; barras mostram os últimos 50 retornos.
+Setas mostram empates da política gulosa. O gráfico mantém todos os episódios,
+com média móvel de 10, 25, 50 ou 100 episódios. Treine Q-Learning, troque para
+SARSA e treine novamente: a curva anterior fica sobreposta na mesma escala.
+Use o seletor de episódio para consultar retornos e médias; mudar seed/epsilon
+ou Reiniciar limpa ambas as curvas.
 Avaliar e executar usam ambiente e RNG próprios, sem alterar o treino seguinte.
 A rota mínima tem oito movimentos e retorno +3. Seeds diferentes e pouca
 exploração podem exigir mais treino. Não há editor de mapas ou treino no servidor.

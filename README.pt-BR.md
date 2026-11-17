@@ -13,7 +13,8 @@ R-learning, SARSA(λ), **Watkins Q(λ)** e **bandits** com epsilon-greedy e UCB1
 
 **[Abrir laboratório online](https://kleberandrade.github.io/reinforcement-engine/)**
 
-Gridworld interativo: setas da política, retornos por episódio, seeds e exploração
+Gridworld interativo: setas da política, histórico completo com média móvel e
+comparação Q-Learning/SARSA, seeds e exploração
 epsilon, pausa/retomada e avaliação independente. [Cenários](example/flutter_lab/README.md).
 
 Versão do código: **0.5.0**. O badge aponta para a versão publicada no pub.dev;

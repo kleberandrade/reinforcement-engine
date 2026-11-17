@@ -14,7 +14,10 @@ Playback now uses a separate GridWorld, GreedyPolicy and Random(7), keeping the
 training environment and RNG untouched. Bounded training preserves episode
 lifecycle and truncation behavior. Reset disposes work; pause retains the batch
 or playback position; cancel retains the model. The history retains episode
-returns in memory until reset and renders the latest 50.
+returns in memory until reset and renders every episode. The chart now uses trailing means over 10/25/50/100
+samples (default 25), without padding at the beginning. Switching algorithms
+retains the latest immutable Q-Learning/SARSA reference under the same settings;
+seed/epsilon changes and explicit reset clear comparisons.
 
 ## Executed checks
 
@@ -36,7 +39,7 @@ returns in memory until reset and renders the latest 50.
 
 The real Chrome run used the release build served under the same repository
 subpath: 500 Q-Learning episodes, evaluation showing 100% / 8.0 steps, playback
-reaching the goal in eight moves, grid policy labels and recent reward bars.
+reaching the goal in eight moves, grid policy labels and complete reward curves with moving means.
 Desktop and 390×844 browser viewports were inspected. The mobile controls wrap
 and the content scrolls. Captures are real browser screenshots, not mockups:
 
@@ -84,3 +87,30 @@ badge endpoint returns 200. These checks do not imply a new package release.
 
 A final documentation-only commit records these results and links with CI
 explicitly skipped; it does not alter the deployed application sources.
+
+
+## Full-history reward comparison revision
+
+Added numerical mean tests (initial partial windows, expired samples, empty input
+and invalid window), episode-1 inspection after 100 samples, an actual window
+selection changing the mean, unequal run lengths without invented samples,
+Q-Learning/SARSA preservation and seed/reset invalidation. Populated chart tests
+exercise 360×800 with 200% text. Axis label space scales with text after this test
+found wrapping in the original fixed-width axis.
+
+Real Chrome validation trained both algorithms for 500 episodes with seed 42
+and epsilon 1, and inspected their overlaid full histories on desktop and at
+390×844. Changed the smoothing window through the browser control. New captures
+are reward-comparison.jpg and reward-comparison-mobile.jpg. Other screenshots
+above retain the earlier maze walkthrough; the old 50-bar chart is superseded.
+
+The helper and renderer live inside the Flutter application. No core API,
+learning algorithms, runtime dependencies or shared SDK were changed. The three
+installed quality tools were invoked again; they still do not support Dart,
+so empty scans are not counted as quality or mutation passes.
+
+Final local revision checks: **19 Flutter tests passed**, including the new chart
+controls and populated accessibility layout case. Fatal-info Flutter analysis,
+release Web build and Wasm compatibility dry run passed. The 92 core tests,
+required VM examples, independent contracts consumer, SVG check and JavaScript
+compile/execution passed again. No dependencies were added for chart rendering.
