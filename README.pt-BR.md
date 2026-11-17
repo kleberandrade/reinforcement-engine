@@ -14,10 +14,11 @@ R-learning, SARSA(λ), **Watkins Q(λ)** e **bandits** com epsilon-greedy e UCB1
 **[Abrir laboratório online](https://kleberandrade.github.io/reinforcement-engine/)**
 
 Gridworld interativo: setas da política, histórico completo com média móvel e
-treino conjunto Q-Learning/SARSA em um clique, painel responsivo, seeds e exploração
+treino conjunto Q-Learning/SARSA em um clique, navegação EN/PT-BR, aulas integradas,
+painel responsivo, seeds e exploração
 epsilon, pausa/retomada e avaliação independente. [Cenários](example/flutter_lab/README.md).
 
-![Painel responsivo com treino conjunto Q-Learning e SARSA e política aprendida no grid.](doc/images/lab/joint-training-desktop.jpg)
+![Painel responsivo com treino conjunto Q-Learning e SARSA e política aprendida no grid.](doc/images/lab/bilingual-navbar-desktop.jpg)
 
 Versão do código: **0.5.0**. O badge aponta para a versão publicada no pub.dev;
 um commit não comprova publicação. Os exemplos novos da 0.5 podem ser executados

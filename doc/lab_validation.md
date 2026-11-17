@@ -161,3 +161,51 @@ format checks passed across 87 Dart files. The 92 core tests, ten VM examples,
 external consumer, JS execution and SVG consistency checks also passed; core
 sources and dependency manifests were not changed. Hosted result follows after
 verification of the deployed revision.
+
+## Bilingual navigation, circular flags and integrated Learn revision
+
+The persistent navbar now contains Laboratory/Learn/Examples/GitHub, collapsing to
+a labeled mobile menu. An original branch-to-reward native/vector mark supplies
+full/compact identity, SVG favicon and locally rendered PNG manifest assets.
+Brazil/UK language graphics are locally drawn and circularly clipped, with 48px
+native buttons, selected rings/semantics, tooltips and language names. They use
+neither remote flag downloads nor emoji.
+
+EN/PT-BR applies to control labels, feedback generated before a language change,
+help, grid/chart semantics, auxiliary labs and educational prose. Section and
+language changes retain existing agents/RNGs/reward lists. Browser preference
+storage is best effort, under a project-specific key; reload resets the learning
+experiment while retaining only language when supported. Native platforms use a
+session fallback and were not built here. JSON/API identifiers stay invariant.
+
+Learn is in-app content derived from the actual version-0.5.0 guides: vocabulary,
+interpreted formulas and worked numbers, eight implemented algorithm families,
+source references, four runnable presets and exactly five final exercises with
+objectives and completion criteria. References precede exercises. Source paths
+(including Portuguese versions) and the version are tested against this checkout.
+The complete displayed Dart program was extracted and executed, yielding success
+1.0 and approximately eight mean steps. No iframe or unimplemented roadmap feature
+is presented as the educational deliverable.
+
+Final local checks: **26 Flutter tests passed**, including native keyboard menu
+and circular-flag activation, 200% text, paired experiment preservation across
+language/Learn changes, preset loading and translated auxiliary feedback with
+counts unchanged. Fatal-info analysis, Web release build with repository base path
+and bundled renderer, and Wasm compatibility dry run passed. The explicit native
+brand-render test also passed. The unchanged core's earlier 92-test/example/JS/
+consumer evidence was reused; hosted CI still runs its required checks.
+
+Chrome observations: full English/Portuguese controls and semantics; English
+persisted across an empty-tab reload; both learners stayed at 500 episodes after
+language/section changes; SARSA lesson and five exercises were visible; a source
+button opened the actual GitHub learning guide. At 390×844, the menu worked and
+the real low-exploration example loaded seed 7 / epsilon .2 and started training.
+New real captures: bilingual-navbar-desktop.jpg, bilingual-navbar-mobile.jpg,
+learn-en.jpg, learn-pt.jpg and learn-mobile-pt.jpg. Earlier captures document prior
+iterations. The old nonempty test tab was preserved when automatic review rejected
+its reload; preference persistence was checked in a new empty tab instead.
+
+The native Flutter localization dependency adds the SDK-pinned intl 0.20.3 in the
+application lockfile. No override or core dependency was added. This is automated
+and visual evidence, not a screen-reader certification. SVG/PNG assets are local;
+no runtime branding download is required. Core sources and shared SDKs are intact.

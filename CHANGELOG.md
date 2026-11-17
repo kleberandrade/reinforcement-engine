@@ -1,5 +1,14 @@
 ## Unreleased
 
+- Add persistent responsive Laboratory/Learn/Examples/GitHub navigation, an
+  original vector/native brand, favicon and local manifest icons.
+- Localize controls, stored feedback, help, semantics and educational content in
+  EN/PT-BR without recreating learners; persist supported browser preferences.
+- Add circular Brazil/UK language buttons with selected state, labels, focus and
+  48px targets; integrated source-based lessons, executable presets and five exercises.
+- Navbar responsiva, marca original, bandeiras circulares Brasil/Reino Unido,
+  EN/PT-BR preservando o experimento e área educativa baseada nos guias reais.
+
 - Add one-click paired Q-Learning/SARSA training with shared parameters and
   separate seeded agents/environments, synchronized pause/resume/cancel and reset.
 - Refresh the lab with responsive settings/policy panels, shared-setting badges,

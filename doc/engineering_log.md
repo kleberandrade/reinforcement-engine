@@ -374,3 +374,43 @@ in lab_validation.md. Final evidence-only commit skips duplicate CI.
 Final local gate: 21 Flutter tests passed with the added contrast and continuation
 assertions; Flutter analysis and Web release build passed. Required format check
 passed across 87 files and all updated local documentation links resolve.
+
+## 2026-11-17 — Bilingual navigation, original brand and integrated learning
+
+- Incorporated the user's navigation/Learn request while preserving the paired
+  training revision already committed. Added a persistent Laboratory/Learn/
+  Examples/GitHub top bar with a compact mobile menu and original native/SVG mark.
+- Added EN/PT-BR rendering for controls, stored feedback, help, chart/grid semantic
+  labels and all three auxiliary labs. IndexedStack preserves learner instances,
+  histories and RNGs across section/language changes. Locale storage uses a
+  project-specific browser key with a session fallback; document language follows it.
+- Replaced the initial selector with the explicitly requested local circular
+  Brazil/UK flag buttons: selected ring/semantics, tooltip/autonym, keyboard and
+  48px targets. No remote flag image or square emoji is used.
+- Built Learn from actual 0.5.0 guides: foundations, interpreted TD/epsilon and
+  algorithm formulas, eight implemented algorithm families, an executable Dart
+  program, source references, four runnable presets and five final exercises with
+  objectives/completion criteria. No iframe or roadmap functionality substitutes
+  for the lessons. Tests check both language source paths and the source version.
+- Wrote state-preservation, dynamic-feedback, preset, mobile/200%-text and keyboard
+  tests. Fixed Material ownership for ExpansionTile ink and responsive navbar
+  width/selector sizing found by tests. Circular flags supersede the dropdown.
+- Generated PNG favicon/manifest derivatives from the original native mark. The
+  explicit render test passed; its initial fake-async wait was corrected with
+  runAsync and only this project's stalled render process was interrupted.
+- Final UI gate: 26 Flutter tests passed, fatal-info analysis passed, Web release
+  build and Wasm compatibility dry run passed. The displayed Dart program ran and
+  returned success 1.0 / approximately 8 mean steps. Core is untouched; reused its
+  already-passing 92-test/example/consumer evidence instead of duplicating heavy work.
+  The installed quality scanners still report Dart unsupported, not a quality pass.
+- Real Chrome verification: circular flags and full EN/PT-BR text; English persisted
+  after reloading an empty experiment; 500/500 runs survived language/section
+  changes; SARSA explanation, all five exercises and a real GitHub guide opened.
+  At 390×844, used the mobile menu and ran the seed-7/epsilon-.2 preset. Saved
+  navbar desktop/mobile and Learn EN/PT/mobile captures.
+- Automatic review rejected reloading the earlier nonempty experiment. Preserved
+  that tab and used a fresh empty tab for preference/reload validation instead.
+  No user experiment had to be discarded and no permission blocker remains.
+- Heavy checks ran sequentially within this project, per resource coordination.
+  Public-source credential-pattern review found no credential material; final
+  staged diff review and hosted publication are recorded below after verification.
