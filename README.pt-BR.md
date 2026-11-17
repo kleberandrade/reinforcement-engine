@@ -1,9 +1,12 @@
 # reinforcement_engine
 
+[![Dart CI](https://github.com/kleberandrade/reinforcement-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kleberandrade/reinforcement-engine/actions/workflows/ci.yml)
+[![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Aprendizado por reforço tabular em Dart puro, com Q-Learning e SARSA.
 O núcleo não depende de Flutter, bibliotecas nativas ou serviços externos.
 
-Versão inicial local: **0.1.0**, ainda não publicada no pub.dev.
+Versão inicial: **0.1.0**.
 
 
 ## Guias e exemplos executáveis

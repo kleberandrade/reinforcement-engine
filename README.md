@@ -1,5 +1,8 @@
 # reinforcement_engine
 
+[![Dart CI](https://github.com/kleberandrade/reinforcement-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kleberandrade/reinforcement-engine/actions/workflows/ci.yml)
+[![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 Pure Dart tabular reinforcement learning for Flutter apps, games and simulations.
 Q-Learning and SARSA, with no runtime dependencies or Flutter imports in the core.
 
