@@ -22,6 +22,8 @@ jobs:
       - run: dart compile js example/persistence.dart -o /tmp/persistence.js
       - run: node /tmp/extensions.js
       - run: node /tmp/persistence.js
+      - run: dart pub publish --dry-run
+        if: matrix.sdk == 'stable'
   flutter:
     runs-on: ubuntu-latest
     steps:

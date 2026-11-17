@@ -12,3 +12,4 @@
 - Sparse JSON Q-tables with user-defined state/action codecs.
 - Bounded episode runner with separate termination and truncation.
 - GridWorld and interactive Flutter learning lab.
+- Retain Flutter compatibility across the Material library split.

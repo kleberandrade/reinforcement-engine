@@ -1,4 +1,6 @@
 import 'dart:async';
+// Keep compatibility with Flutter versions before the material_ui split.
+// ignore: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:reinforcement_engine/reinforcement_engine.dart';
 
