@@ -1,5 +1,7 @@
 name: Dart
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -61,11 +63,42 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: 3.50.0
       - run: flutter pub get
         working-directory: example/flutter_lab
       - run: flutter analyze --fatal-infos
         working-directory: example/flutter_lab
       - run: flutter test
         working-directory: example/flutter_lab
-      - run: flutter build web
+      - run: flutter build web --no-web-resources-cdn --base-href /reinforcement-engine/
         working-directory: example/flutter_lab
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reinforcement-lab-web
+          path: example/flutter_lab/build/web
+  pages:
+    name: Publish interactive laboratory
+    needs: [test, flutter]
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/download-artifact@v4
+        with:
+          name: reinforcement-lab-web
+          path: public
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - uses: actions/deploy-pages@v4
+        id: deployment

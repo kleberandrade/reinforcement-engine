@@ -11,6 +11,9 @@ SARSA(λ), **Watkins Q(λ)** and **multi-armed bandits** (epsilon-greedy and UCB
 [Português](README.pt-BR.md) · [Learning guide](doc/learning_guide.md) ·
 [Flutter lab](example/flutter_lab/README.md) · [Architecture](doc/architecture.md)
 
+Interactive gridworld: policy arrows, episode rewards, seeded epsilon exploration,
+pause/resume and independent greedy evaluation. [Scenario guide](example/flutter_lab/README.md).
+
 Source version: **0.5.0**. The badge links to the independently published pub.dev
 version; a source commit does not imply publication. New 0.5 examples can be run
 from this checkout. Dart **3.3+**; Flutter is needed only for the interactive lab.

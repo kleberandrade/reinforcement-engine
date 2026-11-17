@@ -279,3 +279,28 @@ Validation before final source commit:
   restricted; CI also validates minimum Dart 3.3, stable and publish dry-run.
 - Source version is 0.5.0. This task commits source; registry publication is a
   separate action and is not inferred from the version number or a passing CI.
+
+## 2026-11-17 — Complete interactive maze laboratory
+
+- Inspected root/project instructions, clean working copy, origin and existing
+  lab/engine contracts; fetched origin to confirm no divergence. Read steering
+  workflow/guide as a reference without editing it; preserved release checkouts.
+- Added failing lifecycle tests first. Implemented pause/resume/cancel, selected
+  seeds and initial epsilon, all-greedy-tie policy arrows and per-episode returns.
+  Kept scheduling and visualization in Flutter; pure Dart core is unchanged.
+- Separated playback environment and RNG after identifying that the old UI
+  consumed training RNG. Added a 1,000-episode observation-isolation regression.
+- Added all-six-algorithm interaction coverage, active reset, narrow/large-text
+  checks and accessible label/target checks. Fixed both dropdown width issues
+  found during these checks; disposed test semantics handles before test end.
+- Used a dedicated Flutter 3.50 SDK copy, upgraded compatible dependencies and
+  tracked the application lockfile; documented SDK-pinned incompatibilities.
+- Ran required Dart examples/analysis/tests, external consumer and JS execution;
+  ran Flutter interaction tests/analysis and Web release build. Inspected real
+  Chrome desktop/mobile runs and saved screenshots; see lab_validation.md.
+- Invoked crapper, dryer and mutator scan: installed tools do not support Dart;
+  did not report empty scans as quality/mutation passes.
+- Rewrote the English lab guide with scenarios, seeds, learning parameters,
+  limits and Portuguese control notes. Synchronized both READMEs and Unreleased.
+- Enabled Actions-based Pages and added publication gated on core and Flutter
+  checks, with repository base-href. Hosted verification is recorded separately.

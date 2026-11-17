@@ -1,5 +1,12 @@
 ## Unreleased
 
+- Complete the Flutter gridworld lab with policy arrows, per-episode returns,
+  seed/epsilon controls, pause/resume/cancel and independent playback RNG.
+- Add responsive/accessibility and observation-isolation regression tests;
+  gate GitHub Pages deployment on Dart and Flutter checks.
+- Laboratório Flutter: política, retornos, seeds/epsilon, pausa/retomada/cancelamento,
+  simulação independente e publicação Pages condicionada aos testes.
+
 ## 0.5.0
 
 - Add accumulating WatkinsQLambdaAgent with pre-update greedy-tie semantics,

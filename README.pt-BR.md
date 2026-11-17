@@ -11,6 +11,9 @@ R-learning, SARSA(λ), **Watkins Q(λ)** e **bandits** com epsilon-greedy e UCB1
 [English](README.md) · [Guia de aprendizado](doc/learning_guide.pt-BR.md) ·
 [Laboratório Flutter](example/flutter_lab/README.md) · [Arquitetura](doc/architecture.md)
 
+Gridworld interativo: setas da política, retornos por episódio, seeds e exploração
+epsilon, pausa/retomada e avaliação independente. [Cenários](example/flutter_lab/README.md).
+
 Versão do código: **0.5.0**. O badge aponta para a versão publicada no pub.dev;
 um commit não comprova publicação. Os exemplos novos da 0.5 podem ser executados
 a partir deste checkout. Requer Dart **3.3+**; Flutter é necessário apenas no laboratório.
