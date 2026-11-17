@@ -1,7 +1,8 @@
 # Reinforcement Engine Lab
 
 A responsive Flutter application over the **pure Dart** reinforcement_engine core.
-The interface is in Portuguese; this guide describes the controls in English.
+The interface supports Brazilian Portuguese and English; the control labels below
+use Portuguese.
 
 **[Open the live laboratory](https://kleberandrade.github.io/reinforcement-engine/)**
 
@@ -22,6 +23,40 @@ flutter build web --no-web-resources-cdn --base-href /reinforcement-engine/
 The GitHub Actions workflow publishes the static build only after both Dart jobs
 and Flutter tests pass. The repository path is part of `base-href`; use `/` when
 serving at a domain root. Web render resources are bundled with the build.
+
+## Navigation, languages and learning
+
+The persistent top bar provides **Laboratory**, **Learn**, **Examples** and
+**GitHub/documentation**. On narrow screens the navigation moves into a labeled
+menu. The original branching-path/diamond mark has a compact variant, SVG favicon
+and locally rendered manifest icons. Brazil and United Kingdom flag buttons are
+locally drawn circular graphics with native focus, 48px targets, tooltips,
+accessible language names and a selected ring; they do not use emoji or remote
+flag downloads.
+
+Switch **PT-BR / English** at any time. Controls, feedback, help, semantic labels,
+auxiliary labs and educational prose translate. Algorithm/API identifiers and
+checkpoint JSON stay stable. The same agents, RNGs, parameters and reward histories
+survive section and language changes. Running training continues when visiting
+Learn/Examples; pause before reading if you want to freeze the experiment.
+
+Language preference is stored under the project-specific browser key
+`reinforcement-lab.language.v1` when localStorage is available. Storage failures
+fall back to the current session. A browser reload starts a fresh experiment;
+only the language preference is persisted automatically. Native platforms have a
+session-only fallback and were not built in this revision.
+
+Learn is integrated content from the repository guides, not an embedded GitHub
+page: foundations, all eight implemented algorithm families, interpreted formulas,
+a complete executable Dart example, source links and exactly five exercises with
+objectives/completion criteria. Examples load and start real lab presets; the
+visible notice explains that they reset the current experiment. Source version
+is 0.5.0 and a test checks it against the package manifest and both language guides.
+References appear before the five final exercises.
+
+The brand and flag drawings are original code-native assets in this MIT-licensed
+repository; no third-party logo or flag image is copied. The PNG app icons are
+rendered from the same native mark with `flutter test tool/render_brand.dart`.
 
 ## Guided scenarios
 
@@ -151,6 +186,15 @@ algorithms. Browser captures and hosted validation are recorded in
 comprehensive assistive-technology audit or a claim of WCAG certification.
 
 ## Português
+
+A navbar reúne Laboratório, Aprender, Exemplos e GitHub; no celular, há menu de
+navegação. Bandeiras circulares desenhadas localmente (Brasil/Reino Unido) mudam
+PT-BR/English com tooltip, foco e idioma selecionado. A troca traduz controles,
+feedback, ajuda e aulas sem reiniciar agentes, RNGs ou curvas. A preferência de
+idioma fica no navegador quando o armazenamento está disponível; recarregar
+inicia um experimento novo. Learn usa os guias reais, fórmulas interpretadas,
+presets e cinco exercícios com objetivo e critério de conclusão.
+
 
 Treine, avalie e execute separadamente. Mudar algoritmo, seed ou epsilon inicial
 reinicia o aprendizado. **Pausar/Continuar** preserva a execução atual;

@@ -1,3 +1,4 @@
+import 'lab_locale.dart';
 import 'dart:math';
 // ignore: deprecated_member_use
 import 'package:flutter/material.dart';
@@ -49,10 +50,10 @@ class _RewardHistoryState extends State<RewardHistory> {
     final labelWidth = axisFontSize * 3.5;
     final chartHeight = max(220.0, axisFontSize * 8);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('Curvas de aprendizado', style: theme.textTheme.titleLarge),
-      Text(
+      LabText('Curvas de aprendizado', style: theme.textTheme.titleLarge),
+      LabText(
           '${widget.rewards.length} episódios registrados · histórico completo'),
-      const Text(
+      const LabText(
           'Use Treinar juntos para comparar Q-Learning e SARSA com a mesma configuração. '
           'Seed, epsilon e Reiniciar limpam as curvas.'),
       const SizedBox(height: 12),
@@ -74,23 +75,23 @@ class _RewardHistoryState extends State<RewardHistory> {
                             child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 12),
-                                child: Text('Média móvel: $v'))))
+                                child: LabText('Média móvel: $v'))))
                         .toList())),
             Row(mainAxisSize: MainAxisSize.min, children: [
               Semantics(
-                  label: 'Mostrar retornos por episódio',
+                  label: tr(context, 'Mostrar retornos por episódio'),
                   child: Switch(
                       value: showRaw,
                       onChanged: (value) => setState(() => showRaw = value))),
-              const Flexible(child: Text('Retornos por episódio')),
+              const Flexible(child: LabText('Retornos por episódio')),
             ]),
           ]),
-      const Text('Média dos últimos N episódios, incluindo o atual. '
+      const LabText('Média dos últimos N episódios, incluindo o atual. '
           'No início, usa apenas os episódios disponíveis.'),
       const SizedBox(height: 12),
       Wrap(spacing: 20, runSpacing: 8, children: [
         for (final curve in curves)
-          Text(
+          LabText(
               '${curve.label == "SARSA" ? "┄" : "━"} ${curve.label} (${curve.label == widget.algorithm ? 'atual' : 'comparação'}) · ${curve.rewards.length} episódios',
               style: TextStyle(color: curve.color, fontWeight: FontWeight.w600))
       ]),
@@ -99,13 +100,16 @@ class _RewardHistoryState extends State<RewardHistory> {
         const SizedBox(
             height: 180,
             child: Center(
-                child: Text('Treine para ver a evolução desde o episódio 1.')))
+                child:
+                    LabText('Treine para ver a evolução desde o episódio 1.')))
       else ...[
-        Text('Episódios 1–$count · retorno por episódio'),
+        LabText('Episódios 1–$count · retorno por episódio'),
         const SizedBox(height: 8),
         Semantics(
-            label: 'Gráfico de recompensas desde o episódio 1 até $count. '
-                'Escala comum de menos 200 a mais 3. Use o seletor de episódio para consultar os valores.',
+            label: tr(
+                context,
+                'Gráfico de recompensas desde o episódio 1 até $count. '
+                'Escala comum de menos 200 a mais 3. Use o seletor de episódio para consultar os valores.'),
             child: ExcludeSemantics(
                 child: SizedBox(
                     height: chartHeight,
@@ -116,17 +120,17 @@ class _RewardHistoryState extends State<RewardHistory> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Text('+3'),
-                                Text('−50',
+                                LabText('+3'),
+                                LabText('−50',
                                     softWrap: false,
                                     style: TextStyle(fontSize: 14)),
-                                Text('−100',
+                                LabText('−100',
                                     softWrap: false,
                                     style: TextStyle(fontSize: 14)),
-                                Text('−150',
+                                LabText('−150',
                                     softWrap: false,
                                     style: TextStyle(fontSize: 14)),
-                                Text('−200',
+                                LabText('−200',
                                     softWrap: false,
                                     style: TextStyle(fontSize: 14))
                               ])),
@@ -142,11 +146,12 @@ class _RewardHistoryState extends State<RewardHistory> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('1'),
-                  if (count > 2) Text('${(count + 1) ~/ 2}'),
-                  if (count > 1) Text('$count')
+                  const LabText('1'),
+                  if (count > 2) LabText('${(count + 1) ~/ 2}'),
+                  if (count > 1) LabText('$count')
                 ])),
-        const Text('Linhas fortes: média móvel · linhas suaves: retorno bruto. '
+        const LabText(
+            'Linhas fortes: média móvel · linhas suaves: retorno bruto. '
             'SARSA tracejada; Q-Learning contínua. Maior é melhor (máximo +3).'),
         if (count > 1)
           Slider(
@@ -155,25 +160,25 @@ class _RewardHistoryState extends State<RewardHistory> {
               max: count.toDouble(),
               divisions: count - 1,
               value: episode.toDouble(),
-              label: 'Episódio $episode',
+              label: tr(context, 'Episódio $episode'),
               semanticFormatterCallback: (value) =>
-                  'Inspecionar episódio ${value.round()}',
+                  tr(context, 'Inspecionar episódio ${value.round()}'),
               onChanged: (value) => setState(() => inspected = value.round())),
         Semantics(
             liveRegion: true,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Episódio $episode', style: theme.textTheme.titleSmall),
+                LabText('Episódio $episode', style: theme.textTheme.titleSmall),
                 for (final curve in curves)
-                  Text(episode > curve.rewards.length
+                  LabText(episode > curve.rewards.length
                       ? '${curve.label}: sem episódio $episode'
                       : '${curve.label}: retorno ${_number(curve.rewards[episode - 1])} · média ${_number(curve.means[episode - 1])}')
               ],
             )),
       ],
       const SizedBox(height: 8),
-      const Text(
+      const LabText(
           'Uma execução por algoritmo; mesma seed não significa as mesmas ações. '
           'Este gráfico mostra treino com exploração, não avaliação da política.'),
     ]);

@@ -1,3 +1,5 @@
+import 'lab_navigation.dart';
+import 'lab_locale.dart';
 import 'dart:async';
 import 'dart:math';
 // ignore: deprecated_member_use
@@ -63,12 +65,12 @@ class _BanditsPageState extends State<BanditsPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('Bandits: aprender a escolher')),
+        appBar: const LabTopBar(back: true),
         body: ListView(padding: const EdgeInsets.all(24), children: [
-          const Text('Três opções, uma recompensa imediata.',
+          const LabText('Três opções, uma recompensa imediata.',
               style: TextStyle(fontSize: 24)),
           const SizedBox(height: 12),
-          const Text(
+          const LabText(
               'Cada escolha retorna 1 em caso de sucesso e 0 em caso de falha. '
               'As chances reais são 20%, 50% e 80%. O agente só vê os resultados.'),
           const SizedBox(height: 16),
@@ -76,8 +78,9 @@ class _BanditsPageState extends State<BanditsPage> {
             DropdownButton<bool>(
                 value: ucb,
                 items: const [
-                  DropdownMenuItem(value: true, child: Text('UCB1')),
-                  DropdownMenuItem(value: false, child: Text('Epsilon-greedy'))
+                  DropdownMenuItem(value: true, child: LabText('UCB1')),
+                  DropdownMenuItem(
+                      value: false, child: LabText('Epsilon-greedy'))
                 ],
                 onChanged: timer != null
                     ? null
@@ -91,18 +94,18 @@ class _BanditsPageState extends State<BanditsPage> {
                       }),
             FilledButton(
                 onPressed: timer != null ? null : train,
-                child: const Text('Experimentar +1.000')),
+                child: const LabText('Experimentar +1.000')),
             TextButton(
                 onPressed: () => setState(reset),
-                child: const Text('Reiniciar')),
+                child: const LabText('Reiniciar')),
           ]),
           const SizedBox(height: 16),
-          Text('Decisões: ${agent.values.observations}'),
-          Text(
+          LabText('Decisões: ${agent.values.observations}'),
+          LabText(
               'Recompensa observada: ${agent.values.observations == 0 ? "—" : (total / agent.values.observations).toStringAsFixed(3)}'),
           const SizedBox(height: 24),
           for (var arm = 0; arm < 3; arm++) ...[
-            Text('Opção ${arm + 1}: ${agent.values.count(arm)} escolhas; '
+            LabText('Opção ${arm + 1}: ${agent.values.count(arm)} escolhas; '
                 'média estimada ${agent.values.mean(arm).toStringAsFixed(3)}'),
             const SizedBox(height: 8),
             LinearProgressIndicator(
@@ -110,10 +113,11 @@ class _BanditsPageState extends State<BanditsPage> {
                     ? 0
                     : agent.values.count(arm) / agent.values.observations,
                 minHeight: 16,
-                semanticsLabel: 'Participação da opção ${arm + 1}'),
+                semanticsLabel:
+                    tr(context, 'Participação da opção ${arm + 1}')),
             const SizedBox(height: 20),
           ],
-          const Text(
+          const LabText(
               'As barras mostram a participação de cada opção nas escolhas, '
               'não a probabilidade de ela ser a melhor. Trocar a estratégia reinicia '
               'o experimento. Este cenário sintético não garante resultados em outras tarefas.'),

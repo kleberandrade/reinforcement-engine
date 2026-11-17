@@ -1,3 +1,4 @@
+import 'lab_locale.dart';
 // ignore: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:reinforcement_engine/reinforcement_engine.dart';
@@ -28,20 +29,20 @@ class LabHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(step,
+        LabText(step,
             style: const TextStyle(
                 color: labCyan,
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
                 letterSpacing: 2)),
         const SizedBox(height: 8),
-        Text(title,
+        LabText(title,
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
                 ?.copyWith(fontWeight: FontWeight.w700)),
         const SizedBox(height: 6),
-        Text(subtitle, style: const TextStyle(color: labMuted)),
+        LabText(subtitle, style: const TextStyle(color: labMuted)),
         const SizedBox(height: 20),
       ]);
 }
@@ -57,7 +58,7 @@ class LabBadge extends StatelessWidget {
           color: color.withValues(alpha: .08),
           border: Border.all(color: color.withValues(alpha: .25)),
           borderRadius: BorderRadius.circular(30)),
-      child: Text(label,
+      child: LabText(label,
           style: TextStyle(
               color: color, fontSize: 12, fontWeight: FontWeight.w600)));
 }
@@ -74,9 +75,9 @@ class LabMetric extends StatelessWidget {
           color: const Color(0xff0d1526),
           borderRadius: BorderRadius.circular(14)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(label, style: const TextStyle(color: labMuted, fontSize: 12)),
+        LabText(label, style: const TextStyle(color: labMuted, fontSize: 12)),
         const SizedBox(height: 6),
-        Text(value,
+        LabText(value,
             style: TextStyle(
                 color: color, fontSize: 19, fontWeight: FontWeight.w700)),
       ]));
@@ -120,9 +121,10 @@ class MazeGrid extends StatelessWidget {
                             ? const Color(0xff302b59)
                             : const Color(0xff1c2940);
             return Semantics(
-                label:
+                label: tr(
+                    context,
                     'Célula $cell, ${wall ? "parede" : goal ? "objetivo" : here ? "agente" : "livre"}'
-                    '${!wall && !goal && trained ? ", política ${policyAt(cell)}" : ""}',
+                    '${!wall && !goal && trained ? ", política ${policyAt(cell)}" : ""}'),
                 child: ExcludeSemantics(
                     child: AnimatedContainer(
                         duration: const Duration(milliseconds: 160),
@@ -149,7 +151,7 @@ class MazeGrid extends StatelessWidget {
                                           : wall
                                               ? const Icon(Icons.block_rounded,
                                                   color: labMuted, size: 24)
-                                              : Text(
+                                              : LabText(
                                                   trained
                                                       ? policyAt(cell)
                                                       : '$cell',

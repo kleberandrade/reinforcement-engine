@@ -1,3 +1,10 @@
+import 'education_page.dart';
+import 'learning_content.dart';
+import 'lab_navigation.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'lab_algorithm.dart';
+export 'lab_algorithm.dart' show LabAlgorithm;
+import 'lab_locale.dart';
 import 'dart:async';
 import 'dart:math';
 import 'continuing_page.dart';
@@ -14,55 +21,99 @@ import 'package:reinforcement_engine/reinforcement_engine.dart';
 
 void main() => runApp(const LearningLab());
 
-enum LabAlgorithm {
-  qLearning('Q-Learning'),
-  sarsa('SARSA'),
-  expectedSarsa('Expected SARSA'),
-  doubleQ('Double Q-Learning'),
-  sarsaLambda('SARSA(λ)'),
-  watkins('Watkins Q(λ)');
-
-  const LabAlgorithm(this.label);
-  final String label;
+class LearningLab extends StatefulWidget {
+  const LearningLab({super.key, this.initialLanguage});
+  final LabLanguage? initialLanguage;
+  @override
+  State<LearningLab> createState() => _LearningLabState();
 }
 
-class LearningLab extends StatelessWidget {
-  const LearningLab({super.key});
+class _LearningLabState extends State<LearningLab> {
+  late final LabController controller;
   @override
-  Widget build(BuildContext context) => MaterialApp(
-      title: 'Reinforcement Engine Lab',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color(0xffa18aff), brightness: Brightness.dark),
-          scaffoldBackgroundColor: const Color(0xff0a1020),
-          inputDecorationTheme: InputDecorationTheme(
-              filled: true,
-              fillColor: const Color(0xff0d1526),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-              enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: Color(0xff34415c)))),
-          filledButtonTheme: FilledButtonThemeData(
-              style: FilledButton.styleFrom(
-                  minimumSize: const Size(48, 48),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)))),
-          outlinedButtonTheme: OutlinedButtonThemeData(
-              style: OutlinedButton.styleFrom(
-                  minimumSize: const Size(48, 48),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)),
-                  side: const BorderSide(color: Color(0xff41506b)))),
-          textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(minimumSize: const Size(48, 48))),
-          useMaterial3: true),
-      home: const MazePage());
+  void initState() {
+    super.initState();
+    controller = LabController(initialLanguage: widget.initialLanguage);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AnimatedBuilder(
+      animation: controller,
+      builder: (context, _) => LabScope(
+          controller: controller,
+          child: MaterialApp(
+              locale: controller.language == LabLanguage.pt
+                  ? const Locale('pt', 'BR')
+                  : const Locale('en'),
+              supportedLocales: const [Locale('pt', 'BR'), Locale('en')],
+              // Compatibility with the pre-material_ui Flutter barrel.
+              // ignore: deprecated_member_use
+              localizationsDelegates: GlobalMaterialLocalizations.delegates,
+              title: 'Reinforcement Engine Lab',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                  colorScheme: ColorScheme.fromSeed(
+                      seedColor: const Color(0xffa18aff),
+                      brightness: Brightness.dark),
+                  scaffoldBackgroundColor: const Color(0xff0a1020),
+                  inputDecorationTheme: InputDecorationTheme(
+                      filled: true,
+                      fillColor: const Color(0xff0d1526),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide:
+                              const BorderSide(color: Color(0xff34415c)))),
+                  filledButtonTheme: FilledButtonThemeData(
+                      style: FilledButton.styleFrom(
+                          minimumSize: const Size(48, 48),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 16),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)))),
+                  outlinedButtonTheme: OutlinedButtonThemeData(
+                      style: OutlinedButton.styleFrom(
+                          minimumSize: const Size(48, 48),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 14),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                          side: const BorderSide(color: Color(0xff41506b)))),
+                  textButtonTheme: TextButtonThemeData(
+                      style: TextButton.styleFrom(
+                          minimumSize: const Size(48, 48))),
+                  useMaterial3: true),
+              home: const LabShell())));
+}
+
+class LabShell extends StatefulWidget {
+  const LabShell({super.key});
+  @override
+  State<LabShell> createState() => _LabShellState();
+}
+
+class _LabShellState extends State<LabShell> {
+  final mazeKey = GlobalKey<_MazePageState>();
+  void runPreset(LabPreset preset) {
+    mazeKey.currentState?.loadPreset(preset);
+    LabScope.of(context)!.showSection(0);
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      appBar: const LabTopBar(),
+      body: IndexedStack(index: LabScope.of(context)!.section, children: [
+        MazePage(key: mazeKey),
+        LearnPage(onPreset: runPreset),
+        ExamplesPage(onPreset: runPreset),
+      ]));
 }
 
 class MazePage extends StatefulWidget {
@@ -286,6 +337,16 @@ class _MazePageState extends State<MazePage> {
     super.dispose();
   }
 
+  void loadPreset(LabPreset preset) {
+    setState(() {
+      algorithm = preset.algorithm;
+      seed = preset.seed;
+      initialEpsilon = preset.epsilon;
+      resetAgent();
+    });
+    preset.paired ? trainTogether() : train();
+  }
+
   void changeAlgorithm(LabAlgorithm value) {
     setState(() {
       if (pair != null) comparisonRuns[LabAlgorithm.sarsa] = pair!.sarsaRewards;
@@ -306,15 +367,15 @@ class _MazePageState extends State<MazePage> {
         OutlinedButton.icon(
             onPressed: busy ? null : () => openLab(const ContinuingPage()),
             icon: const Icon(Icons.all_inclusive, size: 18),
-            label: const Text('Tarefa contínua')),
+            label: const LabText('Tarefa contínua')),
         OutlinedButton.icon(
             onPressed: busy ? null : () => openLab(const CheckpointPage()),
             icon: const Icon(Icons.save_outlined, size: 18),
-            label: const Text('Salvar e retomar')),
+            label: const LabText('Salvar e retomar')),
         OutlinedButton.icon(
             onPressed: busy ? null : () => openLab(const BanditsPage()),
             icon: const Icon(Icons.bar_chart_rounded, size: 18),
-            label: const Text('Bandits')),
+            label: const LabText('Bandits')),
       ]);
 
   Widget controls(BuildContext context) => LabPanel(
@@ -324,7 +385,7 @@ class _MazePageState extends State<MazePage> {
             'Uma seed. As mesmas regras. Duas formas de aprender.'),
         InputDecorator(
             decoration:
-                const InputDecoration(labelText: 'Algoritmo individual'),
+                const InputDecoration(label: LabText('Algoritmo individual')),
             child: DropdownButtonHideUnderline(
                 child: DropdownButton<LabAlgorithm>(
                     iconDisabledColor: labMuted,
@@ -338,13 +399,14 @@ class _MazePageState extends State<MazePage> {
                             child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 8),
-                                child: Text(v.label,
+                                child: LabText(v.label,
                                     style: const TextStyle(
                                         color: Color(0xffd7def1))))))
                         .toList()))),
         const SizedBox(height: 18),
         InputDecorator(
-            decoration: const InputDecoration(labelText: 'Semente aleatória'),
+            decoration:
+                const InputDecoration(label: LabText('Semente aleatória')),
             child: DropdownButtonHideUnderline(
                 child: DropdownButton<int>(
                     iconDisabledColor: labMuted,
@@ -359,23 +421,23 @@ class _MazePageState extends State<MazePage> {
                     items: [42, 7, 123]
                         .map((value) => DropdownMenuItem(
                             value: value,
-                            child: Text('Seed $value',
+                            child: LabText('Seed $value',
                                 style:
                                     const TextStyle(color: Color(0xffd7def1)))))
                         .toList()))),
         const SizedBox(height: 20),
-        Text('Epsilon inicial: ${initialEpsilon.toStringAsFixed(2)}',
+        LabText('Epsilon inicial: ${initialEpsilon.toStringAsFixed(2)}',
             style: const TextStyle(fontWeight: FontWeight.w600)),
         const SizedBox(height: 4),
-        const Text('Quanto explorar antes de seguir a política.',
+        const LabText('Quanto explorar antes de seguir a política.',
             style: TextStyle(color: labMuted, fontSize: 12)),
         Slider(
             value: initialEpsilon,
             min: .01,
             max: 1,
             label: initialEpsilon.toStringAsFixed(2),
-            semanticFormatterCallback: (value) =>
-                'Exploração inicial ${(value * 100).round()} por cento',
+            semanticFormatterCallback: (value) => tr(context,
+                'Exploração inicial ${(value * 100).round()} por cento'),
             onChanged: busy
                 ? null
                 : (value) => setState(() {
@@ -393,9 +455,9 @@ class _MazePageState extends State<MazePage> {
         FilledButton.icon(
             onPressed: busy ? null : trainTogether,
             icon: const Icon(Icons.compare_arrows_rounded),
-            label: const Text('Treinar juntos')),
+            label: const LabText('Treinar juntos')),
         const SizedBox(height: 8),
-        const Text(
+        const LabText(
             'Q-Learning + SARSA · 500 episódios cada.\nInicia uma comparação nova, desde o zero.',
             style: TextStyle(color: labMuted, fontSize: 12),
             textAlign: TextAlign.center),
@@ -403,7 +465,7 @@ class _MazePageState extends State<MazePage> {
         OutlinedButton.icon(
             onPressed: busy ? null : train,
             icon: const Icon(Icons.play_arrow_rounded),
-            label: const Text('Treinar +500')),
+            label: const LabText('Treinar +500')),
         if (busy) ...[
           const SizedBox(height: 12),
           Wrap(spacing: 8, runSpacing: 8, children: [
@@ -411,19 +473,21 @@ class _MazePageState extends State<MazePage> {
                 onPressed: togglePause,
                 icon: Icon(
                     paused ? Icons.play_arrow_rounded : Icons.pause_rounded),
-                label: Text(paused ? 'Continuar' : 'Pausar')),
-            TextButton(onPressed: cancel, child: const Text('Cancelar')),
+                label: LabText(paused ? 'Continuar' : 'Pausar')),
+            TextButton(onPressed: cancel, child: const LabText('Cancelar')),
           ]),
         ],
         if (training) ...[
           const SizedBox(height: 16),
           LinearProgressIndicator(
               value: (500 - remaining) / 500,
-              semanticsLabel: pair == null
-                  ? 'Progresso do treino'
-                  : 'Progresso dos dois agentes'),
+              semanticsLabel: tr(
+                  context,
+                  pair == null
+                      ? 'Progresso do treino'
+                      : 'Progresso dos dois agentes')),
           const SizedBox(height: 8),
-          Text(
+          LabText(
               '${500 - remaining} / 500 ${pair == null ? "episódios" : "pares de episódios"}',
               style: const TextStyle(color: labMuted, fontSize: 12)),
         ],
@@ -431,9 +495,9 @@ class _MazePageState extends State<MazePage> {
         TextButton.icon(
             onPressed: () => setState(resetAgent),
             icon: const Icon(Icons.restart_alt_rounded),
-            label: const Text('Reiniciar')),
+            label: const LabText('Reiniciar')),
         const Divider(height: 28),
-        const Text(
+        const LabText(
             'Mudar seed ou epsilon reinicia o aprendizado e limpa a comparação.',
             style: TextStyle(color: labMuted, fontSize: 12)),
       ]));
@@ -470,7 +534,7 @@ class _MazePageState extends State<MazePage> {
             child: Semantics(
                 liveRegion: true,
                 container: true,
-                child: Text(status,
+                child: LabText(status,
                     style: const TextStyle(color: Color(0xffd7def1))))),
         const SizedBox(height: 24),
         Center(
@@ -487,19 +551,19 @@ class _MazePageState extends State<MazePage> {
           OutlinedButton.icon(
               onPressed: busy || episodes == 0 ? null : play,
               icon: const Icon(Icons.route_rounded, size: 18),
-              label: const Text('Executar')),
+              label: const LabText('Executar')),
           OutlinedButton.icon(
               onPressed: busy || episodes == 0 ? null : evaluate,
               icon: const Icon(Icons.fact_check_outlined, size: 18),
-              label: const Text('Avaliar ×50')),
+              label: const LabText('Avaliar ×50')),
         ]),
         const SizedBox(height: 14),
-        const Text(
+        const LabText(
             '↑ → ↓ ← Melhores ações · empates mostram várias setas.\n'
             'Bandeira: objetivo · blocos: paredes · trilha: caminho executado.',
             style: TextStyle(color: labMuted, fontSize: 12)),
         const SizedBox(height: 8),
-        const Text(
+        const LabText(
             '−1 por passo · +10 no objetivo · rota mínima: 8 passos (retorno +3).',
             style: TextStyle(color: labMuted, fontSize: 12)),
       ]));
@@ -507,7 +571,7 @@ class _MazePageState extends State<MazePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
           body: SafeArea(child: LayoutBuilder(builder: (context, viewport) {
-        final wide = viewport.maxWidth >= 1020;
+        final wide = viewport.maxWidth >= 960;
         return ListView(
             padding: EdgeInsets.all(viewport.maxWidth < 600 ? 16 : 32),
             children: [
@@ -517,25 +581,9 @@ class _MazePageState extends State<MazePage> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Wrap(
-                                spacing: 10,
-                                runSpacing: 10,
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                children: [
-                                  const Icon(Icons.hub_outlined,
-                                      color: labCyan, size: 26),
-                                  Text('REINFORCEMENT / LAB',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge
-                                          ?.copyWith(
-                                              color: const Color(0xffd1d9ef),
-                                              letterSpacing: 2,
-                                              fontWeight: FontWeight.w700)),
-                                  const LabBadge('6 algoritmos · 1 gridworld'),
-                                ]),
+                            const LabBadge('6 algoritmos · 1 gridworld'),
                             const SizedBox(height: 22),
-                            Text('Aprenda com cada decisão.',
+                            LabText('Aprenda com cada decisão.',
                                 style: Theme.of(context)
                                     .textTheme
                                     .headlineLarge
@@ -544,7 +592,7 @@ class _MazePageState extends State<MazePage> {
                                         fontWeight: FontWeight.w800,
                                         letterSpacing: -1)),
                             const SizedBox(height: 10),
-                            const Text(
+                            const LabText(
                                 'Explore, treine e compare. Transforme recompensas em uma política que encontra o caminho.',
                                 style: TextStyle(
                                     color: labMuted,
@@ -573,7 +621,7 @@ class _MazePageState extends State<MazePage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                  const Text('03 / COMPARAR',
+                                  const LabText('03 / COMPARAR',
                                       style: TextStyle(
                                           color: labCyan,
                                           fontSize: 11,
@@ -602,13 +650,13 @@ class _MazePageState extends State<MazePage> {
                                               : 'SARSA'),
                                 ])),
                             const SizedBox(height: 24),
-                            const Text('UM LABORATÓRIO PARA EXPERIMENTAR',
+                            const LabText('UM LABORATÓRIO PARA EXPERIMENTAR',
                                 style: TextStyle(
                                     color: labMuted,
                                     fontSize: 11,
                                     letterSpacing: 2)),
                             const SizedBox(height: 8),
-                            const Text(
+                            const LabText(
                                 'Treinar altera os valores. Avaliar e executar usam ambientes e seeds independentes. '
                                 'Uma comparação com uma seed não representa um ranking estatístico dos algoritmos.',
                                 style: TextStyle(

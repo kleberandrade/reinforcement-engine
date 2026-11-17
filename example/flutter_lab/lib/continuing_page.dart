@@ -1,3 +1,5 @@
+import 'lab_navigation.dart';
+import 'lab_locale.dart';
 import 'dart:async';
 import 'dart:math';
 // Keep compatibility with Flutter versions before the material_ui split.
@@ -81,39 +83,39 @@ class _ContinuingPageState extends State<ContinuingPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('R-Learning: tarefa contínua')),
+        appBar: const LabTopBar(back: true),
         body: Center(
             child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 720),
                 child: ListView(padding: const EdgeInsets.all(24), children: [
-                  Text('Trabalhar e manter.',
+                  LabText('Trabalhar e manter.',
                       style: Theme.of(context).textTheme.headlineLarge),
                   const SizedBox(height: 16),
-                  const Text(
+                  const LabText(
                       'Uma máquina didática ganha +3 ao trabalhar pronta e −1 se desgastada. '
                       'Manutenção ganha 0 e deixa a máquina pronta. O melhor ciclo ganha 1,50 por passo.'),
                   const SizedBox(height: 24),
-                  Text('Passos: $steps'),
-                  Text(
+                  LabText('Passos: $steps'),
+                  LabText(
                       'Recompensa média estimada (ρ): ${agent.averageReward.toStringAsFixed(3)}'),
-                  Text(
+                  LabText(
                       'Estado: ${environment.state == MachineState.ready ? 'pronta' : 'desgastada'}'),
                   const SizedBox(height: 24),
                   Wrap(spacing: 12, runSpacing: 12, children: [
                     FilledButton(
                         onPressed: timer == null ? train : null,
-                        child: const Text('Treinar +10.000')),
+                        child: const LabText('Treinar +10.000')),
                     OutlinedButton(
                         onPressed: timer == null && steps > 0 ? evaluate : null,
-                        child: const Text('Avaliar política')),
+                        child: const LabText('Avaliar política')),
                     TextButton(
                         onPressed: () => setState(reset),
-                        child: const Text('Reiniciar')),
+                        child: const LabText('Reiniciar')),
                   ]),
                   const SizedBox(height: 24),
-                  Text(result),
+                  LabText(result),
                   const SizedBox(height: 24),
-                  const Text(
+                  const LabText(
                       'A tarefa nunca termina. Cada lote preserva o estado e ρ; '
                       'a exploração permanece em 10%. A avaliação usa outra máquina e outro gerador aleatório.'),
                 ]))),

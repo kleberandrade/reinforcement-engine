@@ -1,3 +1,5 @@
+import 'lab_navigation.dart';
+import 'lab_locale.dart';
 import 'dart:async';
 import 'dart:convert';
 // ignore: deprecated_member_use
@@ -105,29 +107,29 @@ class _CheckpointPageState extends State<CheckpointPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('Salvar e retomar')),
+        appBar: const LabTopBar(back: true),
         body: ListView(padding: const EdgeInsets.all(24), children: [
-          const Text('Checkpoints de aprendizado',
+          const LabText('Checkpoints de aprendizado',
               style: TextStyle(fontSize: 26)),
           const SizedBox(height: 12),
-          const Text(
+          const LabText(
               'Os valores e a exploração são restaurados. A retomada usa uma '
               'nova sequência aleatória e reinicia o ambiente a cada episódio.'),
           const SizedBox(height: 16),
-          Text('Episódios salvos e novos: $episodes'),
-          Text('Exploração: ${agent.epsilon.toStringAsFixed(4)}'),
-          Text('Ao importar: $before'),
+          LabText('Episódios salvos e novos: $episodes'),
+          LabText('Exploração: ${agent.epsilon.toStringAsFixed(4)}'),
+          LabText('Ao importar: $before'),
           const SizedBox(height: 16),
           Wrap(spacing: 12, runSpacing: 12, children: [
             FilledButton(
                 onPressed: busy ? null : train,
-                child: const Text('Treinar +100')),
+                child: const LabText('Treinar +100')),
             OutlinedButton(
                 onPressed: busy ? null : export,
-                child: const Text('Exportar JSON')),
+                child: const LabText('Exportar JSON')),
             OutlinedButton(
                 onPressed: busy ? null : restore,
-                child: const Text('Importar JSON')),
+                child: const LabText('Importar JSON')),
             TextButton(
                 onPressed: busy
                     ? null
@@ -137,10 +139,10 @@ class _CheckpointPageState extends State<CheckpointPage> {
                           before = 'Ainda não avaliado';
                           status = 'Agente reiniciado; JSON mantido.';
                         }),
-                child: const Text('Novo agente')),
+                child: const LabText('Novo agente')),
           ]),
           const SizedBox(height: 16),
-          Text(status),
+          LabText(status),
           const SizedBox(height: 16),
           TextField(
               controller: json,
