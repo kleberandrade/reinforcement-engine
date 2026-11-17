@@ -94,3 +94,14 @@ Validation of the development increment:
 - Updated widget evaluation test is included for hosted CI; local widget execution
   remains unavailable because loopback sockets are denied.
 - Expected SARSA, Double Q-Learning and configurable exploration remain roadmap items.
+
+## 2026-11-16 — repository topics and prerelease metadata
+
+Added eight GitHub topics: dart, flutter, reinforcement-learning, machine-learning,
+q-learning, sarsa, gridworld and dart-package. Confirmed they appear on the repository.
+
+Hosted CI for 56b5e9f passed the core behavior, examples, JavaScript execution and
+Flutter job, but the publication dry-run rejected the missing 0.2.0-dev.1 changelog
+heading. Added that heading while keeping Unreleased for future changes. No runtime
+code changed; the fix is validated by the publication check on the next hosted run.
+The initial 0.1.0 release worktree and tag remain unchanged.

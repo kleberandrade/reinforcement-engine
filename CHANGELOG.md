@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.2.0-dev.1
+
 - Add read-only policy evaluation with independent RNG, caller-defined success,
   immutable episode summaries and aggregate reward/step/termination metrics.
 - Add the `ActionPolicy` contract and `GreedyPolicy`, shared by evaluation and
