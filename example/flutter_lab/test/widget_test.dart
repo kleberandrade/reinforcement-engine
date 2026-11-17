@@ -28,7 +28,7 @@ void main() {
     expect(find.text('Episódios: 0'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
-  for (final name in ['Expected SARSA', 'Double Q-Learning']) {
+  for (final name in ['Expected SARSA', 'Double Q-Learning', 'SARSA(λ)']) {
     testWidgets('trains and evaluates $name', (tester) async {
       await tester.binding.setSurfaceSize(const Size(1000, 1200));
       addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -48,6 +48,24 @@ void main() {
       expect(tester.takeException(), isNull);
     });
   }
+  testWidgets('continuing task learns the maintenance cycle', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1000, 1200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(const LearningLab());
+    await tester.tap(find.text('Tarefa contínua'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Treinar +10.000'));
+    for (var i = 0; i < 105; i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    await tester.tap(find.text('Avaliar política'));
+    await tester.pump();
+    expect(find.textContaining('Recompensa média: 1.50'), findsOneWidget);
+    await tester.tap(find.text('Reiniciar'));
+    await tester.pump();
+    expect(find.text('Passos: 0'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
   testWidgets('changing algorithm resets training', (tester) async {
     await tester.binding.setSurfaceSize(const Size(1000, 1200));
     addTearDown(() => tester.binding.setSurfaceSize(null));

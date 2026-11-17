@@ -27,3 +27,8 @@ with `flutter create --platforms=android,ios,macos .` on a configured machine.
 In 0.2 development, **Avaliar ×50** runs 50 greedy GridWorld episodes with a
 separate evaluation RNG and fresh environments. It reports success rate and
 average steps without changing the learned table or agent exploration.
+
+The 0.3 development lab adds **SARSA(λ)** to the maze selector and **Tarefa contínua**
+for an independent maintenance-task screen. R-learning trains 100-step blocks
+between timer ticks, preserving state/rho; evaluation uses a fresh environment.
+The trace agent uses trainEpisodic so eligibility cannot cross episode boundaries.

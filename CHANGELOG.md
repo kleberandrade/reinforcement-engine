@@ -1,5 +1,15 @@
 ## Unreleased
 
+## 0.3.0-dev.1
+
+- Add RLearningAgent with relative values and an average-reward estimate, using
+  explicit post-update greedy gating and validated projected table updates.
+- Add ContinuingAgent, trainContinuing and MaintenanceTask for bounded continuing
+  windows that preserve environment state and reward estimates.
+- Add accumulating SarsaLambdaAgent, EpisodicAgent and trainEpisodic, including
+  bootstrap-preserving truncation and trace cleanup after episode errors.
+- Add bilingual continuing/trace guides, executable examples and Flutter demos.
+
 ## 0.2.0
 
 - Add Expected SARSA with behavior probabilities bound to the current policy

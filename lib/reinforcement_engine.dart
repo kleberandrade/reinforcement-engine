@@ -28,3 +28,15 @@ export 'src/policies/epsilon_greedy.dart';
 export 'src/policies/softmax_exploration.dart';
 export 'src/algorithms/expected_sarsa.dart';
 export 'src/agents/double_q_agent.dart';
+
+export 'src/contracts/continuing_agent.dart';
+export 'src/contracts/episodic_agent.dart';
+export 'src/domain/continuing_result.dart';
+export 'src/agents/r_learning_agent.dart';
+export 'src/agents/sarsa_lambda_agent.dart';
+export 'src/training/train_continuing.dart';
+export 'src/training/train_episodic.dart';
+
+export 'src/domain/machine_state.dart';
+export 'src/domain/machine_action.dart';
+export 'src/environments/maintenance_task.dart';

@@ -6,7 +6,14 @@
 Aprendizado por reforço tabular em Dart puro, com Q-Learning, SARSA, Expected SARSA e Double Q-Learning.
 O núcleo não depende de Flutter, bibliotecas nativas ou serviços externos.
 
-Versão inicial: **0.1.0**. Código atual: **0.2.0**.
+Versão inicial: **0.1.0**. Código atual: **0.3.0-dev.1**.
+
+
+## Desenvolvimento da 0.3.0
+
+O código atual `0.3.0-dev.1` adiciona [R-Learning e tarefas contínuas](doc/continuing.pt-BR.md)
+e [SARSA(λ) com rastros acumulativos](doc/traces.pt-BR.md). A referência `v0.2.0`
+preserva a entrega estável anterior. Os novos algoritmos ainda não foram publicados.
 
 
 ## Versão 0.2.0
@@ -99,6 +106,6 @@ agente, valores e treinamento seguem a [estrutura por responsabilidade](doc/arch
 
 Expected SARSA, Double Q-Learning e políticas epsilon-greedy/softmax estão
 implementados em 0.2.0. Veja o [guia de controle](doc/control.pt-BR.md).
-O laboratório Flutter permite selecionar os quatro algoritmos. A `0.1.0` já foi
+O laboratório Flutter permite selecionar os quatro algoritmos. A versão estável `0.2.0` já foi
 publicada no [pub.dev](https://pub.dev/packages/reinforcement_engine) pelo publisher
 verificado [kleberandrade.dev](https://pub.dev/publishers/kleberandrade.dev).

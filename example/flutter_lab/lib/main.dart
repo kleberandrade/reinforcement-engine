@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'continuing_page.dart';
 // Keep compatibility with Flutter versions before the material_ui split.
 // ignore: deprecated_member_use
 import 'package:flutter/material.dart';
@@ -10,7 +11,8 @@ enum LabAlgorithm {
   qLearning('Q-Learning'),
   sarsa('SARSA'),
   expectedSarsa('Expected SARSA'),
-  doubleQ('Double Q-Learning');
+  doubleQ('Double Q-Learning'),
+  sarsaLambda('SARSA(λ)');
 
   const LabAlgorithm(this.label);
   final String label;
@@ -40,6 +42,7 @@ class _MazePageState extends State<MazePage> {
   final environment = GridWorld();
   LabAlgorithm algorithm = LabAlgorithm.qLearning;
   late LearningAgent<int, GridAction> agent;
+  late EpisodeResult Function() runEpisode;
   Timer? timer;
   int episodes = 0, position = 0, moves = 0;
   double lastReward = 0;
@@ -55,18 +58,28 @@ class _MazePageState extends State<MazePage> {
   void resetAgent() {
     timer?.cancel();
     timer = null;
-    agent = switch (algorithm) {
-      LabAlgorithm.doubleQ =>
-        DoubleQAgent<int, GridAction>(seed: 42, learningRate: 0.2),
-      _ => TabularAgent<int, GridAction>(
-          algorithm: switch (algorithm) {
-            LabAlgorithm.qLearning => LearningAlgorithm.qLearning,
-            LabAlgorithm.sarsa => LearningAlgorithm.sarsa,
-            _ => LearningAlgorithm.expectedSarsa,
-          },
-          seed: 42,
-          learningRate: 0.2),
-    };
+    if (algorithm == LabAlgorithm.sarsaLambda) {
+      final traceAgent =
+          SarsaLambdaAgent<int, GridAction>(seed: 42, learningRate: 0.2);
+      agent = traceAgent;
+      runEpisode = () => trainEpisodic(
+          environment: environment, agent: traceAgent, maxSteps: 200);
+    } else {
+      agent = switch (algorithm) {
+        LabAlgorithm.doubleQ =>
+          DoubleQAgent<int, GridAction>(seed: 42, learningRate: 0.2),
+        _ => TabularAgent<int, GridAction>(
+            algorithm: switch (algorithm) {
+              LabAlgorithm.qLearning => LearningAlgorithm.qLearning,
+              LabAlgorithm.sarsa => LearningAlgorithm.sarsa,
+              _ => LearningAlgorithm.expectedSarsa,
+            },
+            seed: 42,
+            learningRate: 0.2),
+      };
+      runEpisode = () =>
+          trainEpisode(environment: environment, agent: agent, maxSteps: 200);
+    }
     episodes = 0;
     position = environment.reset();
     moves = 0;
@@ -80,8 +93,7 @@ class _MazePageState extends State<MazePage> {
     // A bounded batch per timer tick lets Flutter render between batches.
     timer = Timer.periodic(const Duration(milliseconds: 16), (_) {
       for (var i = 0; i < 10 && remaining > 0; i++, remaining--) {
-        final result =
-            trainEpisode(environment: environment, agent: agent, maxSteps: 200);
+        final result = runEpisode();
         episodes++;
         lastReward = result.reward;
       }
@@ -197,6 +209,14 @@ class _MazePageState extends State<MazePage> {
                               onPressed:
                                   busy || episodes == 0 ? null : evaluate,
                               child: const Text('Avaliar ×50')),
+                          OutlinedButton(
+                              onPressed: busy
+                                  ? null
+                                  : () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                          builder: (_) =>
+                                              const ContinuingPage())),
+                              child: const Text('Tarefa contínua')),
                           TextButton(
                               onPressed: () => setState(resetAgent),
                               child: const Text('Reiniciar')),

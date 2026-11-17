@@ -102,3 +102,36 @@ DoubleQAgent exposes SumActionValues and updates only one independent QTable per
 
 ExpectedSarsa implementa TdUpdateRule com probabilidades vinculadas ao comportamento
 atual. DoubleQAgent expõe SumActionValues e atualiza apenas uma tabela por passo.
+
+## Continuing and episodic state / Estado contínuo e episódico (0.3)
+
+```mermaid
+classDiagram
+  class ContinuingAgent {
+    <<interface>>
+    values
+    selectAction()
+    update()
+  }
+  class RLearningAgent {
+    averageReward
+  }
+  class EpisodicAgent {
+    <<interface>>
+    beginEpisode()
+    endEpisode()
+  }
+  class SarsaLambdaAgent {
+    traceCount
+  }
+  ContinuingAgent <|.. RLearningAgent
+  EpisodicAgent <|.. SarsaLambdaAgent
+```
+
+The continuing runner preserves state between windows. The episodic runner wraps
+the existing episode loop with guaranteed cleanup. RLearningAgent computes a
+projected table update before committing average-reward arithmetic.
+
+O runner contínuo preserva estado entre janelas. O episódico envolve o loop
+existente com limpeza garantida. RLearningAgent valida uma projeção da tabela
+antes de confirmar a atualização de recompensa média.

@@ -16,19 +16,27 @@
 - [x] Publish 0.1.0 to pub.dev.
 - [x] Transfer to verified publisher kleberandrade.dev (160 pub points).
 
-## 0.2.0 — release prepared
+## 0.2.0 — stable source release
 
 - [x] Expected SARSA and Double Q-Learning.
 - [x] Evaluation runner with aggregate success/reward/step metrics.
 - [x] Cliff Walking environment and algorithm comparisons.
 - [x] Exploration strategy composition: epsilon-greedy and fixed-temperature softmax.
 - [x] Review and prepare the stable 0.2 release.
-- [ ] Confirm the 0.2.0 upload on pub.dev.
+- [x] Create GitHub release v0.2.0 after complete hosted CI.
+- [x] Confirm the 0.2.0 upload on pub.dev (verified publisher, 160 points).
+
+## 0.3.0 — in development
+
+- [x] R-Learning and explicit continuing-task/window contracts.
+- [x] Accumulating SARSA(lambda) and guaranteed episode trace cleanup.
+- [x] Continuing MaintenanceTask, executable examples and bilingual guides.
+- [x] Flutter continuing-task demo and SARSA(lambda) maze control.
+- [ ] Review before selecting a stable 0.3 release.
 
 ## Later candidates
 
-- R-Learning for average-reward tasks (with its own update semantics).
-- Eligibility traces: SARSA(lambda) and Watkins Q(lambda).
+- Replacing/true-online traces and Watkins Q(lambda).
 - Bandit algorithms under distinct interfaces.
 - DQN with optional neural_engine integration in a separate package.
 - Explicit checkpoint contract, including a serializable RNG if exact resume is needed.

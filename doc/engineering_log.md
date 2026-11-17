@@ -150,3 +150,40 @@ agent/value contracts and two-table persistence. Runtime code is unchanged from
 c86f969, whose complete hosted CI passed. A dedicated release worktree preserves
 0.2.0 while 0.3 development proceeds. Publishing success is verified separately;
 no upload is inferred from a tag or metadata change.
+
+## 2026-11-16 — 0.2 publication confirmed and 0.3 initial implementation
+
+Stable 0.2.0 source at 6f39516 passed complete hosted CI, including publication
+dry-run. Created GitHub release v0.2.0. The local upload attempt failed due to
+network isolation, so a preserved 0.2 worktree was provided for the user's upload.
+Subsequently verified pub.dev serves reinforcement_engine 0.2.0 under verified
+publisher kleberandrade.dev with 160 points; updated the release notes accordingly.
+
+Implemented RLearningAgent with a distinct ContinuingAgent contract, bounded
+trainContinuing windows and MaintenanceTask. Post-update greedy gating and rho
+maxima follow the cited Barto pseudocode, with self-loop semantics tested explicitly.
+Projected value reads validate the complete update before Q/rho writes. Windows
+preserve environment state, rho and exploration; terminal boundaries are rejected.
+
+Implemented accumulating SarsaLambdaAgent with explicit EpisodicAgent lifecycle
+and trainEpisodic. The wrapper reuses the existing episode loop and guarantees
+cleanup after termination, truncation or environment exceptions, with no concrete
+agent type checks. Trace updates are validated before any multi-cell table write.
+No true-online/replacing-trace or general convergence claim is made.
+
+Added executable continuing/trace examples, bilingual guides, source maps and
+class diagrams, plus a SARSA(lambda) maze option and a separate continuing-task
+Flutter screen. Source is 0.3.0-dev.1; the development version is not published.
+
+Validation on the installed Dart 3.11.5 / Flutter 3.41.9:
+
+- 60 core behavioral tests passed, including lambda-zero SARSA equivalence,
+  accumulating/discounted traces, truncation/error cleanup, atomic overflow,
+  R-learning greedy/non-greedy/self-loop semantics and continuing window state.
+- Core and Flutter static analysis passed; formatting and local doc links clean.
+- New examples passed on Dart VM and compiled JavaScript in Node.
+- Maintenance greedy evaluation averages 1.5 reward per step; SARSA(lambda)
+  learns the eight-move maze with no eligibility retained between episodes.
+- Flutter release web build and Wasm compatibility dry-run passed.
+- New widget scenarios and minimum-SDK validation are run in hosted CI after push;
+  local widget execution remains blocked by loopback socket restrictions.

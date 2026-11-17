@@ -20,6 +20,12 @@ jobs:
       - run: dart run example/persistence.dart
       - run: dart run example/evaluation.dart
       - run: dart run example/exploration.dart
+      - run: dart run example/continuing.dart
+      - run: dart run example/eligibility_traces.dart
+      - run: dart compile js example/continuing.dart -o /tmp/continuing.js
+      - run: dart compile js example/eligibility_traces.dart -o /tmp/traces.js
+      - run: node /tmp/continuing.js
+      - run: node /tmp/traces.js
       - run: dart compile js example/exploration.dart -o /tmp/exploration.js
       - run: node /tmp/exploration.js
       - run: dart compile js example/evaluation.dart -o /tmp/evaluation.js
