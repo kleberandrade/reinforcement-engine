@@ -1,4 +1,4 @@
-# SARSA(λ) e rastros de elegibilidade (0.3 em desenvolvimento)
+# SARSA(λ) e rastros de elegibilidade (0.3)
 
 `SarsaLambdaAgent<S, A>` implementa SARSA tabular com rastros acumulativos.
 Não é true-online SARSA nem uma implementação de rastros substitutivos.

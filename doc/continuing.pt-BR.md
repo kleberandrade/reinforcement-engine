@@ -1,4 +1,4 @@
-# R-Learning e tarefas contínuas (0.3 em desenvolvimento)
+# R-Learning e tarefas contínuas (0.3)
 
 `RLearningAgent<S, A>` aprende valores relativos e uma estimativa de recompensa
 média por passo, `averageReward`. Não existe fator de desconto ou estado terminal

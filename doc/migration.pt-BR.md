@@ -14,3 +14,14 @@ chamadas aleatórias do epsilon-greedy padrão foi preservada no mesmo runtime.
   decayExploration. explore: false sempre escolhe greedy.
 
 Veja [controle](control.pt-BR.md), [avaliação](evaluation.pt-BR.md) e [persistência](persistence.pt-BR.md).
+
+## De 0.2 para 0.3
+
+As mudanças são aditivas: os contratos de agentes e atualização da 0.2 permanecem.
+Use RLearningAgent com trainContinuing em tarefas sem término; carregue finalState
+entre janelas sem resetar o ambiente. Use SarsaLambdaAgent com trainEpisodic para
+limpar rastros nas fronteiras e em erros. O runner trainEpisode não passa a limpar
+rastros automaticamente; loops manuais precisam beginEpisode/endEpisode.
+Persistir QTable não salva RNG, rastros ou rho. Para R-Learning, salve rho
+separadamente e restaure com initialAverageReward. Veja os guias de
+[tarefas contínuas](continuing.pt-BR.md) e [rastros](traces.pt-BR.md).

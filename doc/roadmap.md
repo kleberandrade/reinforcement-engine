@@ -26,13 +26,15 @@
 - [x] Create GitHub release v0.2.0 after complete hosted CI.
 - [x] Confirm the 0.2.0 upload on pub.dev (verified publisher, 160 points).
 
-## 0.3.0 — in development
+## 0.3.0 — stable release preparation
 
 - [x] R-Learning and explicit continuing-task/window contracts.
 - [x] Accumulating SARSA(lambda) and guaranteed episode trace cleanup.
 - [x] Continuing MaintenanceTask, executable examples and bilingual guides.
 - [x] Flutter continuing-task demo and SARSA(lambda) maze control.
-- [ ] Review before selecting a stable 0.3 release.
+- [x] Compare learning across 420 task/parameter/seed combinations.
+- [x] Review API, migration, guides and independent contract consumers.
+- [ ] Confirm stable 0.3.0 publication and GitHub release.
 
 ## Later candidates
 

@@ -187,3 +187,32 @@ Validation on the installed Dart 3.11.5 / Flutter 3.41.9:
 - Flutter release web build and Wasm compatibility dry-run passed.
 - New widget scenarios and minimum-SDK validation are run in hosted CI after push;
   local widget execution remains blocked by loopback socket restrictions.
+
+## 2026-11-16 — 0.3 stability review and stable preparation
+
+Ran the full learning-stability-v1 protocol: 420 task/parameter/seed combinations
+on ten paired seeds. Stored every raw result, SDK/source provenance and bilingual
+reports in doc/benchmarks. All runs remained numerically finite. GridWorld had
+119/120 fully successful runs, Cliff Walking 107/120, and both continuing tasks
+learned the expected maintenance policy in all 180 runs. Failed capped evaluations
+are retained in success rates, steps and returns, never discarded. These finite
+synthetic tasks establish no general convergence or production-performance claim.
+
+Reviewed the API/lifecycle boundaries, arithmetic, persistence and migration, and
+validated an independent application implementing ContinuingAgent/EpisodicAgent
+using only public exports. No implementation defect required a numerical core
+change. Verified its source digest still matches the recorded b3c1a3b core.
+
+Prepared 0.3.0 stable metadata, additive migration notes and release review.
+CI now checks the independent consumer and a reduced experiment smoke run on the
+minimum and stable Dart SDKs. Full matrix numbers are local measurements, not
+attributed to the smoke job. The stable upload and GitHub release are verified
+separately after the review; neither a tag nor a dry-run implies publication.
+
+Local validation:
+- 60 behavioral tests passed; root/consumer analysis passed with fatal infos.
+- Independent public-contract consumer ran successfully.
+- Formatting and all local Markdown links checked; core source unchanged.
+- Full experiment has 420 unique rows, all ten seeds per task and no numeric errors.
+- Previous hosted run 44002809344 passed core, JS and Flutter checks for this exact
+  numerical implementation; final stable metadata/consumer CI runs after pushing.

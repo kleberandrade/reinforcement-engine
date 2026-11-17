@@ -9,6 +9,7 @@ with no Flutter, IO, HTTP or runtime package dependencies.
 | [Overview](architecture/overview.md) / [Visão geral](architecture/overview.pt-BR.md) | Boundaries, ownership, design decisions |
 | [Source structure](architecture/structure.md) / [Estrutura](architecture/structure.pt-BR.md) | Folder map and dependency rules |
 | [Class diagrams / Diagramas](architecture/class_diagrams.md) | Implemented interfaces and collaborators |
+| [Release review](release_0.3.0.md) / [Revisão](release_0.3.0.pt-BR.md) | API audit, migration, stability and external consumers |
 | [Continuing tasks](continuing.md) / [Tarefas contínuas](continuing.pt-BR.md) | R-learning and window semantics (0.3 development) |
 | [Eligibility traces](traces.md) / [Rastros](traces.pt-BR.md) | SARSA(lambda) and explicit episode lifecycle (0.3 development) |
 | [Control](control.md) / [Controle](control.pt-BR.md) | Expected SARSA, Double Q-Learning and exploration (0.2 development) |

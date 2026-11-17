@@ -1,4 +1,4 @@
-# SARSA(lambda) and eligibility traces (0.3 development)
+# SARSA(lambda) and eligibility traces (0.3)
 
 `SarsaLambdaAgent<S, A>` implements tabular SARSA with accumulating traces.
 It is neither true-online SARSA nor replacing-trace SARSA.

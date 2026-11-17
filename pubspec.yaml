@@ -1,6 +1,6 @@
 name: reinforcement_engine
 description: Pure Dart reinforcement learning with Q-Learning, SARSA, Double Q, R-Learning, eligibility traces, composable exploration and evaluation.
-version: 0.3.0-dev.1
+version: 0.3.0
 repository: https://github.com/kleberandrade/reinforcement-engine
 issue_tracker: https://github.com/kleberandrade/reinforcement-engine/issues
 homepage: https://github.com/kleberandrade/reinforcement-engine

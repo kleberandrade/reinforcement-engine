@@ -1,7 +1,11 @@
 ## Unreleased
 
-## 0.3.0-dev.1
+## 0.3.0
 
+- Validate learning stability across 420 task/parameter/seed combinations; publish
+  raw results, provenance and bilingual reports retaining capped unsuccessful runs.
+- Validate independent public-contract consumers; document continuing/episodic
+  lifecycle, persistence limitations and additive migration from 0.2.
 - Add RLearningAgent with relative values and an average-reward estimate, using
   explicit post-update greedy gating and validated projected table updates.
 - Add ContinuingAgent, trainContinuing and MaintenanceTask for bounded continuing

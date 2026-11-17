@@ -10,11 +10,11 @@ Q-Learning, SARSA, Expected SARSA and Double Q-Learning, with no runtime depende
 [Architecture](doc/architecture.md) · [Roadmap](doc/roadmap.md) · [Contributing](CONTRIBUTING.md)
 
 
-## 0.3.0 development
+## Version 0.3.0
 
-Current source `0.3.0-dev.1` adds [R-learning and continuing tasks](doc/continuing.md)
+Current source `0.3.0` adds [R-learning and continuing tasks](doc/continuing.md)
 and [SARSA(lambda) with accumulating traces](doc/traces.md). The `v0.2.0` reference
-preserves the previous stable delivery. These new algorithms are not published yet.
+preserves the previous stable delivery. See the [stability review](doc/benchmarks/stability.md) and [API review](doc/release_0.3.0.md).
 
 
 ## Version 0.2.0
@@ -36,7 +36,7 @@ See the [evaluation guide](doc/evaluation.md) and run
 
 ## Status
 
-Initial release line: 0.1.0. Current source: 0.3.0-dev.1.
+Initial release line: 0.1.0. Current source: 0.3.0.
 Requires Dart 3.3 or newer. Intended for finite, discrete state/action spaces.
 
 ## Quick start

@@ -1,4 +1,4 @@
-# R-learning and continuing tasks (0.3 development)
+# R-learning and continuing tasks (0.3)
 
 `RLearningAgent<S, A>` learns relative action values and an average reward per
 step estimate, `averageReward`. This contract has neither discount nor terminal

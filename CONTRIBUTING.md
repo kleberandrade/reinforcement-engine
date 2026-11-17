@@ -16,7 +16,7 @@ action, reason and validation in `doc/engineering_log.md`.
 
 ```sh
 dart pub get
-dart format --output=none --set-exit-if-changed lib test example
+dart format --output=none --set-exit-if-changed lib test example benchmark validation
 dart analyze --fatal-infos
 dart test
 dart run example/reinforcement_engine_example.dart
@@ -38,3 +38,8 @@ Never represent unsupported, configured-only or blocked checks as passing.
 Before publication, verify package name, repository metadata, package contents,
 version and hosted CI. Run `dart pub publish --dry-run`. Release and publishing
 remain a separate workflow; do not tag just to test automation.
+
+Run the independent consumer in `validation/contracts_03` with `dart pub get`,
+`dart analyze --fatal-infos` and `dart run main.dart`. Stability experiment protocol,
+raw results and limitations live in `doc/benchmarks/stability.md`. CI runs smoke;
+release conclusions use the full matrix, not the smoke output.

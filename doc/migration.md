@@ -14,3 +14,14 @@ seeded call order is preserved within the same runtime.
   when decayExploration is called. explore: false always selects greedily.
 
 See [control](control.md), [evaluation](evaluation.md) and [persistence](persistence.md).
+
+## From 0.2 to 0.3
+
+Changes are additive: 0.2 learner and update contracts remain supported.
+Use RLearningAgent with trainContinuing for nonterminating tasks; carry finalState
+between windows without resetting the environment. Use SarsaLambdaAgent with
+trainEpisodic to clear traces on boundaries and errors. trainEpisode does not
+acquire automatic trace cleanup; manual loops need beginEpisode/endEpisode.
+Persisting QTable saves neither RNG, traces nor rho. For R-learning, save rho
+separately and restore with initialAverageReward. See the
+[continuing](continuing.md) and [trace](traces.md) guides.

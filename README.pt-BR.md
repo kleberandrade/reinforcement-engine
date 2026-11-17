@@ -6,14 +6,14 @@
 Aprendizado por reforço tabular em Dart puro, com Q-Learning, SARSA, Expected SARSA e Double Q-Learning.
 O núcleo não depende de Flutter, bibliotecas nativas ou serviços externos.
 
-Versão inicial: **0.1.0**. Código atual: **0.3.0-dev.1**.
+Versão inicial: **0.1.0**. Código atual: **0.3.0**.
 
 
-## Desenvolvimento da 0.3.0
+## Versão 0.3.0
 
-O código atual `0.3.0-dev.1` adiciona [R-Learning e tarefas contínuas](doc/continuing.pt-BR.md)
+O código atual `0.3.0` adiciona [R-Learning e tarefas contínuas](doc/continuing.pt-BR.md)
 e [SARSA(λ) com rastros acumulativos](doc/traces.pt-BR.md). A referência `v0.2.0`
-preserva a entrega estável anterior. Os novos algoritmos ainda não foram publicados.
+preserva a entrega estável anterior. Veja a [revisão de estabilidade](doc/benchmarks/stability.pt-BR.md) e a [revisão de API](doc/release_0.3.0.pt-BR.md).
 
 
 ## Versão 0.2.0

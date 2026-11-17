@@ -2,3 +2,5 @@ example/flutter_lab/.dart_tool/
 example/flutter_lab/build/
 example/flutter_lab/.metadata
 example/flutter_lab/pubspec.lock
+validation/contracts_03/.dart_tool/
+validation/contracts_03/pubspec.lock

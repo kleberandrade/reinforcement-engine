@@ -1,0 +1,9 @@
+name: reinforcement_contract_consumer
+publish_to: none
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+dependencies:
+  reinforcement_engine:
+    path: ../..
+dev_dependencies:
+  lints: '>=3.0.0 <7.0.0'

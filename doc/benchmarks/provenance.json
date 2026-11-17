@@ -1,0 +1,10 @@
+{
+  "source_commit": "b3c1a3b05248218211a7e190ad43e0cc1616db61",
+  "dart": "Dart SDK version: 3.11.5 (stable) (Wed Apr 15 00:36:32 2026 -0700) on \"macos_arm64\"",
+  "source_sha256": "e4d96425fed1768195fa1ea7c8ba5d24b24ca1a2fbb9ed1b14ef997305c01d88",
+  "protocol": "learning-stability-v1",
+  "run_count": 420,
+  "results_file": "learning_stability.json",
+  "numerical_error_count": 0,
+  "notes": "Paired seeds across parameter settings; source code is unchanged by the stable version bump."
+}
