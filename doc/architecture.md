@@ -10,12 +10,12 @@ with no Flutter, IO, HTTP or runtime package dependencies.
 | [Source structure](architecture/structure.md) / [Estrutura](architecture/structure.pt-BR.md) | Folder map and dependency rules |
 | [Class diagrams / Diagramas](architecture/class_diagrams.md) | Implemented interfaces and collaborators |
 | [Release review](release_0.3.0.md) / [Revisão](release_0.3.0.pt-BR.md) | API audit, migration, stability and external consumers |
-| [Continuing tasks](continuing.md) / [Tarefas contínuas](continuing.pt-BR.md) | R-learning and window semantics (0.3 development) |
-| [Eligibility traces](traces.md) / [Rastros](traces.pt-BR.md) | SARSA(lambda) and explicit episode lifecycle (0.3 development) |
-| [Control](control.md) / [Controle](control.pt-BR.md) | Expected SARSA, Double Q-Learning and exploration (0.2 development) |
+| [Continuing tasks](continuing.md) / [Tarefas contínuas](continuing.pt-BR.md) | R-learning and window semantics (0.3) |
+| [Eligibility traces](traces.md) / [Rastros](traces.pt-BR.md) | SARSA(lambda) and explicit episode lifecycle (0.3) |
+| [Control](control.md) / [Controle](control.pt-BR.md) | Expected SARSA, Double Q-Learning and exploration (0.2) |
 | [Algorithms](algorithms.md) / [Algoritmos](algorithms.pt-BR.md) | Updates, termination, truncation and exploration |
 | [Extending](extending.md) / [Extensibilidade](extending.pt-BR.md) | Custom environments and TD strategies |
-| [Evaluation](evaluation.md) / [Avaliação](evaluation.pt-BR.md) | Fixed policies, episode metrics and Cliff Walking (0.2 development) |
+| [Evaluation](evaluation.md) / [Avaliação](evaluation.pt-BR.md) | Fixed policies, episode metrics and Cliff Walking (0.2) |
 | [Persistence](persistence.md) / [Persistência](persistence.pt-BR.md) | Versioned table format and limits |
 | [Integration](integration.md) / [Integração](integration.pt-BR.md) | Flutter execution and engine family boundaries |
 
@@ -24,3 +24,7 @@ in the [roadmap](roadmap.md).
 
 [Learning checkpoints](checkpoints.md) / [Checkpoints](checkpoints.pt-BR.md) describe
 the 0.4 outer persistence adapter, typed key codecs and new-RNG boundary contract.
+
+[Learning guide](learning_guide.md) / [Aprendizado](learning_guide.pt-BR.md) introduces
+terms and worked examples. New 0.5 guides: [Watkins](watkins.md) /
+[Português](watkins.pt-BR.md), [bandits](bandits.md) / [Português](bandits.pt-BR.md).

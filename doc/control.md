@@ -91,7 +91,7 @@ With 2,000 Cliff Walking training episodes, alpha 0.5, discount 1, fixed epsilon
 0.1, seed 42 and greedy evaluation seed 7, the local runtime produced 13 steps for
 Q-Learning, 17 for SARSA, 15 for Expected SARSA and 17 for Double Q. All 100 evaluation
 episodes reached the goal. These educational results establish no general
-superiority. The lab supports all four algorithms and GridWorld evaluation.
+superiority. The lab supports these four algorithms, SARSA(lambda), Watkins Q(lambda) and GridWorld evaluation.
 
 Adding `expectedSarsa` to the enum may require another branch in consumer
 exhaustive switches. The published `0.1.0` `TdUpdateRule` contract is unchanged.

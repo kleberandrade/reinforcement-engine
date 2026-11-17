@@ -48,7 +48,7 @@ necessary for on-policy SARSA correctness.
 O runner amostra a próxima ação quando exigido pela estratégia e reutiliza essa
 mesma ação no próximo passo do ambiente. Isso preserva a semântica on-policy de SARSA.
 
-## Evaluation / Avaliação (0.2 development)
+## Evaluation / Avaliação (0.2)
 
 ```mermaid
 classDiagram
@@ -159,3 +159,33 @@ It owns no environment or storage. Restore begins a new random stream.
 
 O adaptador externo captura agentes suportados e cria novos agentes. Não controla
 ambiente nem armazenamento. A restauração inicia outra sequência aleatória.
+
+## Bandit contracts / Contratos de bandit (0.5)
+
+```mermaid
+classDiagram
+  class BanditLearner {
+    <<interface>>
+    selectArm()
+    observe()
+  }
+  class BanditPolicy {
+    <<interface>>
+    selectArm()
+  }
+  class BanditValues {
+    <<interface>>
+    observations
+    count()
+    mean()
+  }
+  BanditLearner <|.. BanditAgent
+  BanditAgent --> BanditPolicy
+  BanditAgent --> BanditValues
+```
+
+trainBandit uses BanditLearner; epsilon-greedy and UCB1 implement BanditPolicy.
+WatkinsQLambdaAgent implements EpisodicAgent and uses AgentBehavior like SARSA(lambda).
+
+trainBandit usa BanditLearner; epsilon-greedy e UCB1 implementam BanditPolicy.
+WatkinsQLambdaAgent implementa EpisodicAgent e usa AgentBehavior como SARSA(lambda).

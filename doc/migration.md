@@ -33,3 +33,14 @@ compatible. `TrainingCheckpoint` is additive; see [checkpoints](checkpoints.md).
 Capture at episode/window boundaries. Restore starts a new RNG stream, not an
 exact continuation. Custom strategies need an application adapter. The public
 `TabularAgent.usesBuiltInUpdateRule` identifies the enum-managed strategy path.
+
+## 0.4 to 0.5
+
+Existing constructors and one-step updates remain compatible. WatkinsQLambdaAgent
+is a separate EpisodicAgent, not another enum case; exhaustive LearningAlgorithm
+switches do not change. BanditLearner/BanditPolicy/BanditValues are separate from
+stateful contracts. Built-in bandit rewards require finite [0,1] values.
+Watkins checkpoints add a new kind to format version 1; older readers reject it.
+Existing snapshot kinds retain their schema and behavior. Bandit statistics are
+not covered by TrainingCheckpoint. See [Watkins](watkins.md), [bandits](bandits.md)
+and the [learning guide](learning_guide.md).

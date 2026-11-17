@@ -244,3 +244,38 @@ Local validation:
 - Widget execution blocked by local loopback socket permissions; hosted CI runs it.
 - Publish dry run built/inspected a 122 KB archive, then failed DNS accessing
   pub.dev. Hosted validation and actual upload are tracked separately.
+
+## 2026-11-17 — Watkins, bandits and didactic 0.5 source
+
+Added accumulating WatkinsQLambdaAgent on the existing EpisodicAgent contract.
+Pinned pre-write greedy ties/self-loops, maximum bootstrap, cut-after-update
+semantics, terminal propagation, truncation cleanup and atomic overflow rejection.
+Added a new boundary checkpoint kind while retaining old schemas and RNG behavior.
+
+Added separate BanditLearner/BanditPolicy/BanditValues contracts, fixed-arm agent,
+normalized sample-mean feedback, fixed-epsilon and UCB1 policies, and a bounded
+feedback runner. Core paths use composition; bandits do not pretend to have next
+states. Feedback ownership, stationary-reward assumptions, delayed observations
+and the absence of bandit persistence are explicit in English/Portuguese guides.
+
+Rebuilt both READMEs as learning paths: glossary links, decision table, complete
+examples, numerical updates and original visuals. Added six deterministic SVGs
+and their dependency-free Dart generator, dedicated learning/Watkins/bandit guides
+and a verified scientific bibliography at the end of each README. Distinguished
+primary articles from the 2018 textbook and its 2015 draft used for Watkins order.
+No paper figures were copied and the old 420-run matrix is not attributed to new
+algorithms. Added Flutter Watkins selection and a bounded bandit simulation whose
+bars show selection shares, not success probabilities.
+
+Validation before final source commit:
+- 92 behavioral core tests passed (22 additional scenarios).
+- Ten VM examples ran, including the two new methods.
+- Both new examples compiled to JavaScript and ran in Node.
+- All four complete README Dart examples were extracted and executed successfully.
+- Independent public-contract consumer validates a custom BanditLearner and Watkins.
+- Root/consumer analysis, local documentation links and six SVG/XML files passed.
+- Flutter web release build and Wasm compatibility dry run passed.
+- Flutter widget execution is delegated to hosted CI because local sockets are
+  restricted; CI also validates minimum Dart 3.3, stable and publish dry-run.
+- Source version is 0.5.0. This task commits source; registry publication is a
+  separate action and is not inferred from the version number or a passing CI.

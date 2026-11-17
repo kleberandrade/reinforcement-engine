@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'continuing_page.dart';
 import 'checkpoint_page.dart';
+import 'bandits_page.dart';
 // Keep compatibility with Flutter versions before the material_ui split.
 // ignore: deprecated_member_use
 import 'package:flutter/material.dart';
@@ -13,7 +14,8 @@ enum LabAlgorithm {
   sarsa('SARSA'),
   expectedSarsa('Expected SARSA'),
   doubleQ('Double Q-Learning'),
-  sarsaLambda('SARSA(λ)');
+  sarsaLambda('SARSA(λ)'),
+  watkins('Watkins Q(λ)');
 
   const LabAlgorithm(this.label);
   final String label;
@@ -59,9 +61,12 @@ class _MazePageState extends State<MazePage> {
   void resetAgent() {
     timer?.cancel();
     timer = null;
-    if (algorithm == LabAlgorithm.sarsaLambda) {
-      final traceAgent =
-          SarsaLambdaAgent<int, GridAction>(seed: 42, learningRate: 0.2);
+    if (algorithm == LabAlgorithm.sarsaLambda ||
+        algorithm == LabAlgorithm.watkins) {
+      final EpisodicAgent<int, GridAction> traceAgent = algorithm ==
+              LabAlgorithm.watkins
+          ? WatkinsQLambdaAgent<int, GridAction>(seed: 42, learningRate: 0.2)
+          : SarsaLambdaAgent<int, GridAction>(seed: 42, learningRate: 0.2);
       agent = traceAgent;
       runEpisode = () => trainEpisodic(
           environment: environment, agent: traceAgent, maxSteps: 200);
@@ -226,6 +231,13 @@ class _MazePageState extends State<MazePage> {
                                           builder: (_) =>
                                               const CheckpointPage())),
                               child: const Text('Salvar e retomar')),
+                          OutlinedButton(
+                              onPressed: busy
+                                  ? null
+                                  : () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                          builder: (_) => const BanditsPage())),
+                              child: const Text('Bandits')),
                           TextButton(
                               onPressed: () => setState(resetAgent),
                               child: const Text('Reiniciar')),

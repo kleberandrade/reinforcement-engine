@@ -40,7 +40,15 @@ void main() {
       resumed.table.value(0, 0) != average.table.value(0, 0)) {
     throw StateError('Public checkpoint consumer failed');
   }
-  print('Independent contracts and 0.4 checkpoint consumer passed');
+  final watkins = WatkinsQLambdaAgent<int, int>(seed: 42);
+  trainEpisodic(environment: ConsumerEnvironment(), agent: watkins);
+  if (watkins.traceCount != 0) throw StateError('Watkins lifecycle failed');
+  final bandit = ConsumerBandit();
+  final window = trainBandit(agent: bandit, pulls: 10, reward: (_) => .5);
+  if (window.reward != 5 || bandit.values.count(0) != 10) {
+    throw StateError('Independent bandit contract failed');
+  }
+  print('Independent contracts and 0.5 consumer passed');
 }
 
 final class ConsumerEnvironment implements Environment<int, int> {
@@ -112,4 +120,16 @@ final class ConsumerEpisodicAgent implements EpisodicAgent<int, int> {
           terminated: terminated,
           nextActions: nextActions,
           nextAction: nextAction);
+}
+
+final class ConsumerBandit implements BanditLearner<int> {
+  final BanditAgent<int> delegate = BanditAgent(arms: [0]);
+  @override
+  List<int> get arms => delegate.arms;
+  @override
+  BanditValues<int> get values => delegate.values;
+  @override
+  int selectArm() => 0;
+  @override
+  void observe(int arm, double reward) => delegate.observe(arm, reward);
 }

@@ -1,5 +1,18 @@
 ## Unreleased
 
+## 0.5.0
+
+- Add accumulating WatkinsQLambdaAgent with pre-update greedy-tie semantics,
+  nongreedy trace cutting, atomic value updates and episode cleanup.
+- Add BanditLearner/BanditPolicy/BanditValues contracts, fixed-arm BanditAgent,
+  fixed epsilon-greedy and UCB1 policies, sample means and bounded trainBandit.
+- Add boundary-only Watkins checkpoints without changing existing snapshot kinds;
+  older readers reject the new kind. Bandit persistence remains application-owned.
+- Rebuild English/Portuguese READMEs around explanations, worked calculations,
+  visual examples, selection guidance and verified scientific references.
+- Add bilingual learning/Watkins/bandit guides, reproducible original SVG diagrams,
+  executable VM/JS examples, Flutter Watkins selection and interactive bandit bars.
+
 ## 0.4.0
 
 - Add immutable versioned TrainingCheckpoint snapshots for built-in tabular,

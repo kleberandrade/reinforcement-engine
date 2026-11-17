@@ -45,10 +45,21 @@
 - [x] Bilingual guides and numerical round-trip/error tests.
 - [ ] Confirm full hosted CI, GitHub release and pub.dev publication.
 
+## 0.5.0 — Watkins, bandits and didactic documentation
+
+- [x] Accumulating Watkins Q(lambda), greedy ties, cuts and lifecycle tests.
+- [x] Separate bandit contracts, epsilon-greedy and UCB1 selection.
+- [x] Normalized rewards, sample means, feedback windows and behavioral tests.
+- [x] Watkins boundary checkpoints and explicit bandit persistence limitations.
+- [x] VM/JS examples, Flutter maze selector and bandit visualization.
+- [x] Bilingual learning guides, original SVG diagrams and scientific references.
+- Final source validation is tracked by [CI](https://github.com/kleberandrade/reinforcement-engine/actions/workflows/ci.yml) on Dart 3.3/stable and Flutter.
+- [ ] Publish 0.5.0 separately when requested.
+
 ## Later candidates
 
-- Replacing/true-online traces and Watkins Q(lambda).
-- Bandit algorithms under distinct interfaces.
+- Replacing and true-online traces.
+- Contextual bandits and adaptive/nonstationary estimators.
 - DQN with optional neural_engine integration in a separate package.
 - Trajectory-exact checkpoints with serializable RNG and environment state.
 

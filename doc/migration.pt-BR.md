@@ -33,3 +33,14 @@ compatibilidade. `TrainingCheckpoint` é aditivo; veja [checkpoints](checkpoints
 Capture entre episódios/janelas. A retomada inicia outra sequência aleatória.
 Estratégias personalizadas exigem adaptador da aplicação. O novo indicador público
 `TabularAgent.usesBuiltInUpdateRule` identifica regras gerenciadas pelo enum.
+
+## 0.4 para 0.5
+
+Construtores e atualizações existentes mantêm compatibilidade. WatkinsQLambdaAgent
+é um EpisodicAgent separado, sem novo caso no enum LearningAlgorithm. Switches
+exaustivos não mudam. BanditLearner/BanditPolicy/BanditValues são contratos próprios.
+Bandits nativos exigem recompensa finita em [0,1]. O checkpoint Watkins adiciona
+um tipo na versão 1 do formato; leitores antigos o rejeitam. Tipos anteriores
+mantêm estrutura e comportamento. TrainingCheckpoint não salva estatísticas de
+bandits. Veja [Watkins](watkins.pt-BR.md), [bandits](bandits.pt-BR.md) e o
+[guia de aprendizado](learning_guide.pt-BR.md).

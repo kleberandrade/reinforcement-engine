@@ -67,3 +67,11 @@ treino produz outra avaliação com a mesma semente de avaliação. A comparaç�
 para esse labirinto e não promete melhoria. A transferência usa copiar/colar,
 sem acesso automático a disco ou rede. O exemplo adiciona identidade do ambiente
 e contador de episódios ao envelope e preserva o agente quando a entrada é inválida.
+
+## Adições na 0.5
+
+`TrainingCheckpoint.watkinsQLambda` / `restoreWatkinsQLambda` preservam configuração,
+Q e exploração de Watkins entre episódios sem traços ativos. O tipo novo
+`watkinsQLambda` mantém a versão 1 do envelope; leitores antigos o rejeitam.
+Tipos anteriores não mudam. Este formato não salva bandits; a aplicação controla
+sua eventual persistência.

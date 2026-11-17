@@ -28,3 +28,20 @@ on the default maze. Its goal is eight moves away. This is an educational
 finite-state example, not a benchmark for real applications.
 
 See [control and exploration](control.md) for Expected SARSA, Double Q-Learning and softmax.
+
+## Beyond one-step rules
+
+| Learner | Target/feedback | Lifecycle |
+| --- | --- | --- |
+| DoubleQAgent | Cross-table discounted bootstrap | trainEpisode |
+| SarsaLambdaAgent | Sampled next Q; accumulating traces | trainEpisodic |
+| WatkinsQLambdaAgent | Maximum next Q; traces cut after nongreedy next action | trainEpisodic |
+| RLearningAgent | Reward minus average reward plus relative next value | trainContinuing |
+| BanditAgent | Immediate normalized reward updates a sample mean | trainBandit or selectArm/observe |
+
+For Q=2, alpha=.25, reward=1, gamma=.8 and next bootstrap=4, the new value is
+`2 + .25 * (1 + .8*4 - 2) = 2.55`. A terminal transition gives 1.75 instead.
+This calculation also illustrates why truncation must not be treated as termination.
+
+Start with the [learning guide](learning_guide.md), then [Watkins](watkins.md),
+[traces](traces.md), [continuing tasks](continuing.md) or [bandits](bandits.md).

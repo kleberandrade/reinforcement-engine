@@ -23,3 +23,15 @@ a legal next action. The runner bounds work through `maxSteps`.
 The enum constructor remains supported. An explicit `updateRule` takes precedence;
 `algorithm` records the convenience selector and is not the effective strategy
 when an override is present. Use `agent.updateRule` to inspect execution behavior.
+
+## Learner families and persistence
+
+EpisodicAgent adds boundary cleanup for SARSA(lambda) and Watkins Q(lambda).
+ContinuingAgent models R-learning without a terminal/discounted update contract.
+BanditLearner models immediate feedback, composed from BanditPolicy and a read-only
+BanditValues view. Each runner depends on the corresponding interface.
+
+TrainingCheckpoint is an outer format adapter depending on built-in agents. It
+creates new learners rather than injecting persistence into the learning loop.
+Applications own environment state, async feedback, IO and scheduling. See the
+[dependency map](structure.md) and [learning guide](../learning_guide.md).

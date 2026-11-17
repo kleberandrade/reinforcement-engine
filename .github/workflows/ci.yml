@@ -14,7 +14,9 @@ jobs:
       - run: dart pub get
       - run: dart pub get
         working-directory: validation/contracts_03
-      - run: dart format --output=none --set-exit-if-changed lib test example benchmark validation
+      - run: dart format --output=none --set-exit-if-changed lib test example benchmark validation tool
+      - run: dart run tool/generate_doc_images.dart
+      - run: git diff --exit-code -- doc/images
       - run: dart analyze --fatal-infos
       - run: dart test
       - run: dart run benchmark/learning_stability.dart --smoke > /tmp/learning-smoke.json
@@ -32,6 +34,12 @@ jobs:
       - run: dart run example/exploration.dart
       - run: dart run example/continuing.dart
       - run: dart run example/eligibility_traces.dart
+      - run: dart run example/watkins.dart
+      - run: dart run example/bandits.dart
+      - run: dart compile js example/watkins.dart -o /tmp/watkins.js
+      - run: dart compile js example/bandits.dart -o /tmp/bandits.js
+      - run: node /tmp/watkins.js
+      - run: node /tmp/bandits.js
       - run: dart compile js example/continuing.dart -o /tmp/continuing.js
       - run: dart compile js example/eligibility_traces.dart -o /tmp/traces.js
       - run: node /tmp/continuing.js

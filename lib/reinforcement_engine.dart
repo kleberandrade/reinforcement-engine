@@ -42,3 +42,13 @@ export 'src/domain/machine_action.dart';
 export 'src/environments/maintenance_task.dart';
 
 export 'src/persistence/training_checkpoint.dart';
+
+export 'src/agents/watkins_q_lambda_agent.dart';
+export 'src/contracts/bandit_values.dart';
+export 'src/contracts/bandit_policy.dart';
+export 'src/agents/bandit_agent.dart';
+export 'src/policies/epsilon_greedy_bandit.dart';
+export 'src/policies/ucb1.dart';
+export 'src/domain/bandit_result.dart';
+export 'src/training/train_bandit.dart';
+export 'src/contracts/bandit_learner.dart';

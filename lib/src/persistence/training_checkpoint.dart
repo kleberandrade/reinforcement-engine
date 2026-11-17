@@ -4,6 +4,7 @@ import '../agents/tabular_agent.dart';
 import '../agents/double_q_agent.dart';
 import '../agents/r_learning_agent.dart';
 import '../agents/sarsa_lambda_agent.dart';
+import '../agents/watkins_q_lambda_agent.dart';
 import '../contracts/exploration_policy.dart';
 import '../domain/learning_algorithm.dart';
 import '../policies/epsilon_greedy.dart';
@@ -109,6 +110,31 @@ final class TrainingCheckpoint {
         encodeAction);
   }
 
+  /// Boundary snapshot of Watkins Q(lambda); active traces are rejected.
+  static TrainingCheckpoint watkinsQLambda<S, A>(
+      WatkinsQLambdaAgent<S, A> agent,
+      {required Object? Function(S) encodeState,
+      required Object? Function(A) encodeAction}) {
+    if (agent.traceCount != 0) {
+      throw StateError('End the episode before capturing eligibility traces');
+    }
+    return _capture(
+        'watkinsQLambda',
+        agent.table,
+        null,
+        {
+          'learningRate': agent.learningRate,
+          'discountFactor': agent.discountFactor,
+          'lambda': agent.lambda
+        },
+        agent.explorationPolicy,
+        agent.epsilon,
+        agent.epsilonDecay,
+        agent.minEpsilon,
+        encodeState,
+        encodeAction);
+  }
+
   static TrainingCheckpoint _capture<S, A>(
       String kind,
       QTable<S, A> first,
@@ -168,7 +194,8 @@ final class TrainingCheckpoint {
       throw const FormatException('Unsupported training checkpoint');
     }
     final kind = data['kind'];
-    if (!['tabular', 'doubleQ', 'rLearning', 'sarsaLambda'].contains(kind)) {
+    if (!['tabular', 'doubleQ', 'rLearning', 'sarsaLambda', 'watkinsQLambda']
+        .contains(kind)) {
       throw const FormatException('Unknown checkpoint kind');
     }
     final tables = data['tables'] as List;
@@ -206,7 +233,9 @@ final class TrainingCheckpoint {
     } else {
       number('discountFactor', minimum: 0, maximum: 1);
     }
-    if (kind == 'sarsaLambda') number('lambda', minimum: 0, maximum: 1);
+    if (kind == 'sarsaLambda' || kind == 'watkinsQLambda') {
+      number('lambda', minimum: 0, maximum: 1);
+    }
     if (kind == 'tabular' &&
         !LearningAlgorithm.values.any((v) => v.name == c['algorithm'])) {
       throw const FormatException('Unknown TD algorithm');
@@ -308,6 +337,24 @@ final class TrainingCheckpoint {
     final d = _data('sarsaLambda');
     final c = d['config'] as Map;
     return SarsaLambdaAgent<S, A>(
+        learningRate: (c['learningRate'] as num).toDouble(),
+        discountFactor: (c['discountFactor'] as num).toDouble(),
+        lambda: (c['lambda'] as num).toDouble(),
+        epsilon: (c['epsilon'] as num).toDouble(),
+        epsilonDecay: (c['epsilonDecay'] as num).toDouble(),
+        minEpsilon: (c['minEpsilon'] as num).toDouble(),
+        seed: seed,
+        explorationPolicy: _policy<S, A>(d),
+        table: _table(d, 0, decodeState, decodeAction));
+  }
+
+  WatkinsQLambdaAgent<S, A> restoreWatkinsQLambda<S, A>(
+      {required S Function(Object?) decodeState,
+      required A Function(Object?) decodeAction,
+      int? seed}) {
+    final d = _data('watkinsQLambda');
+    final c = d['config'] as Map;
+    return WatkinsQLambdaAgent<S, A>(
         learningRate: (c['learningRate'] as num).toDouble(),
         discountFactor: (c['discountFactor'] as num).toDouble(),
         lambda: (c['lambda'] as num).toDouble(),

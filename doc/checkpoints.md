@@ -70,3 +70,11 @@ A before/after comparison measures this maze only; it promises no improvement.
 Copy/paste owns transfer; there is no automatic filesystem or network access.
 The demo wraps the core checkpoint with its environment identifier and episode
 counter, rejects incompatible envelopes, and keeps the current agent on bad input.
+
+## 0.5 additions
+
+`TrainingCheckpoint.watkinsQLambda` / `restoreWatkinsQLambda` preserve Watkins
+configuration, Q-table and exploration at episode boundaries with empty traces.
+The new `watkinsQLambda` kind keeps envelope version 1; older readers reject that
+kind. Existing kinds remain unchanged. Bandit statistics are not supported by
+this format; applications own any bandit persistence.

@@ -28,7 +28,12 @@ void main() {
     expect(find.text('Episódios: 0'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
-  for (final name in ['Expected SARSA', 'Double Q-Learning', 'SARSA(λ)']) {
+  for (final name in [
+    'Expected SARSA',
+    'Double Q-Learning',
+    'SARSA(λ)',
+    'Watkins Q(λ)'
+  ]) {
     testWidgets('trains and evaluates $name', (tester) async {
       await tester.binding.setSurfaceSize(const Size(1000, 1200));
       addTearDown(() => tester.binding.setSurfaceSize(null));

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="340" viewBox="0 0 880 340" role="img" aria-labelledby="title desc">
+<title id="title">Como funciona o aprendizado por reforço</title><desc id="desc">Como funciona o aprendizado por reforço</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#3561a5"/></marker></defs>
+<rect width="880" height="340" rx="16" fill="#f4f7fc"/>
+<g font-family="Arial, sans-serif" fill="#152c48"><text x="32" y="40" font-size="24" font-weight="bold">Como funciona o aprendizado por reforço</text>
+<rect x="48" y="95" width="255" height="100" rx="12" fill="#e3ddff" stroke="#6e55b3"/>
+<text x="175" y="133" text-anchor="middle" font-size="21">Agente</text>
+<text x="175" y="164" text-anchor="middle" font-size="15">Escolhe usando Q(estado, ação)</text>
+<rect x="575" y="95" width="255" height="100" rx="12" fill="#d8f0e8" stroke="#288067"/>
+<text x="702" y="133" text-anchor="middle" font-size="21">Ambiente</text>
+<text x="702" y="164" text-anchor="middle" font-size="15">Avança e devolve o resultado</text>
+<path d="M303 122H568" stroke="#3561a5" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<text x="440" y="107" text-anchor="middle" font-size="16">ação</text>
+<path d="M575 177H312" stroke="#3561a5" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<text x="440" y="209" text-anchor="middle" font-size="16">recompensa + próximo estado</text>
+<text x="48" y="263" font-size="18">Q ← Q + α × (target − Q)</text>
+<text x="48" y="300" font-size="16">Treino: atualiza valores. Avaliação: congela o aprendizado e mede a política.</text>
+</g></svg>

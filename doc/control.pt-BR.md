@@ -93,7 +93,7 @@ Com 2.000 episódios de Cliff Walking, alpha 0,5, desconto 1, epsilon fixo 0,1,
 semente 42 e avaliação greedy com semente 7: Q-Learning fez 13 passos, SARSA 17,
 Expected SARSA 15 e Double Q 17 no runtime local. Todos os 100 episódios de avaliação
 chegaram ao objetivo. Esses resultados são didáticos e não demonstram superioridade
-geral. O laboratório permite escolher os quatro algoritmos e avaliar o GridWorld.
+geral. O laboratório permite escolher esses quatro algoritmos, SARSA(lambda), Watkins Q(lambda) e avaliar o GridWorld.
 
 Adicionar `expectedSarsa` ao enum pode exigir uma nova ramificação em switches
 exaustivos dos consumidores. O contrato `TdUpdateRule` da `0.1.0` não mudou.

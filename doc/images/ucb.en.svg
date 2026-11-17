@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="340" viewBox="0 0 880 340" role="img" aria-labelledby="title desc">
+<title id="title">UCB1: value + uncertainty bonus</title><desc id="desc">UCB1: value + uncertainty bonus</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="#3561a5"/></marker></defs>
+<rect width="880" height="340" rx="16" fill="#f4f7fc"/>
+<g font-family="Arial, sans-serif" fill="#152c48"><text x="32" y="40" font-size="24" font-weight="bold">UCB1: value + uncertainty bonus</text>
+<text x="32" y="78" font-size="17">Worked example: 101 observations (A: 100, B: 1)</text>
+<text x="32" y="125" font-size="18">A</text><rect x="70" y="102" width="144" height="32" fill="#5274c8"/><rect x="214" y="102" width="55" height="32" fill="#d8942e"/>
+<text x="290" y="125" font-size="17">0.800 + 0.304 = 1.104</text>
+<text x="32" y="180" font-size="18">B</text><rect x="70" y="157" width="36" height="32" fill="#5274c8"/><rect x="106" y="157" width="547" height="32" fill="#d8942e"/>
+<text x="70" y="220" font-size="17">0.200 + 3.038 = 3.238 → choose B</text>
+<text x="32" y="270" font-size="16">Blue: observed mean. Orange: sqrt(2 × ln(101) / count).</text>
+<text x="32" y="310" font-size="16">The index may exceed 1. It is not a probability or a success prediction.</text>
+</g></svg>

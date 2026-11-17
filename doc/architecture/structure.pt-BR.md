@@ -31,3 +31,10 @@ validação e restauração em agentes novos. Depende de agentes, políticas, va
 domínio e SDK. Agentes e runners não importam essa camada. A inspeção de tipos
 nativos fica restrita ao adaptador de serialização; treino e seleção continuam
 por contratos. Estratégias personalizadas exigem um adaptador da aplicação.
+
+## Bandits e Watkins (0.5)
+
+BanditAgent compõe BanditPolicy e expõe BanditValues somente para leitura.
+trainBandit depende de BanditLearner, sem exigir um agente concreto. BanditStatistics
+valida recompensas normalizadas e mantém médias/contagens. WatkinsQLambdaAgent
+implementa EpisodicAgent; o runner existente não verifica tipos concretos.
